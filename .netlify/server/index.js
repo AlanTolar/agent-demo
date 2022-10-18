@@ -2135,7 +2135,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-const app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width" />\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+const app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n\n<head>\n	<meta charset="utf-8" />\n	<link rel="icon" href="' + assets2 + '/favicon.png" />\n	<meta name="viewport" content="width=device-width" />\n	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"><\/script>\n	' + head + "\n</head>\n\n<body>\n	<div>" + body + '</div>\n	<script>\n		if (window.netlifyIdentity) {\n			window.netlifyIdentity.on("init", user => {\n				if (!user) {\n					window.netlifyIdentity.on("login", () => {\n						document.location.href = "/admin/";\n					});\n				}\n			});\n		}\n	<\/script>\n</body>\n\n</html>';
 const error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
