@@ -6,7 +6,7 @@ export const handler = init({
 	assets: new Set([".DS_Store","admin/config.yml","admin/index.html","favicon.png"]),
 	mimeTypes: {".yml":"text/yaml",".html":"text/html",".png":"image/png"},
 	_: {
-		entry: {"file":"_app/immutable/start-86b7d85a.js","imports":["_app/immutable/start-86b7d85a.js","_app/immutable/chunks/index-edd250b0.js","_app/immutable/chunks/singletons-cc4cbb96.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-46e38ccf.js","imports":["_app/immutable/start-46e38ccf.js","_app/immutable/chunks/index-edd250b0.js","_app/immutable/chunks/singletons-10374625.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../server/nodes/0.js'),
 			() => import('../server/nodes/1.js'),
