@@ -14,6 +14,9 @@ collections:
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
+# when using the default proxy server port
+local_backend: true
+
 # site_url: https://your-site.com
 # display_url: https://your-site.com
 # logo_url: https://your-site.com/images/logo.svg
