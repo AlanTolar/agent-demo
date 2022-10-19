@@ -1,11 +1,56 @@
-<head>
+<script>
+	// import 'netlify-cms';
+	// import CMS from 'netlify-cms';
+	import { onMount } from 'svelte';
+	onMount(async () => {
+		await import('netlify-cms');
+		// CMS.init();
+		// window.previewDataCMS = {};
+		// const GeneratePreview = (type, properties = []) =>
+		// 	createClass({
+		// 		render: function () {
+		// 			const { entry } = this.props;
+		// 			const data = { type };
+		// 			const keys = properties || [];
+		// 			if (Array.isArray(keys)) {
+		// 				keys.forEach((key) => {
+		// 					try {
+		// 						const tmp = entry.getIn(['data', key]);
+		// 						data[key] = tmp === 'undefined' ? '' : tmp;
+		// 					} catch (e) {
+		// 						console.log(e);
+		// 					}
+		// 				});
+		// 				try {
+		// 					data.mediaFiles = entry.get('mediaFiles');
+		// 				} catch (e) {
+		// 					console.log(e);
+		// 				}
+		// 			}
+		// 			let host = window.location.host;
+		// 			const isLocal = ['localhost', '127.0.0.1', '0.0.0.0'].includes(
+		// 				(host || 'default-online').split(':')[0]
+		// 			);
+		// 			const src = `${isLocal ? 'http' : 'https'}://${host}/preview`;
+		// 			console.log(data);
+		// 			window.previewDataCMS = data;
+		// 			const html = `<iframe border="0" src="${src}" width="100%" height="100%" style="border: 1px solid #EEE; height: calc(100vh - 80px)"></iframe>`;
+		// 			return h('div', { dangerouslySetInnerHTML: { __html: html } });
+		// 		}
+		// 	});
+		// CMS.registerPreviewTemplate(
+		// 	'listings',
+		// 	GeneratePreview('listings', ['body', 'title', 'thumbnail'])
+		// );
+	});
+</script>
+
+<!-- <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Content Manager</title>
 	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
+</head> -->
 
-<body>
-	<!-- Include the script that builds the page and powers Netlify CMS -->
-	<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-</body>
+<!-- Include the script that builds the page and powers Netlify CMS -->
+<!-- <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script> -->
