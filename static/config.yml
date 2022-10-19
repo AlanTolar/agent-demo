@@ -2,18 +2,37 @@ backend:
   name: git-gateway
   branch: master
 collections:
-  - name: routes
-    label: routes
-    folder: src/routes
+  - name: listings
+    label: listings
+    folder: src/routes/listings
     create: true
     extension: json
     fields:
-      - name: title
-      - name: nav_label
-      - name: body
-        widget: markdown
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - label: Team
+        name: team
+        widget: list
+        fields:
+          - {label: Name, name: name, widget: string}
+          - {label: Position, name: position, widget: string}
+          - {label: Photo, name: photo, widget: image}
+  - name: team
+    label: team
+    folder: src/routes/team
+    create: true
+    extension: json
+    # widget: list
+    fields:
+      - {label: Photo, name: photo, widget: image}
+      # - label: Photos
+      #   name: photos
+      #   widget: list
+      #   fields:
+      #     - {label: Photo, name: photo, widget: image}
 media_folder: "static/uploads"
-public_folder: "/uploads"
+# public_folder: "/uploads"
 
 # when using the default proxy server port
 local_backend: true
