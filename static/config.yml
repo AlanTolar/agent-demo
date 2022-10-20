@@ -5,9 +5,9 @@ local_backend: true
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
-show_preview_links: true
-site_url: https://taupe-heliotrope-97d179.netlify.app
-display_url: https://taupe-heliotrope-97d179.netlify.app/
+# show_preview_links: true
+# site_url: https://taupe-heliotrope-97d179.netlify.app
+# display_url: https://taupe-heliotrope-97d179.netlify.app/
 # logo_url: https://your-site.com/images/logo.svg
 
 collections:
@@ -20,7 +20,7 @@ collections:
     preview_path: listings/{{slug}}
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Body", name: "body", widget: "markdown", modes: ['rich_text']}
       - {label: "Featured Image", name: "thumbnail", widget: "image"}
       - label: "Slideshow Images"
         name: "images"

@@ -27,11 +27,11 @@ This is a paragraph.
 	const listing = modules[`/src/lib/content/listings/${data.title}.json`];
 </script>
 
-<div class="markdown-body mylist">
+<div class="prose">
 	<SvelteMarkdown {source} {options} />
 </div>
 
-<div class="markdown-body mylist">
+<div class="prose">
 	<Markdown
 		source={`
 # Setup
@@ -51,7 +51,7 @@ Here are the steps to set up svelte-marked plugin
 </div>
 
 <style>
-	@import url(/css/github-markdown.css);
+	/* @import url($lib/css/github-markdown.css); */
 	/* @import url(/css/pilcrow.css);
 	@import url(/css/hljs-github.min.css); */
 </style>

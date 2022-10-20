@@ -26,31 +26,20 @@
 				console.log(md.render(previewData.body.replace(/\n/g, '&nbsp;\n')));
 				// console.log(md.render(previewData.body.replace(/\n/gi, '&nbsp;')));
 			}
-		}, 500);
+		}, 100);
 	});
 
 	// Write logic to call page based on type
 </script>
-
-<h1>Success!!</h1>
-<Markdown
-	source={`
-# Setup
-Here are the steps to set up svelte-marked plugin
-1. Install it
-2. Enjoy
-    - If you enjoyed, make sure to star the repo!
-`}
-/>
 
 <!-- Listing components -->
 <ul>
 	{#each Object.entries(previewData) as [key, value], index}
 		<h6>{index}&#41; {key}</h6>
 		{#if key === 'body'}
-			<!-- {@html md.render(value.replace(/\n/g, '&nbsp;\n'))} -->
-			<div class="markdown-body">
-				{@html md.render(value)}
+			<div class="prose">
+				<!-- {@html md.render(value)} -->
+				{@html md.render(value.replace(/\n/g, '&nbsp;\n'))}
 			</div>
 			<!-- <SvelteMarkdown source={value} /> -->
 		{:else}
@@ -62,9 +51,3 @@ Here are the steps to set up svelte-marked plugin
 
 <!-- Team components -->
 {#if previewData.type === 'team'}{/if}
-
-<style>
-	@import url(/css/github-markdown.css);
-	/* @import url(/css/pilcrow.css);
-	@import url(/css/hljs-github.min.css); */
-</style>
