@@ -3,6 +3,8 @@
 
 	onMount(async () => {
 		await import('netlify-cms');
+		await import('netlify-cms-widget-richtext');
+		// import richText from 'netlify-cms-widget-richtext';
 		window.previewDataCMS = {};
 		const GeneratePreview = (type, properties = []) =>
 			createClass({
@@ -36,9 +38,11 @@
 					return h('div', { dangerouslySetInnerHTML: { __html: html } });
 				}
 			});
+
 		CMS.registerPreviewTemplate(
 			'listings',
 			GeneratePreview('listings', ['body', 'title', 'thumbnail'])
 		);
+		CMS.registerWidget('richtext', RichTextControl, RichTextPreview);
 	});
 </script>

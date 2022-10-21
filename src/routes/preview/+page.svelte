@@ -37,9 +37,9 @@
 	{#each Object.entries(previewData) as [key, value], index}
 		<h6>{index}&#41; {key}</h6>
 		{#if key === 'body'}
-			<div class="prose">
-				<!-- {@html md.render(value)} -->
-				{@html md.render(value.replace(/\n/g, '&nbsp;\n'))}
+			<div class="prose prose-li:m-0 prose-p:m-0">
+				{@html value.replace(/\n(?=\n)/g, '<br/>')}
+				<!-- {@html md.render(value.replace(/\n/g, '&nbsp;\n'))} -->
 			</div>
 			<!-- <SvelteMarkdown source={value} /> -->
 		{:else}

@@ -20,7 +20,8 @@ collections:
     preview_path: listings/{{slug}}
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Body", name: "body", widget: "markdown", modes: ['rich_text']}
+      # - {label: "Body", name: "body", widget: "markdown", modes: ['rich_text']}
+      - { name: 'body', label: 'Blog post content', widget: 'richtext' }
       - {label: "Featured Image", name: "thumbnail", widget: "image"}
       - label: "Slideshow Images"
         name: "images"
