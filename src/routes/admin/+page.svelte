@@ -4,7 +4,7 @@
 	onMount(async () => {
 		await import('netlify-cms');
 		await import('netlify-cms-widget-richtext');
-		// import richText from 'netlify-cms-widget-richtext';
+
 		window.previewDataCMS = {};
 		const GeneratePreview = (type, properties = []) =>
 			createClass({
@@ -32,7 +32,7 @@
 						(host || 'default-online').split(':')[0]
 					);
 					const src = `${isLocal ? 'http' : 'https'}://${host}/preview`;
-					console.log(data);
+					// console.log(data);
 					window.previewDataCMS = data;
 					const html = `<iframe border="0" src="${src}" width="100%" height="100%" style="border: 1px solid #EEE; height: calc(100vh - 80px)"></iframe>`;
 					return h('div', { dangerouslySetInnerHTML: { __html: html } });
