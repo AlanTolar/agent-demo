@@ -20,12 +20,7 @@
 				}
 			}
 			previewData = JSON.parse(JSON.stringify(previewData));
-			console.log(previewData);
-			if (Object.keys(previewData).includes('body')) {
-				// console.log(previewData.body);
-				console.log(md.render(previewData.body.replace(/\n/g, '&nbsp;\n')));
-				// console.log(md.render(previewData.body.replace(/\n/gi, '&nbsp;')));
-			}
+			// console.log(previewData);
 		}, 100);
 	});
 
