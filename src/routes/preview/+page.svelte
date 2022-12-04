@@ -1,11 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import MarkdownIt from 'markdown-it';
-	import SvelteMarkdown from 'svelte-markdown';
-	import Markdown from '@magidoc/plugin-svelte-marked';
-
-	const options = { breaks: true };
-	let md = new MarkdownIt(options);
 
 	let previewData = {};
 	onMount(() => {
