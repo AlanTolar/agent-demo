@@ -20,7 +20,17 @@ collections:
       preview_path: listings/{{slug}}
       fields:
           - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Location', name: 'location', widget: 'string' }
+          - label: 'Address'
+            name: 'address'
+            widget: 'object'
+            collapsed: false
+            fields:
+                - { label: 'Street Address', name: 'street', widget: 'string' }
+                - { label: 'City', name: 'city', widget: 'string' }
+                - { label: 'State', name: 'state', widget: 'string' }
+                - { label: 'Postal Code', name: 'post-code', widget: 'string' }
+                - { label: 'County', name: 'county', widget: 'string' }
+          - { label: 'Location', name: 'location', widget: 'map' }
           - { label: 'Acres', name: 'acres', widget: 'number', value_type: 'float', min: 0 }
           - { label: 'Price', name: 'price', widget: 'number', value_type: 'int', min: 0 }
           - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
@@ -30,7 +40,81 @@ collections:
             required: false
             fields:
                 - { label: 'Slideshow Image', name: 'image', widget: 'image' }
-          - { label: 'Listing Body Text', name: 'body', widget: 'richtext' }
+          - { label: 'Description', name: 'description', widget: 'richtext', required: false }
+          - { label: 'Details', name: 'details', widget: 'richtext', required: false }
+          - label: 'Summary'
+            name: 'summary'
+            widget: 'object'
+            collapsed: false
+            fields:
+                - label: 'Property'
+                  name: 'property'
+                  widget: 'object'
+                  collapsed: true
+                  fields:
+                      - label: 'Type'
+                        name: 'type'
+                        widget: 'select'
+                        multiple: true
+                        required: false
+                        options:
+                            - { label: 'Recreational Land', value: 'recreational_land' }
+                            - { label: 'Timberland', value: 'timberland' }
+                      - label: 'Road Frontage'
+                        name: 'road_frontage'
+                        widget: 'select'
+                        multiple: true
+                        required: false
+                        options:
+                            - { label: 'State Highway', value: 'state_highway' }
+                            - { label: 'Access Road', value: 'access_road' }
+                      - label: 'Road Surface'
+                        name: 'road_surface'
+                        widget: 'select'
+                        multiple: true
+                        required: false
+                        options:
+                            - { label: 'Pavement', value: 'pavement' }
+                            - { label: 'Blacktop/Alsphalt', value: 'blacktop' }
+                            - { label: 'Gravel', value: 'gravel' }
+                      - label: 'Fencing'
+                        name: 'fencing'
+                        widget: 'select'
+                        multiple: true
+                        required: false
+                        options:
+                            - { label: 'Partial', value: 'partial' }
+                            - { label: 'Low', value: 'low' }
+                      - label: 'Outbuildings'
+                        name: 'outbuildings'
+                        widget: 'select'
+                        multiple: true
+                        required: false
+                        options:
+                            - { label: 'Metal', value: 'metal' }
+                            - { label: 'Shop', value: 'shop' }
+                            - { label: 'Barn', value: 'barn' }
+                            - { label: 'Garage', value: 'garage' }
+                - label: 'Utilities'
+                  name: 'utilities'
+                  widget: 'object'
+                  collapsed: true
+                  fields:
+                      - { label: 'Electric', name: 'electric', widget: 'boolean', required: false }
+                      - { label: 'Sewer', name: 'sewer', widget: 'boolean', required: false }
+                      - { label: 'Internet', name: 'internet', widget: 'boolean', required: false }
+                      - { label: 'Cable', name: 'cable', widget: 'boolean', required: false }
+                      - {
+                            label: 'Telephone',
+                            name: 'telephone',
+                            widget: 'boolean',
+                            required: false,
+                        }
+                      - { label: 'Water', name: 'water', widget: 'boolean', required: false }
+          - label: 'Download Brouchure'
+            name: 'brouchure'
+            widget: 'file'
+            required: false
 
     - name: team
       label: team
