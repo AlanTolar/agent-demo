@@ -17,6 +17,7 @@ collections:
       create: true
       extension: json
       summary: '{{title}} (/{{filename}})' #customize w/ title, date and url button
+      slug: '{{slug}}'
       preview_path: listings/{{slug}}
       fields:
           - { label: 'Title', name: 'title', widget: 'string' }
@@ -25,12 +26,11 @@ collections:
             widget: 'object'
             collapsed: false
             fields:
-                - { label: 'Street Address', name: 'street', widget: 'string' }
+                - { label: 'Street Address', name: 'street', widget: 'string', required: false }
                 - { label: 'City', name: 'city', widget: 'string' }
                 - { label: 'State', name: 'state', widget: 'string' }
-                - { label: 'Postal Code', name: 'post-code', widget: 'string' }
-                - { label: 'County', name: 'county', widget: 'string' }
-          - { label: 'Location', name: 'location', widget: 'map' }
+                - { label: 'Postal Code', name: 'post-code', widget: 'string', required: false }
+                - { label: 'County', name: 'county', widget: 'string', required: false }
           - { label: 'Acres', name: 'acres', widget: 'number', value_type: 'float', min: 0 }
           - { label: 'Price', name: 'price', widget: 'number', value_type: 'int', min: 0 }
           - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
@@ -46,11 +46,13 @@ collections:
             name: 'summary'
             widget: 'object'
             collapsed: false
+            required: false
             fields:
                 - label: 'Property'
                   name: 'property'
                   widget: 'object'
                   collapsed: true
+                  required: false
                   fields:
                       - label: 'Type'
                         name: 'type'
@@ -99,6 +101,7 @@ collections:
                   name: 'utilities'
                   widget: 'object'
                   collapsed: true
+                  required: false
                   fields:
                       - { label: 'Electric', name: 'electric', widget: 'boolean', required: false }
                       - { label: 'Sewer', name: 'sewer', widget: 'boolean', required: false }
@@ -115,6 +118,7 @@ collections:
             name: 'brouchure'
             widget: 'file'
             required: false
+          - { label: 'Location', name: 'location', widget: 'map', required: false }
 
     - name: team
       label: team
