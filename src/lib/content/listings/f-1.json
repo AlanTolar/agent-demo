@@ -1,15 +1,15 @@
 {
   "body": "a﻿sdf asdf asdf                      asdfasdljfsal dd fjasljf dsjflasdjflsdjf sdkjf lsdkjf sldj\n\nfaa﻿sdfsdf*a﻿**sd**fadf*\n\n*aa﻿sdfasdsdf*\n\na﻿sdf",
-  "title": "f",
-  "thumbnail": "/uploads/map.png",
+  "title": "The Cotton Patch",
+  "thumbnail": "/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg",
   "address": {
-    "street": "7602 Auden Trail",
-    "city": "Atlanta",
+    "street": "123 Main Street",
+    "city": "Alamo",
     "state": "Georgia",
-    "post-code": "30350",
-    "county": "Cobb"
+    "post-code": "12345",
+    "county": "County"
   },
-  "location": "{\"type\":\"Point\",\"coordinates\":[-88.7214661,47.4726629]}",
-  "acres": 1,
-  "price": 2
+  "location": "{\"type\":\"Point\",\"coordinates\":[-88.668242,47.4659586]}",
+  "acres": 20,
+  "price": 1200000
 }
