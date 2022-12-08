@@ -1,0 +1,10 @@
+{
+  "title": "The Strawberry Farm",
+  "address": {
+    "city": "Eufaula",
+    "state": "Alabama"
+  },
+  "acres": 5,
+  "price": 425000,
+  "thumbnail": "/uploads/a8308d6f4b2836c74177677fababf98f.jpeg"
+}
