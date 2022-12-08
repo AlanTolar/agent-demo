@@ -17,7 +17,7 @@ collections:
       create: true
       extension: json
       summary: '{{title}} (/{{filename}})' #customize w/ title, date and url button
-      slug: '{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}_{{title}}'
+      slug: '{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}_{{field.title}}'
       preview_path: listings/{{slug}}
       fields:
           - { label: 'Title', name: 'title', widget: 'string' }
