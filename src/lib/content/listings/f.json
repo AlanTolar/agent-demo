@@ -1,5 +1,15 @@
 {
   "body": "a﻿sdf asdf asdf                      asdfasdljfsal dd fjasljf dsjflasdjflsdjf sdkjf lsdkjf sldj\n\nfaa﻿sdfsdf*a﻿**sd**fadf*\n\n*aa﻿sdfasdsdf*\n\na﻿sdf",
   "title": "f",
-  "thumbnail": "/uploads/map.png"
+  "thumbnail": "/uploads/map.png",
+  "address": {
+    "street": "7602 Auden Trail",
+    "city": "Atlanta",
+    "state": "Georgia",
+    "post-code": "30350",
+    "county": "Cobb"
+  },
+  "location": "{\"type\":\"Point\",\"coordinates\":[-88.7214661,47.4726629]}",
+  "acres": 1,
+  "price": 2
 }
