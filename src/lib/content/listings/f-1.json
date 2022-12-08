@@ -1,5 +1,8 @@
 {
   "body": "<p>sa</p>",
   "title": "f",
-  "thumbnail": "/uploads/map1-2.png"
+  "thumbnail": "/uploads/map1-2.png",
+  "acres": 1.1,
+  "price": 9995,
+  "location": "t, state"
 }
