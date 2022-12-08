@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getListings } from '$lib/scripts/listings';
+	import numbro from 'numbro';
 
 	const listings = getListings();
 	console.log(listings);
@@ -90,10 +91,14 @@
 						<img class="object-cover rounded-t-xl" src="{listing.thumbnail}" alt="" />
 					</div>
 					<div class="p-5">
-						<span class="accent-text">{listing.location}</span>
+						<span class="accent-text"
+							>{listing.address.city}, {listing.address.state}</span
+						>
 						<h3 class="subtitle-text mb-2 text-primary-600">{listing.title}</h3>
 						<div class="flex items-center gap-1 main-text">
-							<span>{listing.acres}</span>
+							<span
+								>{numbro(listing.acres).format({ thousandSeparated: true })} acres</span
+							>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								class="h-3"
@@ -102,7 +107,11 @@
 								><circle cx="16" cy="16" r="8" fill="currentColor"></circle></svg
 							>
 
-							<span>{listing.price}</span>
+							<span
+								>{numbro(listing.price).formatCurrency({
+									thousandSeparated: true,
+								})}</span
+							>
 						</div>
 					</div>
 				</a>

@@ -53,6 +53,7 @@
 		"marked": "^4.1.1",
 		"netlify-cms": "^2.10.192",
 		"netlify-cms-widget-richtext": "^0.1.5",
+		"numbro": "^2.3.6",
 		"svelte-markdown": "^0.2.3"
 	}
 }

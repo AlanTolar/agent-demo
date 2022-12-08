@@ -2,7 +2,6 @@
 
 function getListings(num=10) {
     const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
-    console.log(modules)
     const listings = Object.keys(modules).map((key) => {
         const filename = key.split('/').at(-1)?.split('.').at(0);
         const url = `/listings/${filename}`;
