@@ -1,9 +1,9 @@
 backend:
-  name: git-gateway
-  branch: master
+    name: git-gateway
+    branch: master
 local_backend: true
-media_folder: "static/uploads"
-public_folder: "/uploads"
+media_folder: 'static/uploads'
+public_folder: '/uploads'
 
 # show_preview_links: true
 # site_url: https://taupe-heliotrope-97d179.netlify.app
@@ -11,32 +11,34 @@ public_folder: "/uploads"
 # logo_url: https://your-site.com/images/logo.svg
 
 collections:
-  - name: listings
-    label: listings
-    folder: src/lib/content/listings
-    create: true
-    extension: json
-    summary: "{{title}} (/{{filename}})" #customize w/ title, date and url button
-    preview_path: listings/{{slug}}
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      # - {label: "Body", name: "body", widget: "markdown", modes: ['rich_text']}
-      - { name: 'body', label: 'Blog post content', widget: 'richtext' }
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - label: "Slideshow Images"
-        name: "images"
-        widget: "list"
-        required: false
-        fields:
-          - {label: "Slideshow Image", name: "image", widget: "image"}
-  - name: team
-    label: team
-    folder: src/lib/content/team
-    create: true
-    extension: json
-    widget: list
-    fields:
-      - {label: Name, name: name, widget: string}
-      - {label: Position, name: position, widget: string}
-      - {label: Photo, name: photo, widget: image}
+    - name: listings
+      label: listings
+      folder: src/lib/content/listings
+      create: true
+      extension: json
+      summary: '{{title}} (/{{filename}})' #customize w/ title, date and url button
+      preview_path: listings/{{slug}}
+      fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Location', name: 'location', widget: 'string' }
+          - { label: 'Acres', name: 'acres', widget: 'number', value_type: 'float', min: 0 }
+          - { label: 'Price', name: 'price', widget: 'number', value_type: 'int', min: 0 }
+          - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
+          - label: 'Slideshow Images'
+            name: 'images'
+            widget: 'list'
+            required: false
+            fields:
+                - { label: 'Slideshow Image', name: 'image', widget: 'image' }
+          - { label: 'Listing Body Text', name: 'body', widget: 'richtext' }
 
+    - name: team
+      label: team
+      folder: src/lib/content/team
+      create: true
+      extension: json
+      widget: list
+      fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Position, name: position, widget: string }
+          - { label: Photo, name: photo, widget: image }
