@@ -1,5 +1,5 @@
 <script>
-	import 'flowbite/dist/flowbite.css';
+	// import 'flowbite/dist/flowbite.css';
 	import { page } from '$app/stores';
 
 	const nav_items = [
@@ -20,8 +20,8 @@
 	let showMobileNav = false;
 </script>
 
-<header class="bg-primary-600 text-neutral-50 sticky top-0 z-50">
-	<nav class="custom-container flex justify-between py-3">
+<header class="sticky top-0 z-50 bg-primary-600 text-neutral-50">
+	<nav class="flex justify-between py-3 custom-container">
 		<a href="/" class="flex items-center gap-2">
 			<svg
 				class="h-10 mt-1"
@@ -36,11 +36,11 @@
 			</svg>
 			<span class="heading-text">Acres & Acres</span>
 		</a>
-		<div class="gap-10 items-center justify-end flex">
+		<div class="flex items-center justify-end gap-10">
 			{#each nav_items as item}
 				<a
 					href="{item.link}"
-					class="label-text hidden sm:block
+					class="label-text hidden md:block
 								{$page.url.pathname === item.link
 						? 'font-bold text-neutral-300'
 						: 'hover:underline hover:underline-offset-8 hover:decoration-2 hover:decoration-neutral-400'}"
@@ -49,7 +49,7 @@
 			{/each}
 			<button
 				type="button"
-				class="p-2 ml-3 sm:hidden"
+				class="p-2 ml-3 md:hidden"
 				aria-controls="navbar-default"
 				aria-expanded="false"
 				on:click="{() => (showMobileNav = !showMobileNav)}"
@@ -72,7 +72,7 @@
 </header>
 <!-- Mobile menu, show/hide based on menu state. -->
 <div
-	class="bg-primary-700 text-neutral-50 sm:hidden flex flex-col gap-2 py-2 {showMobileNav
+	class="bg-primary-700 text-neutral-50 md:hidden flex flex-col gap-2 py-2 {showMobileNav
 		? 'block'
 		: 'hidden'}"
 >

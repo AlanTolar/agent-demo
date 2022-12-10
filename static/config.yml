@@ -4,6 +4,7 @@ backend:
 local_backend: true
 media_folder: 'static/uploads'
 public_folder: '/uploads'
+# publish_mode: editorial_workflow
 
 # show_preview_links: true
 # site_url: https://taupe-heliotrope-97d179.netlify.app
@@ -17,10 +18,12 @@ collections:
       create: true
       extension: json
       summary: '{{title}} (/{{filename}})' #customize w/ title, date and url button
-      slug: '{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}_{{field.title}}'
+      slug: '{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}_{{title}}'
       preview_path: listings/{{slug}}
       fields:
           - { label: 'Title', name: 'title', widget: 'string' }
+          # - { label: 'Slug', name: 'slug', widget: slug, hint: 'slug' }
+          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
           - label: 'Address'
             name: 'address'
             widget: 'object'

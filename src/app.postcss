@@ -8,25 +8,28 @@
 
 /* Additional choices: style */
 .display-text {
-	@apply font-serif leading-tight tracking-tight text-5xl font-bold;
+	@apply font-serif leading-tight tracking-tight font-bold text-3xl sm:text-4xl lg:text-5xl;
 }
 .heading-text {
-	@apply font-serif leading-tight text-3xl font-medium;
+	@apply font-serif leading-tight font-medium text-xl sm:text-2xl lg:text-3xl;
 }
 .subtitle-text {
-	@apply font-sans leading-tight text-2xl font-medium;
+	@apply font-sans leading-tight font-medium text-lg sm:text-xl lg:text-2xl;
 }
 .main-text {
-	@apply font-sans leading-normal;
+	@apply font-sans leading-normal text-sm sm:text-base;
 }
 .paragraph-text {
-	@apply font-sans leading-loose;
+	@apply font-sans leading-loose text-sm sm:text-base;
+}
+.caption-text {
+	@apply font-sans font-light leading-normal text-xs sm:text-sm;
 }
 .label-text {
-	@apply font-sans leading-none tracking-wide;
+	@apply font-sans leading-none tracking-wide text-sm sm:text-base;
 }
 .accent-text {
-	@apply font-sans font-light text-sm leading-none tracking-wide;
+	@apply font-sans font-light leading-none tracking-wide text-xs sm:text-sm;
 }
 
 .custom-container {
@@ -34,5 +37,8 @@
 }
 
 .button {
-	@apply font-sans leading-none tracking-wide rounded-lg px-5 py-2.5;
+	@apply rounded-lg px-5 py-2.5 inline-block;
+}
+.button-elevated {
+	@apply drop-shadow-xl shadow-[inset_0px_2px_8px_0px_rgba(255,255,255,0.4)];
 }

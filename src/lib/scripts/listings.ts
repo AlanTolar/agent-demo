@@ -1,12 +1,13 @@
 
 
-function getListings(num=10) {
+function getListings(num=100) {
     const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
-    const listings = Object.keys(modules).map((key) => {
+    let listings = Object.keys(modules).map((key) => {
         const filename = key.split('/').at(-1)?.split('.').at(0);
         const url = `/listings/${filename}`;
         return { ...modules[key], json_url: key, url };
     });
+    listings.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0))
     return listings.slice(0,num)    
 }
 
