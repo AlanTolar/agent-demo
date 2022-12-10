@@ -29,7 +29,7 @@ collections:
             widget: 'object'
             collapsed: false
             fields:
-                - { label: 'Street Address', name: 'street1', widget: 'string', required: false }
+                - { label: 'Street Address', name: 'street', widget: 'string', required: false }
                 - { label: 'City', name: 'city', widget: 'string' }
                 - { label: 'State', name: 'state', widget: 'string' }
                 - { label: 'Postal Code', name: 'post-code', widget: 'string', required: false }
