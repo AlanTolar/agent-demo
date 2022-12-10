@@ -1,4 +1,3 @@
-import { _ as __vite_glob_0_0, a as __vite_glob_0_1, b as __vite_glob_0_2, c as __vite_glob_0_3, d as __vite_glob_0_4, e as __vite_glob_0_5, f as __vite_glob_0_6, g as __vite_glob_0_7, h as __vite_glob_0_8, i as __vite_glob_0_9 } from "../../../../../chunks/the-strawberry-farm.js";
 import { c as create_ssr_component, f as add_attribute, i as is_void, d as each, v as validate_component, m as missing_component, e as escape, h as compute_rest_props, g as getContext, j as createEventDispatcher, s as setContext, b as subscribe } from "../../../../../chunks/index.js";
 import { marked, Slugger, Lexer } from "marked";
 import { p as page } from "../../../../../chunks/stores.js";
@@ -703,29 +702,53 @@ const SvelteMarkdown = create_ssr_component(($$result, $$props, $$bindings, slot
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  const source = `
-  # This is a header
-
-This is a paragraph.
-
-* This is a list
-* With two items
-  1. And a sublist
-  2. That is ordered
-    * With another
-    * Sublist inside
-
-| And this is | A table |
-|-------------|---------|
-| With two    | columns |
-`;
+  const source = {
+    details: "<ul>\n  <li>20 acres of pristine farmland in Alamo, Georgia</li>\n  <li>Surrounded by nature and is only a short drive from the Appalachian Trail</li>\n  <li>Home to a variety of wildlife, including deer, turkey, and even the occasional bear</li>\n  <li>Property has a pond, perfect for fishing or swimming on hot summer days</li>\n  <li>There is creek that runs through the property, providing hours of fun for kids of all ages</li>\n  <li>Situated on a hill, providing stunning views of the surrounding countryside</li>\n  <li>The Cotton Patch is a true nature lover's paradise and would make an excellent primary residence or vacation home&nbsp;</li>\n</ul>",
+    summary: {
+      property: {
+        type: ["recreational_land", "timberland"],
+        road_frontage: ["state_highway"],
+        road_surface: ["pavement", "gravel"],
+        fencing: ["partial", "low"],
+        outbuildings: ["metal", "barn", "shop", "garage"]
+      },
+      utilities: { electric: true, sewer: true, cable: true }
+    },
+    price: 12e5,
+    thumbnail: "/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg",
+    brouchure: "/uploads/logo-light.svg",
+    date: "2022-12-08T17:00:30.545Z",
+    address: {
+      street: "123 Main Street",
+      city: "Alamo",
+      state: "Georgia",
+      "post-code": "12345",
+      county: "County"
+    },
+    location: '{"type":"Point","coordinates":[-88.668242,47.4659586]}',
+    title: "The Cotton Patch",
+    description: "<p>Nestled in the heart of Alamo, Georgia, The Cotton Patch is a stunning 20-acre property that would make an ideal home for someone looking for peace and quiet in a rural setting. The land is mostly wooded, with a small clearing near the center that would be perfect for building a home or farmhouse. There is a creek running through the property, and a small pond near the edge of the woods. The Cotton Patch is truly a nature lover's paradise, and would be perfect for someone looking to get away from the hustle and bustle of city life.</p>",
+    acres: 20
+  };
   const options = { langPrefix: "markdown-body" };
-  const modules = /* @__PURE__ */ Object.assign({ "/src/lib/content/listings/the-cotton-patch.json": __vite_glob_0_0, "/src/lib/content/listings/the-cypress-swamp.json": __vite_glob_0_1, "/src/lib/content/listings/the-dogwood-farm.json": __vite_glob_0_2, "/src/lib/content/listings/the-magnolia-farm.json": __vite_glob_0_3, "/src/lib/content/listings/the-old-mill-place.json": __vite_glob_0_4, "/src/lib/content/listings/the-ozark-mountain-retreat.json": __vite_glob_0_5, "/src/lib/content/listings/the-peanut-farm.json": __vite_glob_0_6, "/src/lib/content/listings/the-pecan-orchard.json": __vite_glob_0_7, "/src/lib/content/listings/the-river-farm.json": __vite_glob_0_8, "/src/lib/content/listings/the-strawberry-farm.json": __vite_glob_0_9 });
-  const listing = modules[`/src/lib/content/listings/${$page.params.listing}.json`];
+  const listing = source;
   $$unsubscribe_page();
-  return `<div class="${"prose"}">${validate_component(SvelteMarkdown, "SvelteMarkdown").$$render($$result, { source, options }, {}, {})}</div>
+  return `<div><section><h3>Description</h3>
+		<p class="${"prose main-paragraph"}">${validate_component(SvelteMarkdown, "SvelteMarkdown").$$render($$result, { source: listing.description, options }, {}, {})}</p></section>
 
-<div class="${"prose"}">${validate_component(Markdown, "Markdown").$$render(
+	<section><h3>Details</h3>
+		<p class="${"prose main-paragraph"}">${validate_component(SvelteMarkdown, "SvelteMarkdown").$$render($$result, { source: listing.details, options }, {}, {})}</p></section>
+
+	<section><h3>Summary</h3>
+		<div><div><div><h4>Property</h4>
+					<h5>Type</h5>
+					</div>
+				<div></div></div>
+			<div><div></div>
+				<div></div>
+				<div></div></div></div></section>
+
+	<div class="${"prose"}">${validate_component(Markdown, "Markdown").$$render(
     $$result,
     {
       source: `
@@ -740,10 +763,9 @@ Here are the steps to set up svelte-marked plugin
     {}
   )}</div>
 
-<h1>${escape($page.params.listing)}</h1>
-<div class="${"p-5"}"><a${add_attribute("href", listing.url, 0)} class="${"text-xl font-bold"}">${escape(listing.title)}</a>
-	<p class="${"mt-1 text-sm"}">${escape(listing.body)}</p>
-	<img${add_attribute("src", listing.thumbnail, 0)} alt="${""}" class="${"h-40"}"></div>`;
+	<h1>${escape($page.params.listing)}</h1>
+	<div class="${"p-5"}"><h2>${escape(listing.title)}</h2>
+		<img${add_attribute("src", listing.thumbnail, 0)} alt="${""}" class="${"h-40"}"></div></div>`;
 });
 export {
   Page as default

@@ -1,5 +1,4 @@
 <script>
-	// import 'flowbite/dist/flowbite.css';
 	import { page } from '$app/stores';
 
 	const nav_items = [

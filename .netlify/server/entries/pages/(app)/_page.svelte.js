@@ -15,7 +15,7 @@ function listingCardDisplay(index) {
   } else if (index === firstCardIndex + 2) {
     return "hidden md:block";
   } else if (index === firstCardIndex + 3) {
-    return "hidden lg:block";
+    return "hidden xl:block";
   } else {
     return "hidden";
   }
@@ -46,20 +46,23 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   ];
   $$result.css.add(css);
-  return `<section class="${"bg-[url('/uploads/map.png')] bg-cover "}"><div class="${"custom-container"}"><div class="${"w-[40%] bg-primary-400 py-24 px-12"}"><h1 class="${"mb-6 text-white display-text"}">Acres &amp; Acres Real Estate</h1>
+  return `<section class="${"bg-[url('/uploads/hero-backdrop.jpeg')] bg-cover bg-center"}"><div class="${"custom-container"}"><div class="${"w-full max-w-[450px] bg-primary-800/60 py-16 sm:py-24 px-12 backdrop-blur"}"><h1 class="${"mb-6 text-white display-text"}">Acres &amp; Acres Real Estate</h1>
 			<p class="${"text-white subtitle-text"}">A blank canvas for you to make your mark.</p></div></div></section>
-<section><div class="${"flex gap-12 py-20 custom-container"}">${each(cardContent, (content) => {
-    return `<div class="${"text-center"}"><div class="${"w-24 h-24 p-1 mx-auto mb-5 rounded-full bg-neutral-100"}"><div class="${"flex w-full h-full border-4 rounded-full border-neutral-200"}"><i class="${escape(content.icon, true) + " fa-3x m-auto svelte-kuw69j"}"></i>
+<section><div class="${"flex flex-col gap-16 py-20 md:flex-row md:gap-12 custom-container"}">${each(cardContent, (content) => {
+    return `<div class="${"max-w-[500px] mx-auto flex md:flex-col items-center"}"><div class="${"p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100"}"><div class="${"flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"}"><i class="${escape(content.icon, true) + " fa-2x md:hidden svelte-kuw69j"}"></i>
+						<i class="${escape(content.icon, true) + " fa-3x hidden md:block svelte-kuw69j"}"></i>
 					</div></div>
-				<h3 class="${"mb-3 heading-text"}">${escape(content.title)}</h3>
-				<p class="${"mb-5 main-text"}">${escape(content.body)}</p>
-				<a${add_attribute("href", content.btnLink, 0)} class="${"text-white button button-elevated bg-primary-600"}">${escape(content.btnLabel)}</a>
+				<div class="${"flex flex-col justify-between grow"}"><div><h3 class="${"mb-3 md:text-center heading-text"}">${escape(content.title)}</h3>
+						<p class="${"mb-5 main-text md:text-center"}">${escape(content.body)}</p></div>
+					<a${add_attribute("href", content.btnLink, 0)} class="${"text-white button button-elevated bg-primary-600 w-fit md:self-center"}">${escape(content.btnLabel)}</a></div>
 			</div>`;
   })}</div></section>
+
+
 <section class="${"bg-neutral-200"}"><div class="${"py-20 custom-container"}"><div class="${"flex justify-between mb-6"}"><h3 class="${"heading-text"}">Recent Listings</h3>
-			<a href="${"/listings"}" class="${"font-semibold underline main-text text-primary-600"}">Browse Listing</a></div>
-		<div class="${"gap-6 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"}">${each(listings, (listing, index) => {
-    return `<a${add_attribute("href", listing.url, 0)} class="${escape(listingCardDisplay(index), true) + " rounded-xl bg-neutral-100 hover:scale-105 tranistion duration-300 ease-out svelte-kuw69j"}"><div class="${"aspect-w-3 aspect-h-2"}"><img class="${"object-cover rounded-t-xl"}"${add_attribute("src", listing.thumbnail, 0)} alt="${""}"></div>
+			<a href="${"/listings"}" class="${"font-semibold underline main-text text-primary-600"}">Browse Listings</a></div>
+		<div class="${"grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"}">${each(listings, (listing, index) => {
+    return `<a${add_attribute("href", listing.url, 0)} class="${escape(listingCardDisplay(index), true) + " rounded-xl hover:scale-105 tranistion duration-300 ease-out bg-neutral-100 svelte-kuw69j"}"><div class="${"aspect-w-3 aspect-h-2"}"><img class="${"object-cover rounded-t-xl"}"${add_attribute("src", listing.thumbnail, 0)} alt="${""}"></div>
 					<div class="${"p-5"}"><span class="${"accent-text"}">${escape(listing.address.city)}, ${escape(listing.address.state)}</span>
 						<h3 class="${"mb-2 subtitle-text text-primary-600"}">${escape(listing.title)}</h3>
 						<div class="${"flex items-center gap-1 main-text"}"><span>${escape(numbro(listing.acres).format({ thousandSeparated: true }))} acres</span>
@@ -69,23 +72,22 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 						</div></div>
 				</a>`;
   })}</div></div></section>
-<section class="${"bg-neutral-200"}"><div class="${"grid gap-12 pt-10 pb-20 custom-container justify-items-center md:grid-cols-5"}"><div class="${"col-span-3"}"><h3 class="${"mb-4 text-left heading-text sm:text-center"}">Sign up for our <span class="${"text-primary-600"}">newsletter</span></h3>
+<section class="${"bg-neutral-200"}"><div class="${"gap-12 pt-10 pb-20 md:grid custom-container md:grid-cols-2"}"><div class="${"col-span-1 mb-6 text-center md:mb-0 md:text-left"}"><h3 class="${"mb-4 heading-text"}">Sign up for our <span class="${"text-primary-600"}">newsletter</span></h3>
 			<p class="${"main-text"}">Stay up to date with new listings by signing up for our weekly newsletter.</p></div>
-		<div class="${"col-span-2"}"><div class="${"flex mb-2"}"><input class="${"w-full rounded-l-lg"}" type="${"text"}" name="${""}" id="${""}">
-				<button class="${"text-white rounded-none rounded-r-lg button bg-primary-600"}">Subscribe</button></div>
-			
+		<div class="${"col-span-1 max-w-[400px] mx-auto"}"><div class="${"flex mb-2"}"><input class="${"w-full rounded-l-lg"}" type="${"text"}" name="${""}" id="${""}">
+				<button class="${"label-text px-5 py-2.5 text-white rounded-r-lg bg-primary-600"}">Subscribe</button></div>
 			<p class="${"caption-text"}">We care about the protection of your data. Read our <span class="${"underline"}"><a href="${"/"}">Privacy Policy</a></span>.</p></div></div></section>
-<section><div class="${"grid grid-cols-3 pt-20 custom-container"}"><img class="${"col-span-2"}" src="${"/uploads/farmer-pointing.jpeg"}" alt="${""}">
-		<div class="${"self-center col-span-1 p-2 -ml-32 bg-neutral-100"}"><div class="${"p-12 border-4 border-neutral-200"}"><h3 class="${"mb-4 heading-text"}">Find the perfect agent</h3>
+<section><div class="${"grid md:grid-cols-3 pt-20 custom-container"}"><img class="${"md:col-span-2"}" src="${"/uploads/farmer-pointing.jpeg"}" alt="${""}">
+		<div class="${"self-center p-2 w-[90%] sm:w-[80%] mx-auto -mt-[15%] md:w-fit md:-ml-32 bg-neutral-100"}"><div class="${"p-8 lg:p-12 border-4 border-neutral-200"}"><h3 class="${"mb-4 heading-text"}">Find the perfect agent</h3>
 				<p class="${"mb-6 main-text"}">Don&#39;t go through the process of selling your land alone. Let our experienced
 					real estate agents help you every step of the way.</p>
 				<a class="${"font-semibold underline text-primary-600 label-text"}" href="${"/agents"}">Find an Agent</a></div></div></div></section>
-<section class="${"relative overflow-hidden"}"><div class="${"grid grid-cols-2 pt-40 pb-20 custom-container"}"><div><h3 class="${"mb-4 heading-text"}">Sell your land with us</h3>
+<section class="${"relative overflow-hidden"}"><div class="${"custom-container grid grid-cols-3 sm:grid-cols-4 pt-20 sm:pt-40 pb-20"}"><div class="${"col-span-2 sm:mb-0"}"><h3 class="${"mb-4 heading-text"}">Sell your land with us</h3>
 			<p class="${"mb-6 main-text"}">We are a trusted and experienced real estate firm that will work hard to sell your
 				land for the best possible price. We have a wide network of potential buyers and a
 				proven track record of success.</p>
 			<a class="${"font-semibold underline text-primary-600 label-text"}" href="${"/sell"}">Sell With Us</a></div></div>
-	<img class="${"absolute mask top-[10%] ml-4 left-[52%] h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] object-cover svelte-kuw69j"}" src="${"/uploads/farmer-pointing.jpeg"}" alt="${""}">
+	<img class="${"absolute mask bottom-[-25%] sm:top-[10%] ml-8 left-[50%] h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] object-cover svelte-kuw69j"}" src="${"/uploads/people-talking.jpeg"}" alt="${""}">
 </section>`;
 });
 export {

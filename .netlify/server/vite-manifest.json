@@ -18,7 +18,7 @@
       "_index.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout-c60fd3ae.css"
+      "_app/immutable/assets/_layout-1ecc6d4f.css"
     ]
   },
   "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
@@ -37,9 +37,6 @@
     "imports": [
       "_index.js",
       "_stores.js"
-    ],
-    "css": [
-      "_app/immutable/assets/_layout-f9ea67d9.css"
     ]
   },
   "src/routes/(admin)/admin/+page.svelte": {
@@ -93,7 +90,6 @@
     "src": "src/routes/(app)/listings/[listing]/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_the-strawberry-farm.js",
       "_index.js",
       "_stores.js"
     ],
@@ -127,13 +123,7 @@
     ]
   },
   "_listings.js": {
-    "file": "chunks/listings.js",
-    "imports": [
-      "_the-strawberry-farm.js"
-    ]
-  },
-  "_the-strawberry-farm.js": {
-    "file": "chunks/the-strawberry-farm.js"
+    "file": "chunks/listings.js"
   },
   ".svelte-kit/build/hooks.js": {
     "file": "chunks/hooks.js",
