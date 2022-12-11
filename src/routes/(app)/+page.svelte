@@ -6,21 +6,21 @@
 
 	const cardContent = [
 		{
-			icon: 'fa-solid fa-mountain',
+			icon: 'material-symbols:landscape',
 			title: 'Buy Land',
 			body: 'We have a wide selection of land available, so you are sure to find the perfect piece of property for your needs.',
 			btnLabel: 'Browse Listings',
 			btnLink: '/listings',
 		},
 		{
-			icon: 'fa-solid fa-user',
+			icon: 'material-symbols:person',
 			title: 'Find Experts',
 			body: 'Our agents are familiar with the local market and can help you find the right property to meet your needs.',
 			btnLabel: 'Find an Agent',
 			btnLink: '/agents',
 		},
 		{
-			icon: 'fa-solid fa-dollar-sign',
+			icon: 'material-symbols:attach-money',
 			title: 'Sell Land',
 			body: 'Our real estate company has the experience and resources to help you get the most value for your land.',
 			btnLabel: 'Sell With Us',
@@ -60,8 +60,10 @@
 					<div
 						class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"
 					>
-						<i class="{content.icon} fa-2x md:hidden"></i>
-						<i class="{content.icon} fa-3x hidden md:block"></i>
+						<iconify-icon class="sm:hidden" icon="{content.icon}" width="45"
+						></iconify-icon>
+						<iconify-icon class="hidden sm:block" icon="{content.icon}" width="70"
+						></iconify-icon>
 					</div>
 				</div>
 				<div class="flex flex-col justify-between grow">
