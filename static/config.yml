@@ -1,9 +1,9 @@
 backend:
-    name: git-gateway
-    branch: master
+  name: git-gateway
+  branch: master
 local_backend: true
-media_folder: 'static/uploads'
-public_folder: '/uploads'
+media_folder: "static/uploads"
+public_folder: "/uploads"
 # publish_mode: editorial_workflow
 
 # show_preview_links: true
@@ -12,124 +12,140 @@ public_folder: '/uploads'
 # logo_url: https://your-site.com/images/logo.svg
 
 collections:
-    - name: listings
-      label: listings
-      folder: src/lib/content/listings
-      create: true
-      extension: json
-      summary: '{{title}} (/{{filename}})' #customize w/ title, date and url button
-      slug: '{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}_{{title}}'
-      preview_path: listings/{{slug}}
-      fields:
-          - { label: 'Title', name: 'title', widget: 'string' }
-          # - { label: 'Slug', name: 'slug', widget: slug, hint: 'slug' }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-          - label: 'Address'
-            name: 'address'
-            widget: 'object'
-            collapsed: false
-            fields:
-                - { label: 'Street Address', name: 'street', widget: 'string', required: false }
-                - { label: 'City', name: 'city', widget: 'string' }
-                - { label: 'State', name: 'state', widget: 'string' }
-                - { label: 'Postal Code', name: 'post-code', widget: 'string', required: false }
-                - { label: 'County', name: 'county', widget: 'string', required: false }
-          - { label: 'Acres', name: 'acres', widget: 'number', value_type: 'float', min: 0 }
-          - { label: 'Price', name: 'price', widget: 'number', value_type: 'int', min: 0 }
-          - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
-          - label: 'Slideshow Images'
-            name: 'images'
-            widget: 'list'
+  - name: listings
+    label: listings
+    folder: src/lib/content/listings
+    create: true
+    extension: json
+    summary: "{{title}} (/{{filename}})" #customize w/ title, date and url button
+    preview_path: listings/{{slug}}
+    fields:
+      # Main data
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+      # Basic facts
+      - label: "Address"
+        name: "address"
+        widget: "object"
+        collapsed: false
+        fields:
+          - {
+              label: "Street Address",
+              name: "street",
+              widget: "string",
+              required: false,
+            }
+          - { label: "City", name: "city", widget: "string" }
+          - { label: "State", name: "state", widget: "string" }
+          - {
+              label: "Postal Code",
+              name: "post-code",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "County",
+              name: "county",
+              widget: "string",
+              required: false,
+            }
+      - label: "Acres"
+        name: "acres"
+        widget: "number"
+        value_type: "float"
+        min: 0
+      - label: "Price"
+        name: "price"
+        widget: "number"
+        value_type: "int"
+        min: 0
+      # Details and descriptions
+      - label: "Featured Image"
+        name: "featured_image"
+        widget: "image"
+      - label: "Slideshow Images"
+        name: "slideshow_images"
+        widget: "list"
+        required: false
+        field: { label: "Slideshow Image", name: "image", widget: "image" }
+      - label: "Description"
+        name: "description"
+        widget: "richtext"
+        required: false
+      - label: "Details"
+        name: "details"
+        widget: "richtext"
+        required: false
+      - label: "Summary"
+        name: "summary"
+        widget: "object"
+        collapsed: false
+        required: false
+        fields:
+          - label: "Feature Categories"
+            name: "feature_categories"
+            widget: "list"
             required: false
             fields:
-                - { label: 'Slideshow Image', name: 'image', widget: 'image' }
-          - { label: 'Description', name: 'description', widget: 'richtext', required: false }
-          - { label: 'Details', name: 'details', widget: 'richtext', required: false }
-          - label: 'Summary'
-            name: 'summary'
-            widget: 'object'
-            collapsed: false
+              - {
+                  label: "Feature Category",
+                  name: "feature_category",
+                  widget: "string",
+                }
+              - { label: "List of Features", name: "features", widget: "list" }
+          - { label: "Land Details", name: "land_details", widget: "list" }
+          - label: "Distances"
+            name: "distances"
+            widget: "list"
+            fields:
+              - {
+                  label: "City/Interstate/Attraction",
+                  name: "location",
+                  widget: "string",
+                }
+              - {
+                  label: "Distance (miles)",
+                  name: "distance",
+                  widget: "number",
+                  value_type: "float",
+                  min: 0,
+                }
+          - label: "Utilities"
+            name: "utilities"
+            widget: "list"
             required: false
             fields:
-                - label: 'Property'
-                  name: 'property'
-                  widget: 'object'
-                  collapsed: true
-                  required: false
-                  fields:
-                      - label: 'Type'
-                        name: 'type'
-                        widget: 'select'
-                        multiple: true
-                        required: false
-                        options:
-                            - { label: 'Recreational Land', value: 'recreational_land' }
-                            - { label: 'Timberland', value: 'timberland' }
-                      - label: 'Road Frontage'
-                        name: 'road_frontage'
-                        widget: 'select'
-                        multiple: true
-                        required: false
-                        options:
-                            - { label: 'State Highway', value: 'state_highway' }
-                            - { label: 'Access Road', value: 'access_road' }
-                      - label: 'Road Surface'
-                        name: 'road_surface'
-                        widget: 'select'
-                        multiple: true
-                        required: false
-                        options:
-                            - { label: 'Pavement', value: 'pavement' }
-                            - { label: 'Blacktop/Alsphalt', value: 'blacktop' }
-                            - { label: 'Gravel', value: 'gravel' }
-                      - label: 'Fencing'
-                        name: 'fencing'
-                        widget: 'select'
-                        multiple: true
-                        required: false
-                        options:
-                            - { label: 'Partial', value: 'partial' }
-                            - { label: 'Low', value: 'low' }
-                      - label: 'Outbuildings'
-                        name: 'outbuildings'
-                        widget: 'select'
-                        multiple: true
-                        required: false
-                        options:
-                            - { label: 'Metal', value: 'metal' }
-                            - { label: 'Shop', value: 'shop' }
-                            - { label: 'Barn', value: 'barn' }
-                            - { label: 'Garage', value: 'garage' }
-                - label: 'Utilities'
-                  name: 'utilities'
-                  widget: 'object'
-                  collapsed: true
-                  required: false
-                  fields:
-                      - { label: 'Electric', name: 'electric', widget: 'boolean', required: false }
-                      - { label: 'Sewer', name: 'sewer', widget: 'boolean', required: false }
-                      - { label: 'Internet', name: 'internet', widget: 'boolean', required: false }
-                      - { label: 'Cable', name: 'cable', widget: 'boolean', required: false }
-                      - {
-                            label: 'Telephone',
-                            name: 'telephone',
-                            widget: 'boolean',
-                            required: false,
-                        }
-                      - { label: 'Water', name: 'water', widget: 'boolean', required: false }
-          - label: 'Download Brouchure'
-            name: 'brouchure'
-            widget: 'file'
-            required: false
-          - { label: 'Location', name: 'location', widget: 'map', required: false }
+              - { label: "Utility", name: "utility", widget: "string" }
+              - label: "Availability"
+                name: "availability"
+                widget: "select"
+                multiple: false
+                options:
+                  - { label: "Onsite", value: "Onsite" }
+                  - { label: "Nearby", value: "Nearby" }
+                  - { label: "Unavailable", value: "Unavailable" }
+          - { label: "Housing", name: "housing", widget: "list" }
+          - { label: "Improvements", name: "improvements", widget: "list" }
+      - label: "Download Brouchure"
+        name: "brouchure"
+        widget: "file"
+        required: false
+      - label: "Location"
+        name: "location"
+        widget: "map"
+        required: false
 
-    - name: team
-      label: team
-      folder: src/lib/content/team
-      create: true
-      extension: json
-      widget: list
-      fields:
-          - { label: Name, name: name, widget: string }
-          - { label: Position, name: position, widget: string }
-          - { label: Photo, name: photo, widget: image }
+  - name: team
+    label: team
+    folder: src/lib/content/team
+    create: true
+    extension: json
+    widget: list
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Position, name: position, widget: string }
+      - { label: Photo, name: photo, widget: image }

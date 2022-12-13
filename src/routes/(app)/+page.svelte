@@ -128,7 +128,11 @@
 					)} rounded-xl hover:scale-105 tranistion duration-300 ease-out bg-neutral-100"
 				>
 					<div class="aspect-w-3 aspect-h-2">
-						<img class="object-cover rounded-t-xl" src="{listing.thumbnail}" alt="" />
+						<img
+							class="object-cover rounded-t-xl"
+							src="{listing.featured_image}"
+							alt=""
+						/>
 					</div>
 					<div class="p-5">
 						<span class="accent-text"

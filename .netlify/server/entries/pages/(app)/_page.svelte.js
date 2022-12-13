@@ -1,4 +1,4 @@
-import { c as create_ssr_component, d as each, e as escape, f as add_attribute } from "../../../chunks/index.js";
+import { c as create_ssr_component, d as each, f as add_attribute, e as escape } from "../../../chunks/index.js";
 import { g as getListings } from "../../../chunks/listings.js";
 import numbro from "numbro";
 const _page_svelte_svelte_type_style_lang = "";
@@ -24,21 +24,21 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const listings = getListings();
   const cardContent = [
     {
-      icon: "fa-solid fa-mountain",
+      icon: "material-symbols:landscape",
       title: "Buy Land",
       body: "We have a wide selection of land available, so you are sure to find the perfect piece of property for your needs.",
       btnLabel: "Browse Listings",
       btnLink: "/listings"
     },
     {
-      icon: "fa-solid fa-user",
+      icon: "material-symbols:person",
       title: "Find Experts",
       body: "Our agents are familiar with the local market and can help you find the right property to meet your needs.",
       btnLabel: "Find an Agent",
       btnLink: "/agents"
     },
     {
-      icon: "fa-solid fa-dollar-sign",
+      icon: "material-symbols:attach-money",
       title: "Sell Land",
       body: "Our real estate company has the experience and resources to help you get the most value for your land.",
       btnLabel: "Sell With Us",
@@ -49,8 +49,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<section class="${"bg-[url('/uploads/hero-backdrop.jpeg')] bg-cover bg-center"}"><div class="${"custom-container"}"><div class="${"w-full max-w-[450px] bg-primary-800/60 py-16 sm:py-24 px-12 backdrop-blur"}"><h1 class="${"mb-6 text-white display-text"}">Acres &amp; Acres Real Estate</h1>
 			<p class="${"text-white subtitle-text"}">A blank canvas for you to make your mark.</p></div></div></section>
 <section><div class="${"flex flex-col gap-16 py-20 md:flex-row md:gap-12 custom-container"}">${each(cardContent, (content) => {
-    return `<div class="${"max-w-[500px] mx-auto flex md:flex-col items-center"}"><div class="${"p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100"}"><div class="${"flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"}"><i class="${escape(content.icon, true) + " fa-2x md:hidden svelte-kuw69j"}"></i>
-						<i class="${escape(content.icon, true) + " fa-3x hidden md:block svelte-kuw69j"}"></i>
+    return `<div class="${"max-w-[500px] mx-auto flex md:flex-col items-center"}"><div class="${"p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100"}"><div class="${"flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"}"><iconify-icon class="${"sm:hidden"}"${add_attribute("icon", content.icon, 0)} width="${"45"}"></iconify-icon>
+						<iconify-icon class="${"hidden sm:block"}"${add_attribute("icon", content.icon, 0)} width="${"70"}"></iconify-icon>
 					</div></div>
 				<div class="${"flex flex-col justify-between grow"}"><div><h3 class="${"mb-3 md:text-center heading-text"}">${escape(content.title)}</h3>
 						<p class="${"mb-5 main-text md:text-center"}">${escape(content.body)}</p></div>
@@ -62,7 +62,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <section class="${"bg-neutral-200"}"><div class="${"py-20 custom-container"}"><div class="${"flex justify-between mb-6"}"><h3 class="${"heading-text"}">Recent Listings</h3>
 			<a href="${"/listings"}" class="${"font-semibold underline main-text text-primary-600"}">Browse Listings</a></div>
 		<div class="${"grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"}">${each(listings, (listing, index) => {
-    return `<a${add_attribute("href", listing.url, 0)} class="${escape(listingCardDisplay(index), true) + " rounded-xl hover:scale-105 tranistion duration-300 ease-out bg-neutral-100 svelte-kuw69j"}"><div class="${"aspect-w-3 aspect-h-2"}"><img class="${"object-cover rounded-t-xl"}"${add_attribute("src", listing.thumbnail, 0)} alt="${""}"></div>
+    return `<a${add_attribute("href", listing.url, 0)} class="${escape(listingCardDisplay(index), true) + " rounded-xl hover:scale-105 tranistion duration-300 ease-out bg-neutral-100 svelte-kuw69j"}"><div class="${"aspect-w-3 aspect-h-2"}"><img class="${"object-cover rounded-t-xl"}"${add_attribute("src", listing.featured_image, 0)} alt="${""}"></div>
 					<div class="${"p-5"}"><span class="${"accent-text"}">${escape(listing.address.city)}, ${escape(listing.address.state)}</span>
 						<h3 class="${"mb-2 subtitle-text text-primary-600"}">${escape(listing.title)}</h3>
 						<div class="${"flex items-center gap-1 main-text"}"><span>${escape(numbro(listing.acres).format({ thousandSeparated: true }))} acres</span>

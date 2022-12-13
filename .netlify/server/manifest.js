@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","config.yml","favicon.png","uploads/08425d08565f60d193d1c76b31c5ad95.jpeg","uploads/0e608ef0bc5c4e0d77ca25ce8978c421.jpeg","uploads/233-2332677_image-500580-placeholder-transparent.webp","uploads/83d9f6dfd5d24163db2ddd6c2266c3c3-1-.jpeg","uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg","uploads/a8308d6f4b2836c74177677fababf98f.jpeg","uploads/d6dfa17e7aa48e257f137248f8dfeb97.jpeg","uploads/farmer-pointing.jpeg","uploads/hero-backdrop.jpeg","uploads/logo-dark.svg","uploads/logo-light.svg","uploads/map-long.png","uploads/map.png","uploads/map1-2.png","uploads/people-talking.jpeg","uploads/picture.png","uploads/rhombus.png","uploads/z-picture.png","uploads/z-sign-pink.png"]),
 	mimeTypes: {".yml":"text/yaml",".png":"image/png",".jpeg":"image/jpeg",".webp":"image/webp",".svg":"image/svg+xml"},
 	_: {
-		entry: {"file":"_app/immutable/start-20081d57.js","imports":["_app/immutable/start-20081d57.js","_app/immutable/chunks/index-32ce85b9.js","_app/immutable/chunks/singletons-10fc1b98.js","_app/immutable/chunks/preload-helper-aa6bc0ce.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-adc06d6a.js","imports":["_app/immutable/start-adc06d6a.js","_app/immutable/chunks/index-e4c242c5.js","_app/immutable/chunks/singletons-d973b3ea.js","_app/immutable/chunks/preload-helper-aa6bc0ce.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
