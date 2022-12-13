@@ -2,148 +2,206 @@
 	import { page } from '$app/stores';
 	import { xlink_attr } from 'svelte/internal';
 	import { fly } from 'svelte/transition';
+	import * as eases from 'svelte/easing';
 
 	const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
 	const listing = modules[`/src/lib/content/listings/${$page.params.listing}.json`];
 	// const listing = source;
 
-	let main_image = 0;
-	let style = 0;
-	let slideImage1, slideImage2, slideImage3;
+	let img = { '-2': '', '-1': '', '0': '', '1': '', '2': '' };
+	let imgURL = {
+		'-2': getImg(-2),
+		'-1': getImg(-1),
+		'0': getImg(0),
+		'1': getImg(1),
+		'2': getImg(2),
+	};
+
+	let slidingImgURL = { '-2': '', '-1': '', '0': '', '1': '', '2': '' };
+
+	let travelDistance = { '-2': '', '-1': '', '0': '', '1': '', '2': '' };
+
 	let movingImages = false;
+	let mainImgIndex = 0;
 
-	function respondToVisibility(element, callback) {
-		var options = {
-			root: document.documentElement,
-		};
-
-		var observer = new IntersectionObserver((entries, observer) => {
-			entries.forEach((entry) => {
-				callback(entry.intersectionRatio > 0);
-			});
-		}, options);
-
-		observer.observe(element);
+	function getImg(i: number) {
+		const imgURL = listing.slideshow_images.at(i % listing.slideshow_images.length);
+		return imgURL;
 	}
 
-	let END_X = 0;
-	let START_X = 0;
-
-	function changeStyle(direction: string) {
-		if (direction === 'backwards') {
-			style = slideImage3.getBoundingClientRect().x - slideImage2.getBoundingClientRect().x;
-		}
+	function startSlide(direction: string) {
 		if (direction === 'forwards') {
-			style = slideImage1.getBoundingClientRect().x - slideImage2.getBoundingClientRect().x;
+			mainImgIndex += 1;
+
+			slidingImgURL['2'] = getImg(mainImgIndex + 2);
+			travelDistance['2'] = img['2'].width;
+
+			['-2', '-1', '0', '1'].forEach((index) => {
+				const oneUp = (Number(index) + 1).toString();
+				slidingImgURL[index] = imgURL[oneUp];
+				travelDistance[index] =
+					img[index].getBoundingClientRect().x - img[index].getBoundingClientRect().x;
+				console.log(`image ${index} -> ${imgURL[index]}`);
+				console.log(`sliding ${index} -> ${slidingImgURL[index]}`);
+			});
+		}
+		if (direction === 'backwards') {
+			mainImgIndex -= 1;
+
+			slidingImgURL['1'] = img['0'].src;
+			travelDistance['1'] =
+				img['0'].getBoundingClientRect().x - img['1'].getBoundingClientRect().x;
+
+			slidingImgURL['0'] = img['-1'].src;
+			travelDistance['0'] =
+				img['-1'].getBoundingClientRect().x - img['0'].getBoundingClientRect().x;
+
+			slidingImgURL['-1'] = getImg(mainImgIndex - 1);
+			travelDistance['-1'] = -img['-1'].width;
 		}
 		movingImages = true;
+	}
+
+	function endSlide() {
+		imgURL['-2'] = slidingImgURL['-2'];
+		imgURL['-1'] = slidingImgURL['-1'];
+		imgURL['0'] = slidingImgURL['0'];
+		imgURL['1'] = slidingImgURL['1'];
+		imgURL['2'] = slidingImgURL['2'];
+		movingImages = false;
 	}
 </script>
 
 <section>
-	<div>{main_image}</div>
-	{START_X - END_X}
+	<div>movingImages: {movingImages}</div>
 
-	<div id="main_carousel" class="flex relative overflow-hidden gap-12 justify-center">
-		{#if listing.slideshow_images}
-			<!-- {#each listing.slideshow_images as images, index}
-				<div class="w-1/3 shrink-0 bg-slate-200">
-					<div class="aspect-w-4 aspect-h-2">
-						<img class="h-full object-contain " src="{images}" alt="" />
-						{index}
+	<div id="main_carousel" class="flex relative gap-12 justify-center">
+		{#each ['-2', '-1', '0', '1', '2'] as imgIndex}
+			<div class="relative w-1/2 shrink-0">
+				<div class="aspect-w-4 aspect-h-2">
+					{imgIndex}
+					<img
+						bind:this="{img[imgIndex]}"
+						class="h-full object-contain {movingImages ? '' : ''}"
+						src="{imgURL[imgIndex]}"
+						alt=""
+					/>
+				</div>
+				{#if movingImages}
+					<div
+						class="absolute font-bold top-0 left-0 w-full h-full"
+						in:fly="{{
+							x: travelDistance[imgIndex],
+							duration: 1000,
+							opacity: 1,
+							easing: eases.linear,
+						}}"
+						on:introend="{() => endSlide()}"
+					>
+						<div class="aspect-w-4 aspect-h-2">
+							{imgIndex}
+							<img
+								class="h-full object-contain"
+								src="{slidingImgURL[imgIndex]}"
+								alt=""
+							/>
+						</div>
 					</div>
-				</div>
-			{/each} -->
-			<!-- {#if !movingImages}
-				<img
-					class="relative w-1/4"
-					src="/uploads/map.png"
-					alt=""
-					style="{style}"
-					bind:this="{elem}"
-					data-img-num="1"
-				/>
-			{/if}
-			<img
-				class="relative w-1/4"
-				src="/uploads/map.png"
-				alt=""
-				style="{style}"
-				bind:this="{elem}"
-				data-img-num="1"
-			/> -->
-			<!-- <img class="w-1/4" src="/uploads/people-talking.jpeg" alt="" data-img-num="2" />
-			<img class="w-1/4" src="/uploads/farmer-pointing.jpeg" alt="" data-img-num="3" /> -->
-		{/if}
-
-		<div class="relative w-1/2 shrink-0 bg-slate-200">
-			<div class="aspect-w-4 aspect-h-2">
-				<img
-					bind:this="{slideImage1}"
-					class="h-full object-contain {movingImages ? '' : ''}"
-					src="/uploads/map.png"
-					alt=""
-				/>
+				{/if}
 			</div>
+		{/each}
 
-			<!-- {#if movingImages}
-				<div
-					class="absolute bg-red-50 font-bold top-0 left-0 w-full h-full"
-					in:fly="{{
-						x: style,
-						duration: 4000,
-						opacity: 1,
-					}}"
-					on:introend="{() => (movingImages = false)}"
-				>
-					1
-				</div>
-			{/if} -->
-		</div>
-		<div class="relative w-1/2 shrink-0">
+		<!-- <div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{slideImage2}"
+					bind:this="{img1}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="/uploads/people-talking.jpeg"
+					src="{getImg(mainImgIndex - 1)}"
 					alt=""
 				/>
 			</div>
 			{#if movingImages}
 				<div
-					class="absolute bg-red-50 font-bold top-0 left-0 w-full h-full"
+					class="absolute font-bold top-0 left-0 w-full h-full"
 					in:fly="{{
-						x: style,
-						duration: 4000,
+						x: travelDistance1,
+						duration: 1000,
 						opacity: 1,
+						easing: eases.linear,
 					}}"
-					on:introend="{() => (movingImages = false)}"
+					on:introend="{() => endSlide()}"
 				>
-					1
+					<div class="aspect-w-4 aspect-h-2">
+						<img class="h-full object-contain" src="{slidingImgURL1}" alt="" />
+					</div>
 				</div>
 			{/if}
 		</div>
-		<div class="relative w-1/2 shrink-0 bg-slate-200">
+		<div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{slideImage3}"
+					bind:this="{img2}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="/uploads/farmer-pointing.jpeg"
+					src="{getImg(mainImgIndex)}"
 					alt=""
 				/>
 			</div>
-			<!-- <div
-				data-mover="3"
-				bind:this="{dataMover3}"
-				class="absolute bg-red-50 h-full w-full top-0 left-0 font-bold"
-			>
-				3
-			</div> -->
+			{#if movingImages}
+				<div
+					class="absolute font-bold top-0 left-0 w-full h-full"
+					in:fly="{{
+						x: travelDistance2,
+						duration: 1000,
+						opacity: 1,
+						easing: eases.linear,
+					}}"
+					on:introend="{() => endSlide()}"
+				>
+					<div class="aspect-w-4 aspect-h-2">
+						<img class="h-full object-contain" src="{slidingImgURL2}" alt="" />
+					</div>
+				</div>
+			{/if}
 		</div>
+		<div class="relative w-1/2 shrink-0">
+			<div class="aspect-w-4 aspect-h-2">
+				<img
+					bind:this="{img3}"
+					class="h-full object-contain {movingImages ? 'hidden' : ''}"
+					src="{getImg(mainImgIndex + 1)}"
+					alt=""
+				/>
+			</div>
+			{#if movingImages}
+				<div
+					class="absolute font-bold top-0 left-0 w-full h-full"
+					in:fly="{{
+						x: travelDistance3,
+						duration: 1000,
+						opacity: 1,
+						easing: eases.linear,
+					}}"
+					on:introend="{() => endSlide()}"
+				>
+					<div class="aspect-w-4 aspect-h-2">
+						<img class="h-full object-contain" src="{slidingImgURL3}" alt="" />
+					</div>
+				</div>
+			{/if}
+		</div>
+		<div class="aspect-w-4 aspect-h-2">
+			<img
+				bind:this="{imgR}"
+				class="h-full object-contain {movingImages ? 'hidden' : ''}"
+				src="{getImg(mainImgIndex + 2)}"
+				alt=""
+			/>
+		</div> -->
+
 		<!-- Slider controls -->
 		<button
 			class="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 p-2 bg-primary-600 rounded-full button-elevated"
-			on:click="{() => changeStyle('backwards')}"
+			on:click="{() => startSlide('backwards')}"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +218,7 @@
 		</button>
 		<button
 			class="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 p-2 bg-primary-600 rounded-full button-elevated"
-			on:click="{() => changeStyle('forwards')}"
+			on:click="{() => startSlide('forwards')}"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -177,15 +235,6 @@
 		</button>
 	</div>
 </section>
-
-<div class="mx-auto flex justify-center p-10">
-	<button
-		class="p-3 {movingImages
-			? 'bg-black'
-			: 'bg-slate-300 hover:bg-slate-200 active:bg-slate-500'}"
-		on:click="{() => changeStyle('backwards')}">Move Images</button
-	>
-</div>
 
 <div id="default-carousel" class="relative" data-carousel="static">
 	<!-- Carousel wrapper -->
