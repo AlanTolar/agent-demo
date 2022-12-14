@@ -6,33 +6,30 @@
 
 	const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
 	const listing = modules[`/src/lib/content/listings/${$page.params.listing}.json`];
-	// const listing = source;
 
-	let imgElem1 = '';
-	let imgElem2 = '';
-	let imgElem3 = '';
-	let imgElem4 = '';
-	let imgElem5 = '';
+	// let img1staticElem = '';
+	// let img2staticElem = '';
+	// let img3staticElem = '';
+	// let img4staticElem = '';
+	// let img5staticElem = '';
 
-	let imgURL1 = getImg(-2);
-	let imgURL2 = getImg(-1);
-	let imgURL3 = getImg(0);
-	let imgURL4 = getImg(1);
-	let imgURL5 = getImg(2);
+	// let img1slidingURL = '';
+	// let img2slidingURL = '';
+	// let img3slidingURL = '';
+	// let img4slidingURL = '';
+	// let img5slidingURL = '';
 
-	let slidingImgURL1 = '';
-	let slidingImgURL2 = '';
-	let slidingImgURL3 = '';
-	let slidingImgURL4 = '';
-	let slidingImgURL5 = '';
+	// let img1travelDistance = 0;
+	// let img2travelDistance = 0;
+	// let img3travelDistance = 0;
+	// let img4travelDistance = 0;
+	// let img5travelDistance = 0;
 
-	let travelDistance1 = 0;
-	let travelDistance2 = 0;
-	let travelDistance3 = 0;
-	let travelDistance4 = 0;
-	let travelDistance5 = 0;
-
-	// let img = {elem: '', url: }
+	let img1 = { staticElem: null, slidingURL: '', travelDistance: 0 };
+	let img2 = { staticElem: null, slidingURL: '', travelDistance: 0 };
+	let img3 = { staticElem: null, slidingURL: '', travelDistance: 0 };
+	let img4 = { staticElem: null, slidingURL: '', travelDistance: 0 };
+	let img5 = { staticElem: null, slidingURL: '', travelDistance: 0 };
 
 	let movingImages = false;
 	let mainImgIndex = 0;
@@ -46,48 +43,64 @@
 		if (direction === 'forwards') {
 			mainImgIndex += 1;
 
-			slidingImgURL5 = getImg(mainImgIndex + 2);
-			travelDistance5 = imgElem5.width;
+			img1.slidingURL = img2.staticElem.src;
+			img1.travelDistance =
+				img2.staticElem.getBoundingClientRect().x -
+				img1.staticElem.getBoundingClientRect().x;
 
-			slidingImgURL4 = imgURL5;
-			travelDistance4 =
-				imgElem5.getBoundingClientRect().x - imgElem4.getBoundingClientRect().x;
+			img2.slidingURL = img3.staticElem.src;
+			img2.travelDistance =
+				img3.staticElem.getBoundingClientRect().x -
+				img2.staticElem.getBoundingClientRect().x;
 
-			slidingImgURL3 = imgURL4;
-			travelDistance3 =
-				imgElem4.getBoundingClientRect().x - imgElem3.getBoundingClientRect().x;
+			img3.slidingURL = img4.staticElem.src;
+			img3.travelDistance =
+				img4.staticElem.getBoundingClientRect().x -
+				img3.staticElem.getBoundingClientRect().x;
 
-			slidingImgURL2 = imgURL3;
-			travelDistance2 =
-				imgElem3.getBoundingClientRect().x - imgElem2.getBoundingClientRect().x;
+			img4.slidingURL = img5.staticElem.src;
+			img4.travelDistance =
+				img5.staticElem.getBoundingClientRect().x -
+				img4.staticElem.getBoundingClientRect().x;
 
-			slidingImgURL1 = imgURL2;
-			travelDistance1 =
-				imgElem2.getBoundingClientRect().x - imgElem1.getBoundingClientRect().x;
+			img5.slidingURL = getImg(mainImgIndex + 2);
+			img5.travelDistance = img5.staticElem.width;
 		}
 		if (direction === 'backwards') {
 			mainImgIndex -= 1;
 
-			// slidingImgURL['1'] = img['0'].src;
-			// travelDistance['1'] =
-			// 	img['0'].getBoundingClientRect().x - img['1'].getBoundingClientRect().x;
+			img1.slidingURL = getImg(mainImgIndex - 2);
+			img1.travelDistance = -img1.staticElem.width;
 
-			// slidingImgURL['0'] = img['-1'].src;
-			// travelDistance['0'] =
-			// 	img['-1'].getBoundingClientRect().x - img['0'].getBoundingClientRect().x;
+			img2.slidingURL = img1.staticElem.src;
+			img2.travelDistance =
+				img1.staticElem.getBoundingClientRect().x -
+				img2.staticElem.getBoundingClientRect().x;
 
-			// slidingImgURL['-1'] = getImg(mainImgIndex - 1);
-			// travelDistance['-1'] = -img['-1'].width;
+			img3.slidingURL = img2.staticElem.src;
+			img3.travelDistance =
+				img2.staticElem.getBoundingClientRect().x -
+				img3.staticElem.getBoundingClientRect().x;
+
+			img4.slidingURL = img3.staticElem.src;
+			img4.travelDistance =
+				img3.staticElem.getBoundingClientRect().x -
+				img4.staticElem.getBoundingClientRect().x;
+
+			img5.slidingURL = img4.staticElem.src;
+			img5.travelDistance =
+				img4.staticElem.getBoundingClientRect().x -
+				img5.staticElem.getBoundingClientRect().x;
 		}
 		movingImages = true;
 	}
 
 	function endSlide() {
-		imgURL1 = slidingImgURL1;
-		imgURL2 = slidingImgURL2;
-		imgURL3 = slidingImgURL3;
-		imgURL4 = slidingImgURL4;
-		imgURL5 = slidingImgURL5;
+		img1.staticElem.src = img1.slidingURL;
+		img2.staticElem.src = img2.slidingURL;
+		img3.staticElem.src = img3.slidingURL;
+		img4.staticElem.src = img4.slidingURL;
+		img5.staticElem.src = img5.slidingURL;
 		movingImages = false;
 	}
 </script>
@@ -96,13 +109,13 @@
 	<div>movingImages: {movingImages}</div>
 
 	<div id="main_carousel" class="flex relative gap-12 justify-center">
-		<!-- {#each ['-2', '-1', '0', '1', '2'] as imgIndex} -->
+		<!-- Slides -->
 		<div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{imgElem1}"
+					bind:this="{img1.staticElem}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="{imgURL1}"
+					src="{getImg(-2)}"
 					alt=""
 				/>
 			</div>
@@ -110,7 +123,7 @@
 				<div
 					class="absolute font-bold top-0 left-0 w-full h-full"
 					in:fly="{{
-						x: travelDistance1,
+						x: img1.travelDistance,
 						duration: 1000,
 						opacity: 1,
 						easing: eases.linear,
@@ -118,7 +131,7 @@
 					on:introend="{() => endSlide()}"
 				>
 					<div class="aspect-w-4 aspect-h-2">
-						<img class="h-full object-contain" src="{slidingImgURL1}" alt="" />
+						<img class="h-full object-contain" src="{img1.slidingURL}" alt="" />
 					</div>
 				</div>
 			{/if}
@@ -126,9 +139,9 @@
 		<div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{imgElem2}"
+					bind:this="{img2.staticElem}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="{imgURL2}"
+					src="{getImg(-1)}"
 					alt=""
 				/>
 			</div>
@@ -136,7 +149,7 @@
 				<div
 					class="absolute font-bold top-0 left-0 w-full h-full"
 					in:fly="{{
-						x: travelDistance2,
+						x: img2.travelDistance,
 						duration: 1000,
 						opacity: 1,
 						easing: eases.linear,
@@ -144,7 +157,7 @@
 					on:introend="{() => endSlide()}"
 				>
 					<div class="aspect-w-4 aspect-h-2">
-						<img class="h-full object-contain" src="{slidingImgURL2}" alt="" />
+						<img class="h-full object-contain" src="{img2.slidingURL}" alt="" />
 					</div>
 				</div>
 			{/if}
@@ -152,9 +165,9 @@
 		<div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{imgElem3}"
+					bind:this="{img3.staticElem}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="{imgURL3}"
+					src="{getImg(0)}"
 					alt=""
 				/>
 			</div>
@@ -162,7 +175,7 @@
 				<div
 					class="absolute font-bold top-0 left-0 w-full h-full"
 					in:fly="{{
-						x: travelDistance3,
+						x: img3.travelDistance,
 						duration: 1000,
 						opacity: 1,
 						easing: eases.linear,
@@ -170,7 +183,7 @@
 					on:introend="{() => endSlide()}"
 				>
 					<div class="aspect-w-4 aspect-h-2">
-						<img class="h-full object-contain" src="{slidingImgURL3}" alt="" />
+						<img class="h-full object-contain" src="{img3.slidingURL}" alt="" />
 					</div>
 				</div>
 			{/if}
@@ -178,9 +191,9 @@
 		<div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{imgElem4}"
+					bind:this="{img4.staticElem}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="{imgURL4}"
+					src="{getImg(1)}"
 					alt=""
 				/>
 			</div>
@@ -188,7 +201,7 @@
 				<div
 					class="absolute font-bold top-0 left-0 w-full h-full"
 					in:fly="{{
-						x: travelDistance4,
+						x: img4.travelDistance,
 						duration: 1000,
 						opacity: 1,
 						easing: eases.linear,
@@ -196,7 +209,7 @@
 					on:introend="{() => endSlide()}"
 				>
 					<div class="aspect-w-4 aspect-h-2">
-						<img class="h-full object-contain" src="{slidingImgURL4}" alt="" />
+						<img class="h-full object-contain" src="{img4.slidingURL}" alt="" />
 					</div>
 				</div>
 			{/if}
@@ -204,9 +217,9 @@
 		<div class="relative w-1/2 shrink-0">
 			<div class="aspect-w-4 aspect-h-2">
 				<img
-					bind:this="{imgElem5}"
+					bind:this="{img5.staticElem}"
 					class="h-full object-contain {movingImages ? 'hidden' : ''}"
-					src="{imgURL5}"
+					src="{getImg(2)}"
 					alt=""
 				/>
 			</div>
@@ -214,7 +227,7 @@
 				<div
 					class="absolute font-bold top-0 left-0 w-full h-full"
 					in:fly="{{
-						x: travelDistance5,
+						x: img5.travelDistance,
 						duration: 1000,
 						opacity: 1,
 						easing: eases.linear,
@@ -222,7 +235,7 @@
 					on:introend="{() => endSlide()}"
 				>
 					<div class="aspect-w-4 aspect-h-2">
-						<img class="h-full object-contain" src="{slidingImgURL5}" alt="" />
+						<img class="h-full object-contain" src="{img5.slidingURL}" alt="" />
 					</div>
 				</div>
 			{/if}
