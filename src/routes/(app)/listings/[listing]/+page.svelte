@@ -121,43 +121,49 @@
 </script>
 
 <div class="sticky top-16 z-50 {contentCovered ? 'bg-neutral-200' : ''}">
-	<div class="flex justify-center gap-6 h-20 max-w-screen-xl mx-auto" bind:this="{factsBarElem}">
-		<div class="w-8/12 shrink-0 flex justify-between align-middle">
-			<h1 class="self-center heading-text">{listing.title}</h1>
+	<div class="h-20 max-w-screen-xl mx-auto" bind:this="{factsBarElem}">
+		<div class="flex justify-center w-[100%] px-7 xl:px-0 h-full">
+			<div
+				class="px-3 w-full xl:w-8/12 shrink-0 flex justify-between gap-x-8 align-middle whitespace-nowrap flex-wrap"
+			>
+				<h1 class="self-center heading-text">{listing.title}</h1>
 
-			<div class="self-center flex items-center gap-4 subtitle-text font-bold">
-				<span>{numbro(listing.acres).format({ thousandSeparated: true })} acres</span>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-3"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 32 32"
-					><circle cx="16" cy="16" r="8" fill="currentColor"></circle></svg
+				<div
+					class="self-center flex items-center gap-2 lg:gap-4 subtitle-text font-bold flex-wrap"
 				>
+					<span>{numbro(listing.acres).format({ thousandSeparated: true })} acres</span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-3"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 32 32"
+						><circle cx="16" cy="16" r="8" fill="currentColor"></circle></svg
+					>
 
-				<span
-					>{numbro(listing.price).formatCurrency({
-						thousandSeparated: true,
-					})}</span
-				>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-3"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 32 32"
-					><circle cx="16" cy="16" r="8" fill="currentColor"></circle></svg
-				>
-				<span>{listing.address.city}, {listing.address.state}</span>
+					<span
+						>{numbro(listing.price).formatCurrency({
+							thousandSeparated: true,
+						})}</span
+					>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-3"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 32 32"
+						><circle cx="16" cy="16" r="8" fill="currentColor"></circle></svg
+					>
+					<span>{listing.address.city}, {listing.address.state}</span>
+				</div>
 			</div>
+			<div class="hidden xl:block w-4/12 shrink-0 px-3"> </div>
 		</div>
-		<div class="w-4/12 shrink-0"> </div>
 	</div>
 </div>
 
 <div class="overflow-clip">
-	<div class="flex relative justify-center mt-px max-w-screen-xl mx-auto">
+	<div class="flex relative justify-center mt-1 max-w-screen-xl mx-auto">
 		<!-- Slides -->
-		<div class="relative w-8/12 shrink-0 px-3">
+		<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img1.staticElem}"
@@ -168,7 +174,7 @@
 			</div>
 			{#if movingImages && movingForward}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full carousel-item z-10"
 					in:fly="{{
 						x: img1.travelDistance,
 						duration: slideSpeed,
@@ -187,7 +193,7 @@
 				</div>
 			{/if}
 		</div>
-		<div class="relative w-8/12 shrink-0 px-3">
+		<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img2.staticElem}"
@@ -200,7 +206,7 @@
 			</div>
 			{#if movingImages}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full carousel-item z-10"
 					in:fly="{{
 						x: img2.travelDistance,
 						duration: slideSpeed,
@@ -219,8 +225,11 @@
 				</div>
 			{/if}
 		</div>
-		<div class="shrink-0 flex justify-center w-[100%]">
-			<div class="relative w-8/12 shrink-0 px-3" bind:this="{mainContentElem}">
+		<div class="shrink-0 flex justify-center w-[100%] flex-col xl:flex-row">
+			<div
+				class="relative w-full xl:w-8/12 shrink-0 carousel-item"
+				bind:this="{mainContentElem}"
+			>
 				<div class="aspect-w-5 aspect-h-3">
 					<!-- Slider controls -->
 					<div class="h-full w-full">
@@ -272,7 +281,7 @@
 				</div>
 				{#if movingImages}
 					<div
-						class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
+						class="absolute font-bold top-0 left-0 w-full h-full carousel-item z-10"
 						in:fly="{{
 							x: img3.travelDistance,
 							duration: slideSpeed,
@@ -309,7 +318,7 @@
 					</section>
 					<section id="summary-section">
 						<h3 class="heading-text-sm">Summary</h3>
-						<div class="mt-4 grid grid-cols-2 gap-6">
+						<div class="mt-4 grid sm:grid-cols-2 gap-6">
 							<div class="flex flex-col gap-6">
 								<div class="flex">
 									<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
@@ -415,12 +424,12 @@
 					</section>
 					<section id="further-info-section">
 						<h3 class="heading-text-sm">Further Information</h3>
-						<div class="mt-4 flex gap-14">
-							<div class="flex flex-col gap-4">
+						<div class="mt-4 grid sm:grid-cols-2 gap-6">
+							<div class="flex flex-col gap-4 items-center">
 								{#if listing.brouchure}
 									<a
 										href="{listing.brouchure}"
-										class="text-white button drop-shadow-xl shine bg-primary-600 w-fit"
+										class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
 										><iconify-icon
 											inline
 											icon="ic:baseline-download"
@@ -430,25 +439,29 @@
 								{#if listing.location}
 									<a
 										href="{listing.location}"
-										class="text-white button drop-shadow-xl shine bg-primary-600 w-fit"
+										class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
 										><iconify-icon inline icon="mdi:map-marker" class="mr-2"
 										></iconify-icon>Get Directions</a
 									>
 								{/if}
 							</div>
-							<div>
-								<p>{listing.address.street || ''}</p>
-								<p
-									>{listing.address.city || ''}, {listing.address.state || ''}
-									{listing.address.post_code || ''}</p
-								>
-								<p>{listing.address.county || ''}</p>
+							<div class="flex justify-center">
+								<div>
+									<p>{listing.address.street || ''}</p>
+									<p
+										>{listing.address.city || ''}, {listing.address.state || ''}
+										{listing.address.post_code || ''}</p
+									>
+									<p>{listing.address.county || ''}</p>
+								</div>
 							</div>
 						</div>
 					</section>
 				</div>
 			</div>
-			<div class="relative w-4/12 shrink-0 px-3 z-20">
+			<div
+				class="relative w-full xl:w-4/12 shrink-0 carousel-item max-w-[600px] xl:max-w-none mx-auto z-20"
+			>
 				<div
 					class="bg-neutral-200 sticky {contentCovered
 						? 'top-40'
@@ -484,7 +497,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="relative w-8/12 shrink-0 px-3">
+		<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img4.staticElem}"
@@ -497,7 +510,7 @@
 			</div>
 			{#if movingImages}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full carousel-item z-10"
 					in:fly="{{
 						x: img4.travelDistance,
 						duration: slideSpeed,
@@ -516,7 +529,7 @@
 				</div>
 			{/if}
 		</div>
-		<div class="relative w-8/12 shrink-0 px-3">
+		<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img5.staticElem}"
@@ -527,7 +540,7 @@
 			</div>
 			{#if movingImages && !movingForward}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full carousel-item z-10"
 					in:fly="{{
 						x: img5.travelDistance,
 						duration: slideSpeed,
