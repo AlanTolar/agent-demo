@@ -19,7 +19,7 @@
 	let mainImgIndex = 0;
 
 	let imgCover = true;
-	let slideSpeed = 5000;
+	let slideSpeed = 500;
 	let slideTransition = eases.cubicOut;
 
 	function getImg(i: number) {
@@ -120,7 +120,7 @@
 	});
 </script>
 
-<div class="sticky top-16 z-20 {contentCovered ? 'bg-neutral-200' : ''}">
+<div class="sticky top-16 z-50 {contentCovered ? 'bg-neutral-200' : ''}">
 	<div class="flex justify-center gap-6 h-20 max-w-screen-xl mx-auto" bind:this="{factsBarElem}">
 		<div class="w-8/12 shrink-0 flex justify-between align-middle">
 			<h1 class="self-center heading-text">{listing.title}</h1>
@@ -155,9 +155,9 @@
 </div>
 
 <div class="overflow-clip">
-	<div class="flex relative gap-6 justify-center mt-px max-w-screen-xl mx-auto">
+	<div class="flex relative justify-center mt-px max-w-screen-xl mx-auto">
 		<!-- Slides -->
-		<div class="relative w-8/12 shrink-0">
+		<div class="relative w-8/12 shrink-0 px-3">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img1.staticElem}"
@@ -168,7 +168,7 @@
 			</div>
 			{#if movingImages && movingForward}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
 					in:fly="{{
 						x: img1.travelDistance,
 						duration: slideSpeed,
@@ -187,7 +187,7 @@
 				</div>
 			{/if}
 		</div>
-		<div class="relative w-8/12 shrink-0">
+		<div class="relative w-8/12 shrink-0 px-3">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img2.staticElem}"
@@ -200,7 +200,7 @@
 			</div>
 			{#if movingImages}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
 					in:fly="{{
 						x: img2.travelDistance,
 						duration: slideSpeed,
@@ -219,259 +219,272 @@
 				</div>
 			{/if}
 		</div>
-		<div class="relative w-8/12 shrink-0" bind:this="{mainContentElem}">
-			<div class="aspect-w-5 aspect-h-3">
-				<!-- Slider controls -->
-				<div class="h-full w-full">
-					<button
-						class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-10"
-						disabled="{movingImages}"
-						on:click="{() => startSlide('backwards')}"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							preserveAspectRatio="xMidYMid meet"
-							viewBox="0 0 24 24"
-							class="w-full text-neutral-100"
-							stroke="currentColor"
-							><path
-								fill="currentColor"
-								d="m10.875 19.3l-6.6-6.6q-.15-.15-.213-.325Q4 12.2 4 12t.062-.375q.063-.175.213-.325l6.6-6.6q.275-.275.687-.288q.413-.012.713.288q.3.275.313.687q.012.413-.288.713L7.4 11h11.175q.425 0 .713.287q.287.288.287.713t-.287.712Q19 13 18.575 13H7.4l4.9 4.9q.275.275.288.7q.012.425-.288.7q-.275.3-.7.3q-.425 0-.725-.3Z"
-							></path></svg
+		<div class="shrink-0 flex justify-center w-[100%]">
+			<div class="relative w-8/12 shrink-0 px-3" bind:this="{mainContentElem}">
+				<div class="aspect-w-5 aspect-h-3">
+					<!-- Slider controls -->
+					<div class="h-full w-full">
+						<button
+							class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
+							disabled="{movingImages}"
+							on:click="{() => startSlide('backwards')}"
 						>
-						<span class="sr-only">Previous</span>
-					</button>
-					<button
-						class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-10"
-						disabled="{movingImages}"
-						on:click="{() => startSlide('forwards')}"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							preserveAspectRatio="xMidYMid meet"
-							viewBox="0 0 24 24"
-							class="w-full text-neutral-100"
-							stroke="currentColor"
-							><path
-								fill="currentColor"
-								d="M11.3 19.3q-.275-.275-.288-.7q-.012-.425.263-.7l4.9-4.9H5q-.425 0-.713-.288Q4 12.425 4 12t.287-.713Q4.575 11 5 11h11.175l-4.9-4.9q-.275-.275-.263-.7q.013-.425.288-.7q.275-.275.7-.275q.425 0 .7.275l6.6 6.6q.15.125.213.312q.062.188.062.388t-.062.375q-.063.175-.213.325l-6.6 6.6q-.275.275-.7.275q-.425 0-.7-.275Z"
-							></path></svg
-						>
-						<span class="sr-only">Next</span>
-					</button>
-				</div>
-				<img
-					bind:this="{img3.staticElem}"
-					class="h-full {imgCover ? 'object-cover' : 'object-contain'} {movingImages
-						? 'hidden'
-						: ''}"
-					src="{getImg(0)}"
-					alt=""
-				/>
-			</div>
-			{#if movingImages}
-				<div
-					class="absolute font-bold top-0 left-0 w-full h-full"
-					in:fly="{{
-						x: img3.travelDistance,
-						duration: slideSpeed,
-						opacity: 1,
-						easing: slideTransition,
-					}}"
-					on:introend="{() => endSlide()}"
-				>
-					<div class="aspect-w-5 aspect-h-3">
-						<img
-							class="h-full {imgCover ? 'object-cover' : 'object-contain'} z-10"
-							src="{img3.slidingURL}"
-							alt=""
-						/>
-					</div>
-				</div>
-			{/if}
-
-			<div
-				id="main-content-container"
-				class="flex flex-col gap-10 py-10 max-w-[800px] mx-auto"
-			>
-				<section id="description-section">
-					<h3 class="heading-text-sm">Description</h3>
-					<p class="mt-4 prose main-paragraph max-w-none">
-						{@html listing.description}
-					</p>
-				</section>
-				<section id="details-section">
-					<h3 class="heading-text-sm">Details</h3>
-					<p class="mt-4 prose main-paragraph max-w-none">
-						{@html listing.details}
-					</p>
-				</section>
-				<section id="summary-section">
-					<h3 class="heading-text-sm">Summary</h3>
-					<div class="mt-4 grid grid-cols-2 gap-6">
-						<div class="flex flex-col gap-6">
-							<div class="flex">
-								<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
-								></iconify-icon>
-								<div>
-									{#if 'feature_categories' in listing.summary}
-										<h4 class="subtitle-text">Property</h4>
-										<div class="mt-2 flex flex-col gap-2">
-											{#each listing.summary.feature_categories as feature}
-												<div
-													><h5 class="font-bold"
-														>{feature.feature_category}</h5
-													>
-													<p>{feature.features}</p>
-												</div>
-											{/each}
-										</div>
-									{/if}
-								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon
-									icon="majesticons:checkbox-list-detail-line"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if 'land_details' in listing.summary}
-										<h4 class="subtitle-text">Land Details</h4>
-										<div class="mt-2">
-											<p>{listing.summary.land_details}</p>
-										</div>
-									{/if}
-								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon icon="mingcute:road-line" class="py-1 pr-4" width="40"
-								></iconify-icon>
-								<div>
-									{#if 'distances' in listing.summary}
-										<h4 class="subtitle-text">Distances</h4>
-										<div class="mt-2">
-											{#each listing.summary.distances as distances}
-												<p>{distances.distance} from {distances.location}</p
-												>
-											{/each}
-										</div>
-									{/if}
-								</div>
-							</div>
-						</div>
-						<div class="flex flex-col gap-6">
-							<div class="flex">
-								<iconify-icon
-									icon="eos-icons:pipeline-outlined"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if 'utilities' in listing.summary}
-										<h4 class="subtitle-text">Utilities</h4>
-										<div class="mt-2">
-											{#each listing.summary.utilities as utilities}
-												<p>{utilities.utility}: {utilities.availability}</p>
-											{/each}
-										</div>
-									{/if}
-								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon
-									icon="material-symbols:house-outline"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if 'housing' in listing.summary}
-										<h4 class="subtitle-text">Housing</h4>
-										<div class="mt-2">
-											<p>{listing.summary.housing}</p>
-										</div>
-									{/if}
-								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon
-									icon="material-symbols:trending-up"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if 'improvements' in listing.summary}
-										<h4 class="subtitle-text">Improvements</h4>
-										<div class="mt-2">
-											<p>{listing.summary.improvements}</p>
-										</div>
-									{/if}
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<section id="further-info-section">
-					<h3 class="heading-text-sm">Further Information</h3>
-					<div class="mt-4 flex gap-14">
-						<div class="flex flex-col gap-4">
-							{#if listing.brouchure}
-								<a
-									href="{listing.brouchure}"
-									class="text-white button drop-shadow-xl shine bg-primary-600 w-fit"
-									><iconify-icon inline icon="ic:baseline-download" class="mr-2"
-									></iconify-icon>Download Files</a
-								>
-							{/if}
-							{#if listing.location}
-								<a
-									href="{listing.location}"
-									class="text-white button drop-shadow-xl shine bg-primary-600 w-fit"
-									><iconify-icon inline icon="mdi:map-marker" class="mr-2"
-									></iconify-icon>Get Directions</a
-								>
-							{/if}
-						</div>
-						<div>
-							<p>{listing.address.street || ''}</p>
-							<p
-								>{listing.address.city || ''}, {listing.address.state || ''}
-								{listing.address.post_code || ''}</p
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								preserveAspectRatio="xMidYMid meet"
+								viewBox="0 0 24 24"
+								class="w-full text-neutral-100"
+								stroke="currentColor"
+								><path
+									fill="currentColor"
+									d="m10.875 19.3l-6.6-6.6q-.15-.15-.213-.325Q4 12.2 4 12t.062-.375q.063-.175.213-.325l6.6-6.6q.275-.275.687-.288q.413-.012.713.288q.3.275.313.687q.012.413-.288.713L7.4 11h11.175q.425 0 .713.287q.287.288.287.713t-.287.712Q19 13 18.575 13H7.4l4.9 4.9q.275.275.288.7q.012.425-.288.7q-.275.3-.7.3q-.425 0-.725-.3Z"
+								></path></svg
 							>
-							<p>{listing.address.county || ''}</p>
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-		<div class="relative w-4/12 shrink-0 z-10">
-			<div
-				class="bg-neutral-200 sticky {contentCovered
-					? 'top-40'
-					: ''} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg"
-			>
-				<div class="grid grid-cols-3">
-					<div class="col-span-1">
-						<div class="aspect-w-1 aspect-h-1">
-							<img class="object-cover" src="/uploads/farmer-pointing.jpeg" alt="" />
-						</div>
-					</div>
-					<div class="col-span-2 pl-10 flex flex-col gap-4">
-						<div>
-							<h2 class="heading-text">John Doe</h2>
-							<p class="subtitle-text">999-999-9999</p>
-						</div>
-						<a class="label-text underline text-neutral-600 font-semibold"
-							>View Profile</a
+							<span class="sr-only">Previous</span>
+						</button>
+						<button
+							class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
+							disabled="{movingImages}"
+							on:click="{() => startSlide('forwards')}"
 						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								preserveAspectRatio="xMidYMid meet"
+								viewBox="0 0 24 24"
+								class="w-full text-neutral-100"
+								stroke="currentColor"
+								><path
+									fill="currentColor"
+									d="M11.3 19.3q-.275-.275-.288-.7q-.012-.425.263-.7l4.9-4.9H5q-.425 0-.713-.288Q4 12.425 4 12t.287-.713Q4.575 11 5 11h11.175l-4.9-4.9q-.275-.275-.263-.7q.013-.425.288-.7q.275-.275.7-.275q.425 0 .7.275l6.6 6.6q.15.125.213.312q.062.188.062.388t-.062.375q-.063.175-.213.325l-6.6 6.6q-.275.275-.7.275q-.425 0-.7-.275Z"
+								></path></svg
+							>
+							<span class="sr-only">Next</span>
+						</button>
 					</div>
+					<img
+						bind:this="{img3.staticElem}"
+						class="h-full {imgCover ? 'object-cover' : 'object-contain'} {movingImages
+							? 'hidden'
+							: ''}"
+						src="{getImg(0)}"
+						alt=""
+					/>
 				</div>
-				<div class="mt-10 flex flex-col gap-6">
-					<input class="rounded-lg" placeholder="Full Name" type="text" />
-					<input class="rounded-lg" placeholder="Email" type="email" />
-					<input class="rounded-lg" placeholder="Phone Number" type="tel" />
-					<textarea class="rounded-lg" placeholder="Message" rows="5" cols="33"
-					></textarea>
+				{#if movingImages}
+					<div
+						class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
+						in:fly="{{
+							x: img3.travelDistance,
+							duration: slideSpeed,
+							opacity: 1,
+							easing: slideTransition,
+						}}"
+						on:introend="{() => endSlide()}"
+					>
+						<div class="aspect-w-5 aspect-h-3">
+							<img
+								class="h-full {imgCover ? 'object-cover' : 'object-contain'}"
+								src="{img3.slidingURL}"
+								alt=""
+							/>
+						</div>
+					</div>
+				{/if}
+
+				<div
+					id="main-content-container"
+					class="flex flex-col gap-10 py-10 max-w-[800px] mx-auto"
+				>
+					<section id="description-section">
+						<h3 class="heading-text-sm">Description</h3>
+						<p class="mt-4 prose main-paragraph max-w-none">
+							{@html listing.description}
+						</p>
+					</section>
+					<section id="details-section">
+						<h3 class="heading-text-sm">Details</h3>
+						<p class="mt-4 prose main-paragraph max-w-none">
+							{@html listing.details}
+						</p>
+					</section>
+					<section id="summary-section">
+						<h3 class="heading-text-sm">Summary</h3>
+						<div class="mt-4 grid grid-cols-2 gap-6">
+							<div class="flex flex-col gap-6">
+								<div class="flex">
+									<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
+									></iconify-icon>
+									<div>
+										{#if 'feature_categories' in listing.summary}
+											<h4 class="subtitle-text">Property</h4>
+											<div class="mt-2 flex flex-col gap-2">
+												{#each listing.summary.feature_categories as feature}
+													<div
+														><h5 class="font-bold"
+															>{feature.feature_category}</h5
+														>
+														<p>{feature.features}</p>
+													</div>
+												{/each}
+											</div>
+										{/if}
+									</div>
+								</div>
+								<div class="flex">
+									<iconify-icon
+										icon="majesticons:checkbox-list-detail-line"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
+										{#if 'land_details' in listing.summary}
+											<h4 class="subtitle-text">Land Details</h4>
+											<div class="mt-2">
+												<p>{listing.summary.land_details}</p>
+											</div>
+										{/if}
+									</div>
+								</div>
+								<div class="flex">
+									<iconify-icon
+										icon="mingcute:road-line"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
+										{#if 'distances' in listing.summary}
+											<h4 class="subtitle-text">Distances</h4>
+											<div class="mt-2">
+												{#each listing.summary.distances as distances}
+													<p
+														>{distances.distance} from {distances.location}</p
+													>
+												{/each}
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+							<div class="flex flex-col gap-6">
+								<div class="flex">
+									<iconify-icon
+										icon="eos-icons:pipeline-outlined"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
+										{#if 'utilities' in listing.summary}
+											<h4 class="subtitle-text">Utilities</h4>
+											<div class="mt-2">
+												{#each listing.summary.utilities as utilities}
+													<p
+														>{utilities.utility}: {utilities.availability}</p
+													>
+												{/each}
+											</div>
+										{/if}
+									</div>
+								</div>
+								<div class="flex">
+									<iconify-icon
+										icon="material-symbols:house-outline"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
+										{#if 'housing' in listing.summary}
+											<h4 class="subtitle-text">Housing</h4>
+											<div class="mt-2">
+												<p>{listing.summary.housing}</p>
+											</div>
+										{/if}
+									</div>
+								</div>
+								<div class="flex">
+									<iconify-icon
+										icon="material-symbols:trending-up"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
+										{#if 'improvements' in listing.summary}
+											<h4 class="subtitle-text">Improvements</h4>
+											<div class="mt-2">
+												<p>{listing.summary.improvements}</p>
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section id="further-info-section">
+						<h3 class="heading-text-sm">Further Information</h3>
+						<div class="mt-4 flex gap-14">
+							<div class="flex flex-col gap-4">
+								{#if listing.brouchure}
+									<a
+										href="{listing.brouchure}"
+										class="text-white button drop-shadow-xl shine bg-primary-600 w-fit"
+										><iconify-icon
+											inline
+											icon="ic:baseline-download"
+											class="mr-2"></iconify-icon>Download Files</a
+									>
+								{/if}
+								{#if listing.location}
+									<a
+										href="{listing.location}"
+										class="text-white button drop-shadow-xl shine bg-primary-600 w-fit"
+										><iconify-icon inline icon="mdi:map-marker" class="mr-2"
+										></iconify-icon>Get Directions</a
+									>
+								{/if}
+							</div>
+							<div>
+								<p>{listing.address.street || ''}</p>
+								<p
+									>{listing.address.city || ''}, {listing.address.state || ''}
+									{listing.address.post_code || ''}</p
+								>
+								<p>{listing.address.county || ''}</p>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="relative w-4/12 shrink-0 px-3 z-20">
+				<div
+					class="bg-neutral-200 sticky {contentCovered
+						? 'top-40'
+						: ''} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg"
+				>
+					<div class="grid grid-cols-3">
+						<div class="col-span-1">
+							<div class="aspect-w-1 aspect-h-1">
+								<img
+									class="object-cover"
+									src="/uploads/farmer-pointing.jpeg"
+									alt=""
+								/>
+							</div>
+						</div>
+						<div class="col-span-2 pl-10 flex flex-col gap-4">
+							<div>
+								<h2 class="heading-text">John Doe</h2>
+								<p class="subtitle-text">999-999-9999</p>
+							</div>
+							<a class="label-text underline text-neutral-600 font-semibold"
+								>View Profile</a
+							>
+						</div>
+					</div>
+					<div class="mt-10 flex flex-col gap-6">
+						<input class="rounded-lg" placeholder="Full Name" type="text" />
+						<input class="rounded-lg" placeholder="Email" type="email" />
+						<input class="rounded-lg" placeholder="Phone Number" type="tel" />
+						<textarea class="rounded-lg" placeholder="Message" rows="5" cols="33"
+						></textarea>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="relative w-8/12 shrink-0">
+		<div class="relative w-8/12 shrink-0 px-3">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img4.staticElem}"
@@ -484,7 +497,7 @@
 			</div>
 			{#if movingImages}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
 					in:fly="{{
 						x: img4.travelDistance,
 						duration: slideSpeed,
@@ -503,7 +516,7 @@
 				</div>
 			{/if}
 		</div>
-		<div class="relative w-8/12 shrink-0">
+		<div class="relative w-8/12 shrink-0 px-3">
 			<div class="aspect-w-5 aspect-h-3">
 				<img
 					bind:this="{img5.staticElem}"
@@ -514,7 +527,7 @@
 			</div>
 			{#if movingImages && !movingForward}
 				<div
-					class="absolute font-bold top-0 left-0 w-full h-full z-10"
+					class="absolute font-bold top-0 left-0 w-full h-full px-3 z-10"
 					in:fly="{{
 						x: img5.travelDistance,
 						duration: slideSpeed,
