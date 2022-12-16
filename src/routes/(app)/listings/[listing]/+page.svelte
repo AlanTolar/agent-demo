@@ -4,9 +4,15 @@
 	import * as eases from 'svelte/easing';
 	import numbro from 'numbro';
 	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 
-	const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
-	const listing = modules[`/src/lib/content/listings/${$page.params.listing}.json`];
+	export let data: PageData;
+	console.log(data);
+
+	// const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
+	// const listing = modules[`/src/lib/content/listings/${$page.params.listing}.json`];
+
+	const listing = data.listing;
 
 	let img1 = { staticElem: null, slidingURL: '', travelDistance: 0 };
 	let img2 = { staticElem: null, slidingURL: '', travelDistance: 0 };
@@ -121,7 +127,7 @@
 </script>
 
 {#if listing}
-	<div class="sticky top-16 z-50 {contentCovered ? 'bg-neutral-200' : ''}">
+	<div class="sticky top-0 z-40 {contentCovered ? 'bg-neutral-200' : ''}">
 		<div class="h-20 max-w-screen-xl mx-auto" bind:this="{factsBarElem}">
 			<div class="flex justify-center w-[100%] px-7 xl:px-0 h-full">
 				<div
@@ -305,26 +311,26 @@
 
 					<div
 						id="main-content-container"
-						class="flex flex-col gap-10 py-10 max-w-[800px] mx-auto"
+						class="flex flex-col py-10 max-w-[800px] mx-auto divide-y"
 					>
 						{#if listing.description}
-							<section id="description-section">
+							<section id="description-section" class="py-10">
 								<h3 class="heading-text-sm">Description</h3>
-								<p class="mt-4 prose main-paragraph max-w-none">
+								<div class="mt-4 prose main-paragraph max-w-none">
 									{@html listing.description}
-								</p>
+								</div>
 							</section>
 						{/if}
 						{#if listing.details}
-							<section id="details-section">
+							<section id="details-section" class="py-10">
 								<h3 class="heading-text-sm">Details</h3>
-								<p class="mt-4 prose main-paragraph max-w-none">
+								<div class="mt-4 prose main-paragraph max-w-none">
 									{@html listing.details}
-								</p>
+								</div>
 							</section>
 						{/if}
 						{#if listing.summary}
-							<section id="summary-section">
+							<section id="summary-section" class="py-10">
 								<h3 class="heading-text-sm">Summary</h3>
 								<div class="mt-4 grid sm:grid-cols-2 gap-6">
 									<div class="flex flex-col gap-6">
@@ -434,7 +440,7 @@
 							</section>
 						{/if}
 						{#if listing.brouchure || listing.location || listing.address}
-							<section id="further-info-section">
+							<section id="further-info-section" class="py-10">
 								<h3 class="heading-text-sm">Further Information</h3>
 								<div class="mt-4 grid sm:grid-cols-2 gap-6">
 									<div class="flex flex-col gap-4 items-center">
@@ -480,7 +486,7 @@
 				>
 					<div
 						class="bg-neutral-200 sticky {contentCovered
-							? 'top-40'
+							? 'top-24'
 							: ''} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg"
 					>
 						<div class="grid grid-cols-3">
