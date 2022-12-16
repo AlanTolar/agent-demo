@@ -44,7 +44,7 @@
 	}
 </script>
 
-<section class="bg-[url('/uploads/hero-backdrop.jpeg')] bg-cover bg-center">
+<section id="hero-section" class="bg-[url('/uploads/hero-backdrop.jpeg')] bg-cover bg-center">
 	<div class="custom-container">
 		<div class="w-full max-w-[450px] bg-primary-800/60 py-16 sm:py-24 px-12 backdrop-blur"
 			><h1 class="mb-6 text-white display-text">Acres & Acres Real Estate</h1>
@@ -52,7 +52,7 @@
 		</div>
 	</div>
 </section>
-<section>
+<section id="services-section">
 	<div class="flex flex-col gap-16 py-20 md:flex-row md:gap-12 custom-container">
 		{#each cardContent as content}
 			<div class="max-w-[500px] mx-auto flex md:flex-col items-center">
@@ -73,7 +73,7 @@
 					</div>
 					<a
 						href="{content.btnLink}"
-						class="text-white button button-elevated bg-primary-600 w-fit md:self-center"
+						class="text-white button drop-shadow-xl shine bg-primary-600 w-fit md:self-center"
 						>{content.btnLabel}</a
 					>
 				</div>
@@ -81,37 +81,7 @@
 		{/each}
 	</div>
 </section>
-<!-- <section>
-	<div class="flex flex-row flex-wrap py-20 gap-x-12 gap-y-16 justify-evenly custom-container">
-		{#each cardContent as content}
-			<div
-				class="flex flex-col items-center grow shrink basis-1/4 max-w-[350px] min-w-[250px]"
-			>
-				<div class="p-1 mb-5 rounded-full bg-neutral-100">
-					<div
-						class="flex items-center justify-center w-16 h-16 border-4 rounded-full md:w-24 md:h-24 border-neutral-200"
-					>
-						<i class="{content.icon} fa-2x md:hidden"></i>
-						<i class="{content.icon} fa-3x hidden md:block"></i>
-					</div>
-				</div>
-				<div class="flex flex-col items-center justify-between grow">
-					<div>
-						<h3 class="mb-3 text-center heading-text">{content.title}</h3>
-						<p class="mb-5 main-text lg:text-center">{content.body}</p>
-					</div>
-					<a
-						href="{content.btnLink}"
-						class="text-white button button-elevated bg-primary-600 w-fit label-text"
-						>{content.btnLabel}</a
-					>
-				</div>
-			</div>
-		{/each}
-	</div>
-</section> -->
-
-<section class="bg-neutral-200">
+<section id="recent-listings-section" class="bg-neutral-200">
 	<div class="py-20 custom-container">
 		<div class="flex justify-between mb-6">
 			<h3 class="heading-text">Recent Listings</h3>
@@ -163,7 +133,7 @@
 		</div>
 	</div>
 </section>
-<section class="bg-neutral-200">
+<section id="newsletter-section" class="bg-neutral-200">
 	<div class="gap-12 pt-10 pb-20 md:grid custom-container md:grid-cols-2">
 		<div class="col-span-1 mb-6 text-center md:mb-0 md:text-left">
 			<h3 class="mb-4 heading-text"
@@ -188,7 +158,7 @@
 		</div>
 	</div>
 </section>
-<section>
+<section id="find-agent-section">
 	<div class="grid md:grid-cols-3 pt-20 custom-container">
 		<img class="md:col-span-2" src="/uploads/farmer-pointing.jpeg" alt="" />
 		<div
@@ -207,7 +177,7 @@
 		</div>
 	</div>
 </section>
-<section class="relative overflow-hidden">
+<section id="sell-section" class="relative overflow-hidden">
 	<div class="custom-container grid grid-cols-3 sm:grid-cols-4 pt-20 sm:pt-40 pb-20">
 		<div class="col-span-2 sm:mb-0">
 			<h3 class="mb-4 heading-text">Sell your land with us</h3>

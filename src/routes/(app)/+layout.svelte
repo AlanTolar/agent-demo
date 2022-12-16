@@ -20,7 +20,7 @@
 </script>
 
 <header class="sticky top-0 z-50 bg-primary-600 text-neutral-50">
-	<nav class="flex justify-between py-3 custom-container">
+	<nav class="flex justify-between px-4 md:px-6 lg:px-12 h-16">
 		<a href="/" class="flex items-center gap-2">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

@@ -43,7 +43,7 @@ collections:
           - { label: "State", name: "state", widget: "string" }
           - {
               label: "Postal Code",
-              name: "post-code",
+              name: "post_code",
               widget: "string",
               required: false,
             }
@@ -96,8 +96,12 @@ collections:
                   name: "feature_category",
                   widget: "string",
                 }
-              - { label: "List of Features", name: "features", widget: "list" }
-          - { label: "Land Details", name: "land_details", widget: "list" }
+              - {
+                  label: "List of Features",
+                  name: "features",
+                  widget: "string",
+                }
+          - { label: "Land Details", name: "land_details", widget: "string" }
           - label: "Distances"
             name: "distances"
             widget: "list"
@@ -128,8 +132,8 @@ collections:
                   - { label: "Onsite", value: "Onsite" }
                   - { label: "Nearby", value: "Nearby" }
                   - { label: "Unavailable", value: "Unavailable" }
-          - { label: "Housing", name: "housing", widget: "list" }
-          - { label: "Improvements", name: "improvements", widget: "list" }
+          - { label: "Housing", name: "housing", widget: "string" }
+          - { label: "Improvements", name: "improvements", widget: "string" }
       - label: "Download Brouchure"
         name: "brouchure"
         widget: "file"

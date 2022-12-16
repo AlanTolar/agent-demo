@@ -13,8 +13,11 @@
 .heading-text {
 	@apply font-serif leading-tight font-medium text-xl sm:text-2xl lg:text-3xl;
 }
+.heading-text-sm {
+	@apply font-serif leading-tight font-medium text-lg sm:text-xl lg:text-2xl;
+}
 .subtitle-text {
-	@apply font-sans leading-tight font-medium text-lg sm:text-xl lg:text-2xl;
+	@apply font-sans leading-tight font-medium text-base sm:text-lg lg:text-xl;
 }
 .main-text {
 	@apply font-sans leading-normal text-sm sm:text-base;
@@ -33,12 +36,16 @@
 }
 
 .custom-container {
-	@apply m-auto max-w-screen-xl px-4 md:px-6 lg:px-12;
+	@apply mx-auto max-w-screen-xl px-4 md:px-6 lg:px-12;
 }
 
 .button {
 	@apply rounded-lg px-5 py-2.5 inline-block;
 }
-.button-elevated {
-	@apply drop-shadow-xl shadow-[inset_0px_2px_8px_0px_rgba(255,255,255,0.4)];
+
+.shine {
+	@apply shadow-[inset_0px_0.1rem_0.5rem_0px_rgba(255,255,255,0.4)];
+}
+.shine-lg {
+	@apply shadow-[inset_0px_1rem_2rem_0px_rgba(255,255,255,0.6)];
 }
