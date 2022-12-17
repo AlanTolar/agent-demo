@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
 	import * as eases from 'svelte/easing';
 	import numbro from 'numbro';
@@ -7,11 +6,6 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	console.log(data);
-
-	// const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
-	// const listing = modules[`/src/lib/content/listings/${$page.params.listing}.json`];
-
 	const listing = data.listing;
 
 	let img1 = { staticElem: null, slidingURL: '', travelDistance: 0 };
