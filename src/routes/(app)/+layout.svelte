@@ -24,7 +24,7 @@
 
 <div class="flex flex-col h-screen">
 	<header
-		class=" bg-primary-600 text-neutral-50"
+		class="bg-primary-600 text-neutral-50"
 		use:clickOutside
 		on:click_outside="{() => (showMobileNav = false)}"
 	>
@@ -103,35 +103,43 @@
 			<slot />
 		</div>
 		<footer
-			class="{btmBarShow ? '' : 'hidden'} bg-slate-200 h-20 px-4 md:px-6 lg:px-12  shrink-0"
+			class="{btmBarShow
+				? ''
+				: 'hidden'} bg-primary-600 text-neutral-50 px-4 md:px-6 lg:px-12 shrink-0 grid divide-y divide-primary-400"
 		>
-			<nav class="grid grid-cols-12">
+			<nav
+				class="flex justify-between md:grid md:grid-cols-12 items-start md:items-center py-3"
+			>
 				<a
 					href="/"
 					class="col-span-2 subtitle-text whitespace-nowrap"
 					on:click="{() => (showMobileNav = false)}">Acres & Acres</a
 				>
-				<div class="col-span-8 flex items-center justify-center gap-10">
+				<div
+					class="col-span-8 flex justify-center items-end flex-col md:flex-row gap-2 md:gap-10"
+				>
 					{#each nav_items as item}
 						<a
 							href="{item.link}"
-							class="label-text hidden md:block
-									{$page.url.pathname === item.link
-								? 'font-bold text-neutral-300'
-								: 'hover:underline hover:underline-offset-8 hover:decoration-2 hover:decoration-neutral-400'}"
-							>{item.label}</a
+							class="caption-text whitespace-nowrap {$page.url.pathname === item.link
+								? ''
+								: 'hover:text-neutral-300'}">{item.label}</a
 						>
 					{/each}
 				</div>
 			</nav>
-			<div class="flex justify-between">
+			<div class="flex flex-col sm:flex-row gap-2 justify-between items-center py-3">
 				<nav class="flex gap-2">
-					<a href="">1</a>
-					<a href="">2</a>
-					<a href="">3</a>
-					<a href="">4</a>
+					<a href=""><iconify-icon inline icon="mdi:twitter" width="20"></iconify-icon></a
+					>
+					<a href=""
+						><iconify-icon inline icon="mdi:facebook" width="20"></iconify-icon></a
+					>
+					<a href=""
+						><iconify-icon inline icon="mdi:instagram" width="20"></iconify-icon></a
+					>
 				</nav>
-				<span>text</span>
+				<span class="caption-text">© 2022 Flowbite, Inc. All rights reserved.</span>
 			</div>
 		</footer>
 	</main>
