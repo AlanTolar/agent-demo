@@ -99,13 +99,13 @@
 	</header>
 
 	<main class="grow overflow-scroll flex flex-col">
-		<div class="grow  shrink-0">
+		<div class="grow">
 			<slot />
 		</div>
 		<footer
 			class="{btmBarShow
 				? ''
-				: 'hidden'} bg-primary-600 text-neutral-50 px-4 md:px-6 lg:px-12 shrink-0 grid divide-y divide-primary-400"
+				: 'hidden'} bg-primary-600 text-neutral-50 px-4 md:px-6 lg:px-12 grid divide-y divide-primary-400"
 		>
 			<nav
 				class="flex justify-between md:grid md:grid-cols-12 items-start md:items-center py-3"

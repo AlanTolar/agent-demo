@@ -234,11 +234,11 @@
 					</div>
 				{/if}
 			</div>
-			<div class="shrink-0 flex justify-center w-[100%] flex-col xl:flex-row">
-				<div
-					class="relative w-full xl:w-8/12 shrink-0 carousel-item"
-					bind:this="{mainContentElem}"
-				>
+			<div
+				class="shrink-0 flex justify-center w-[100%] flex-col xl:flex-row"
+				bind:this="{mainContentElem}"
+			>
+				<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 					<div class="aspect-w-5 aspect-h-3">
 						<!-- Slider controls -->
 						<div class="h-full w-full">
@@ -487,7 +487,7 @@
 					<div
 						class="bg-neutral-200 sticky {contentCovered
 							? 'top-24'
-							: ''} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg"
+							: ''} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10"
 					>
 						<div class="grid grid-cols-3">
 							<div class="col-span-1">
