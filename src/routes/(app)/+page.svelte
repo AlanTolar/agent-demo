@@ -28,19 +28,9 @@
 		},
 	];
 
-	const firstCardIndex = 0;
-	function listingCardDisplay(index: number) {
-		if (index === firstCardIndex) {
-			return '';
-		} else if (index === firstCardIndex + 1) {
-			return '';
-		} else if (index === firstCardIndex + 2) {
-			return 'hidden md:block';
-		} else if (index === firstCardIndex + 3) {
-			return 'hidden xl:block';
-		} else {
-			return 'hidden';
-		}
+	function getImg(i: number) {
+		const imgURL = listings?.at(i % listings.length);
+		return imgURL;
 	}
 </script>
 
@@ -90,9 +80,10 @@
 			>
 		</div>
 		<div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-			{#each listings as listing, index}
-				<ListingCard listing="{listing}" extraClasses="{listingCardDisplay(index)}" />
-			{/each}
+			<ListingCard listing="{getImg(0)}" />
+			<ListingCard listing="{getImg(1)}" />
+			<ListingCard listing="{getImg(2)}" extraClasses="hidden md:block" />
+			<ListingCard listing="{getImg(3)}" extraClasses="hidden xl:block" />
 		</div>
 	</div>
 </section>
