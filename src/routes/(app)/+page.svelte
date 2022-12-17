@@ -1,32 +1,9 @@
 <script lang="ts">
-	import { getListings } from '$lib/scripts/listings';
 	import ListingCard from '$lib/components/ListingCard.svelte';
+	import type { PageData } from './$types';
 
-	const listings = getListings();
-
-	const cardContent = [
-		{
-			icon: 'material-symbols:landscape',
-			title: 'Buy Land',
-			body: 'We have a wide selection of land available, so you are sure to find the perfect piece of property for your needs.',
-			btnLabel: 'Browse Listings',
-			btnLink: '/listings',
-		},
-		{
-			icon: 'material-symbols:person',
-			title: 'Find Experts',
-			body: 'Our agents are familiar with the local market and can help you find the right property to meet your needs.',
-			btnLabel: 'Find an Agent',
-			btnLink: '/agents',
-		},
-		{
-			icon: 'material-symbols:attach-money',
-			title: 'Sell Land',
-			body: 'Our real estate company has the experience and resources to help you get the most value for your land.',
-			btnLabel: 'Sell With Us',
-			btnLink: '/sell',
-		},
-	];
+	export let data: PageData;
+	const listings = data.listings;
 
 	function getImg(i: number) {
 		const imgURL = listings?.at(i % listings.length);
@@ -44,31 +21,88 @@
 </section>
 <section id="services-section">
 	<div class="flex flex-col gap-16 py-20 md:flex-row md:gap-12 custom-container">
-		{#each cardContent as content}
-			<div class="max-w-[500px] mx-auto flex md:flex-col items-center">
-				<div class="p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100">
-					<div
-						class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"
-					>
-						<iconify-icon class="sm:hidden" icon="{content.icon}" width="45"
-						></iconify-icon>
-						<iconify-icon class="hidden sm:block" icon="{content.icon}" width="70"
-						></iconify-icon>
-					</div>
-				</div>
-				<div class="flex flex-col justify-between grow">
-					<div>
-						<h3 class="mb-3 md:text-center heading-text">{content.title}</h3>
-						<p class="mb-5 main-text md:text-center">{content.body}</p>
-					</div>
-					<a
-						href="{content.btnLink}"
-						class="text-white button drop-shadow-xl shine bg-primary-600 w-fit md:self-center"
-						>{content.btnLabel}</a
-					>
+		<div class="max-w-[500px] mx-auto flex md:flex-col items-center">
+			<div class="p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100">
+				<div
+					class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"
+				>
+					<iconify-icon class="sm:hidden" icon="material-symbols:landscape" width="45"
+					></iconify-icon>
+					<iconify-icon
+						class="hidden sm:block"
+						icon="material-symbols:landscape"
+						width="70"></iconify-icon>
 				</div>
 			</div>
-		{/each}
+			<div class="flex flex-col justify-between grow">
+				<div>
+					<h3 class="mb-3 md:text-center heading-text">Buy Land</h3>
+					<p class="mb-5 main-text md:text-center"
+						>We have a wide selection of land available, so you are sure to find the
+						perfect piece of property for your needs.</p
+					>
+				</div>
+				<a
+					href="/listings"
+					class="text-white button drop-shadow-xl shine bg-primary-600 w-fit md:self-center"
+					>Browse Listings</a
+				>
+			</div>
+		</div>
+		<div class="max-w-[500px] mx-auto flex md:flex-col items-center">
+			<div class="p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100">
+				<div
+					class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"
+				>
+					<iconify-icon class="sm:hidden" icon="material-symbols:person" width="45"
+					></iconify-icon>
+					<iconify-icon class="hidden sm:block" icon="material-symbols:person" width="70"
+					></iconify-icon>
+				</div>
+			</div>
+			<div class="flex flex-col justify-between grow">
+				<div>
+					<h3 class="mb-3 md:text-center heading-text">Find Experts</h3>
+					<p class="mb-5 main-text md:text-center"
+						>Our agents are familiar with the local market and can help you find the
+						right property to meet your needs.</p
+					>
+				</div>
+				<a
+					href="/agents"
+					class="text-white button drop-shadow-xl shine bg-primary-600 w-fit md:self-center"
+					>Find an Agent</a
+				>
+			</div>
+		</div>
+		<div class="max-w-[500px] mx-auto flex md:flex-col items-center">
+			<div class="p-1 md:mb-5 mr-5 md:mr-0 rounded-full bg-neutral-100">
+				<div
+					class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 border-4 rounded-full border-neutral-200"
+				>
+					<iconify-icon class="sm:hidden" icon="material-symbols:attach-money" width="45"
+					></iconify-icon>
+					<iconify-icon
+						class="hidden sm:block"
+						icon="material-symbols:attach-money"
+						width="70"></iconify-icon>
+				</div>
+			</div>
+			<div class="flex flex-col justify-between grow">
+				<div>
+					<h3 class="mb-3 md:text-center heading-text">Sell Land</h3>
+					<p class="mb-5 main-text md:text-center"
+						>Our real estate company has the experience and resources to help you get
+						the most value for your land.</p
+					>
+				</div>
+				<a
+					href="/sell"
+					class="text-white button drop-shadow-xl shine bg-primary-600 w-fit md:self-center"
+					>Sell With Us</a
+				>
+			</div>
+		</div>
 	</div>
 </section>
 <section id="recent-listings-section" class="bg-neutral-200">

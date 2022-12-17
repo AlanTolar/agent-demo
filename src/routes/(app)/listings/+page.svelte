@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { getListings } from '$lib/scripts/listings';
-	const listings = getListings();
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+	const listings = data.listings;
 </script>
 
 <div class="grid grid-cols-12 h-[calc(100vh-64px)]">

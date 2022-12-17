@@ -1,5 +1,6 @@
 <script lang="ts">
 	import numbro from 'numbro';
+
 	export let listing;
 	export let extraClasses;
 	export let horizontal = true;
