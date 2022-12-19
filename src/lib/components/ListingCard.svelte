@@ -3,19 +3,28 @@
 
 	export let listing;
 	export let extraClasses;
-	export let horizontal = true;
+	export let horizontal = false;
 </script>
 
 <a
 	href="{listing.url}"
-	class="{extraClasses} rounded-xl hover:scale-105 tranistion duration-300 ease-out bg-neutral-100"
+	class="{extraClasses} rounded-xl hover:scale-105 tranistion duration-300 ease-out bg-neutral-100 shrink-0
+	{horizontal ? 'flex' : ''}"
 >
-	<div class="aspect-w-3 aspect-h-2">
-		<img class="object-cover rounded-t-xl" src="{listing.featured_image}" alt="" />
-	</div>
-	<div class="p-5">
-		<span class="accent-text">{listing.address.city}, {listing.address.state}</span>
-		<h3 class="mb-2 subtitle-text text-primary-600">{listing.title}</h3>
+	{#if horizontal}
+		<div
+			class="shrink w-1/2 object-cover rounded-l-xl bg-cover bg-center"
+			style:background-image="url('{listing.featured_image}')"></div>
+	{:else}
+		<div class="aspect-w-3 aspect-h-2">
+			<img class="rounded-t-xl" src="{listing.featured_image}" alt="" />
+		</div>
+	{/if}
+	<div class="{horizontal ? 'w-1/2' : ''} p-5 flex flex-col justify-between">
+		<div>
+			<span class="accent-text">{listing.address.city}, {listing.address.state}</span>
+			<h3 class="mb-2 subtitle-text text-primary-600">{listing.title}</h3>
+		</div>
 		<div class="flex items-center gap-1 main-text">
 			<span>{numbro(listing.acres).format({ thousandSeparated: true })} acres</span>
 			<svg

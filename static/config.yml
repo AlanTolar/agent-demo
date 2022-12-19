@@ -101,7 +101,12 @@ collections:
                   name: "features",
                   widget: "string",
                 }
-          - { label: "Land Details", name: "land_details", widget: "string" }
+          - {
+              label: "Land Details",
+              name: "land_details",
+              widget: "string",
+              required: false,
+            }
           - label: "Distances"
             name: "distances"
             widget: "list"
@@ -132,8 +137,18 @@ collections:
                   - { label: "Onsite", value: "Onsite" }
                   - { label: "Nearby", value: "Nearby" }
                   - { label: "Unavailable", value: "Unavailable" }
-          - { label: "Housing", name: "housing", widget: "string" }
-          - { label: "Improvements", name: "improvements", widget: "string" }
+          - {
+              label: "Housing",
+              name: "housing",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Improvements",
+              name: "improvements",
+              widget: "string",
+              required: false,
+            }
       - label: "Download Brouchure"
         name: "brouchure"
         widget: "file"
