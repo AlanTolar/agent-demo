@@ -1,5 +1,4 @@
 {
-  "title": "The Peanut Farm",
   "address": {
     "city": "Luverne",
     "state": "Alabama"
@@ -7,5 +6,6 @@
   "acres": 10,
   "price": 1200000,
   "featured_image": "/uploads/233-2332677_image-500580-placeholder-transparent.webp",
-  "date": "2022-12-08T16:41:06.271Z"
+  "date": "2022-12-08T16:41:06.271Z",
+  "title": "The Peanut Farm"
 }

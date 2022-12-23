@@ -6,13 +6,25 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const listing = data.listing;
+	const { listing } = data;
 
-	let img1 = { staticElem: null, slidingURL: '', travelDistance: 0 };
-	let img2 = { staticElem: null, slidingURL: '', travelDistance: 0 };
-	let img3 = { staticElem: null, slidingURL: '', travelDistance: 0 };
-	let img4 = { staticElem: null, slidingURL: '', travelDistance: 0 };
-	let img5 = { staticElem: null, slidingURL: '', travelDistance: 0 };
+	// create interface for image objects
+	interface SlideImage {
+		slidingURL: string;
+		travelDistance: number;
+	}
+
+	let imgElem1: HTMLImageElement,
+		imgElem2: HTMLImageElement,
+		imgElem3: HTMLImageElement,
+		imgElem4: HTMLImageElement,
+		imgElem5: HTMLImageElement;
+
+	let img1: SlideImage = { slidingURL: '', travelDistance: 0 };
+	let img2: SlideImage = { slidingURL: '', travelDistance: 0 };
+	let img3: SlideImage = { slidingURL: '', travelDistance: 0 };
+	let img4: SlideImage = { slidingURL: '', travelDistance: 0 };
+	let img5: SlideImage = { slidingURL: '', travelDistance: 0 };
 
 	let movingImages = false;
 	let movingForward = true;
@@ -32,73 +44,65 @@
 			mainImgIndex += 1;
 			movingForward = true;
 
-			img1.slidingURL = img2.staticElem.src;
+			img1.slidingURL = imgElem2.src;
 			img1.travelDistance =
-				img2.staticElem.getBoundingClientRect().x -
-				img1.staticElem.getBoundingClientRect().x;
+				imgElem2.getBoundingClientRect().x - imgElem1.getBoundingClientRect().x;
 
-			img2.slidingURL = img3.staticElem.src;
+			img2.slidingURL = imgElem3.src;
 			img2.travelDistance =
-				img3.staticElem.getBoundingClientRect().x -
-				img2.staticElem.getBoundingClientRect().x;
+				imgElem3.getBoundingClientRect().x - imgElem2.getBoundingClientRect().x;
 
-			img3.slidingURL = img4.staticElem.src;
+			img3.slidingURL = imgElem4.src;
 			img3.travelDistance =
-				img4.staticElem.getBoundingClientRect().x -
-				img3.staticElem.getBoundingClientRect().x;
+				imgElem4.getBoundingClientRect().x - imgElem3.getBoundingClientRect().x;
 
-			img4.slidingURL = img5.staticElem.src;
+			img4.slidingURL = imgElem5.src;
 			img4.travelDistance =
-				img5.staticElem.getBoundingClientRect().x -
-				img4.staticElem.getBoundingClientRect().x;
+				imgElem5.getBoundingClientRect().x - imgElem4.getBoundingClientRect().x;
 
 			img5.slidingURL = getImg(mainImgIndex + 2);
-			img5.travelDistance = img5.staticElem.width;
+			img5.travelDistance = imgElem5.width;
 		}
 		if (direction === 'backwards') {
 			mainImgIndex -= 1;
 			movingForward = false;
 
 			img1.slidingURL = getImg(mainImgIndex - 2);
-			img1.travelDistance = -img1.staticElem.width;
+			img1.travelDistance = -imgElem1.width;
 
-			img2.slidingURL = img1.staticElem.src;
+			img2.slidingURL = imgElem1.src;
 			img2.travelDistance =
-				img1.staticElem.getBoundingClientRect().x -
-				img2.staticElem.getBoundingClientRect().x;
+				imgElem1.getBoundingClientRect().x - imgElem2.getBoundingClientRect().x;
 
-			img3.slidingURL = img2.staticElem.src;
+			img3.slidingURL = imgElem2.src;
 			img3.travelDistance =
-				img2.staticElem.getBoundingClientRect().x -
-				img3.staticElem.getBoundingClientRect().x;
+				imgElem2.getBoundingClientRect().x - imgElem3.getBoundingClientRect().x;
 
-			img4.slidingURL = img3.staticElem.src;
+			img4.slidingURL = imgElem3.src;
 			img4.travelDistance =
-				img3.staticElem.getBoundingClientRect().x -
-				img4.staticElem.getBoundingClientRect().x;
+				imgElem3.getBoundingClientRect().x - imgElem4.getBoundingClientRect().x;
 
-			img5.slidingURL = img4.staticElem.src;
+			img5.slidingURL = imgElem4.src;
 			img5.travelDistance =
-				img4.staticElem.getBoundingClientRect().x -
-				img5.staticElem.getBoundingClientRect().x;
+				imgElem4.getBoundingClientRect().x - imgElem5.getBoundingClientRect().x;
 		}
 
 		movingImages = true;
-		if (!movingForward) img1.staticElem.src = img1.slidingURL;
-		img2.staticElem.src = img2.slidingURL;
-		img3.staticElem.src = img3.slidingURL;
-		img4.staticElem.src = img4.slidingURL;
-		if (movingForward) img5.staticElem.src = img5.slidingURL;
+		if (!movingForward) imgElem1.src = img1.slidingURL;
+		imgElem2.src = img2.slidingURL;
+		imgElem3.src = img3.slidingURL;
+		imgElem4.src = img4.slidingURL;
+		if (movingForward) imgElem5.src = img5.slidingURL;
 	}
 
 	function endSlide() {
-		if (movingForward) img1.staticElem.src = img1.slidingURL;
-		if (!movingForward) img5.staticElem.src = img5.slidingURL;
+		if (movingForward) imgElem1.src = img1.slidingURL;
+		if (!movingForward) imgElem5.src = img5.slidingURL;
 		movingImages = false;
 	}
 
-	let mainContentElem;
-	let factsBarElem;
+	let mainContentElem: HTMLDivElement;
+	let factsBarElem: HTMLDivElement;
 	let contentCovered = false;
 	onMount(() => {
 		const btmBarPx =
@@ -169,7 +173,7 @@
 			<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 				<div class="aspect-w-5 aspect-h-3">
 					<img
-						bind:this="{img1.staticElem}"
+						bind:this="{imgElem1}"
 						class="h-full {imgCover ? 'object-cover' : 'object-contain'}"
 						src="{getImg(-2)}"
 						alt=""
@@ -199,7 +203,7 @@
 			<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 				<div class="aspect-w-5 aspect-h-3">
 					<img
-						bind:this="{img2.staticElem}"
+						bind:this="{imgElem2}"
 						class="h-full {imgCover ? 'object-cover' : 'object-contain'} {movingImages
 							? 'hidden'
 							: ''}"
@@ -274,7 +278,7 @@
 							</button>
 						</div>
 						<img
-							bind:this="{img3.staticElem}"
+							bind:this="{imgElem3}"
 							class="h-full {imgCover
 								? 'object-cover'
 								: 'object-contain'} {movingImages ? 'hidden' : ''}"
@@ -516,7 +520,7 @@
 			<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 				<div class="aspect-w-5 aspect-h-3">
 					<img
-						bind:this="{img4.staticElem}"
+						bind:this="{imgElem4}"
 						class="h-full {imgCover ? 'object-cover' : 'object-contain'} {movingImages
 							? 'hidden'
 							: ''}"
@@ -548,7 +552,7 @@
 			<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 				<div class="aspect-w-5 aspect-h-3">
 					<img
-						bind:this="{img5.staticElem}"
+						bind:this="{imgElem5}"
 						class="h-full {imgCover ? 'object-cover' : 'object-contain'}"
 						src="{getImg(2)}"
 						alt=""

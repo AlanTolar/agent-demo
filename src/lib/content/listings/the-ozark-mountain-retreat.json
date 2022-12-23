@@ -1,5 +1,4 @@
 {
-  "title": "The Ozark Mountain Retreat",
   "address": {
     "city": "Glenwood",
     "state": "Arkansas"
@@ -7,5 +6,7 @@
   "acres": 40,
   "price": 1600000,
   "featured_image": "/uploads/233-2332677_image-500580-placeholder-transparent.webp",
-  "date": "2022-12-08T16:40:59.302Z"
+  "date": "2022-12-08T16:40:59.302Z",
+  "title": "The Ozark Mountain Retreat",
+  "location": "{\"type\":\"Point\",\"coordinates\":[-84.7457886,42.1562775]}"
 }
