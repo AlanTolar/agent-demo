@@ -1,6 +1,6 @@
 
 
-function getListings(num=100) {
+export function getListings(num=100) {
     const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
     let listings = Object.keys(modules).map((key) => {
         const filename = key.split('/').at(-1)?.split('.').at(0);
@@ -11,5 +11,9 @@ function getListings(num=100) {
     return listings.slice(0,num)    
 }
 
+export function getListing(listingName:string) {
+    const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
+	const listing = modules[`$lib/content/listings/${listingName}.json`];
+    return listing
+}
 
-export {getListings}

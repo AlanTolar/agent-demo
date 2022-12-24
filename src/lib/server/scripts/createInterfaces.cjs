@@ -34,6 +34,6 @@ collections.map((collection) => {
 });
 
 // Write the interfaces to a file
-fs.writeFileSync('./src/lib/content/interfaces.ts', interfaces.join('\n\n'));
+fs.writeFileSync('./src/lib/interfaces/Listings.ts', interfaces.join('\n\n'));
 
 console.log('Interfaces generated successfully!');

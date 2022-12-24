@@ -12,17 +12,16 @@
 	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
 	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
 
+	type Coord = [number, number];
+	let coords: Coord[] = [];
 	listings = listings.map((listing) => {
 		if (typeof listing?.location === 'string') listing.location = JSON.parse(listing.location);
+		if (listing?.location?.type === 'Point') coords.push(listing.location.coordinates);
 		return listing;
 	});
 
 	// function that filters listings to get the bounding box from the coordinates in the location key
-	function getBbox(listings) {
-		const coords = listings.reduce((result, listing) => {
-			if (listing?.location?.type === 'Point') result.push(listing.location.coordinates);
-			return result;
-		}, []);
+	function getBbox(coords: Coord[]): Coord[] {
 		const lngs = coords.map((coord) => coord[0]);
 		const lats = coords.map((coord) => coord[1]);
 		const minLng = Math.min(...lngs);
@@ -34,11 +33,11 @@
 			[maxLng, maxLat],
 		];
 	}
-	const bbox = getBbox(listings);
-	const center = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
+	const bbox = getBbox(coords);
+	const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
 
 	// fit map to marker's bounding box
-	let mapComponent;
+	let mapComponent: Map;
 	const initMap = () => {
 		mapComponent.resize(); // resize map to fit container
 		mapComponent.fitBounds(bbox, {

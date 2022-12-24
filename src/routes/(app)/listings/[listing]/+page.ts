@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import { getListing } from '$lib/utils/listings';
  
 export const load = (({ params }) => {
-    const modules = import.meta.glob('$lib/content/listings/*.json', { eager: true });
-	const listing = modules[`/src/lib/content/listings/${params.listing}.json`];
+    const listing = getListing(params.listing)
     if (listing) {
         return {
             listing
