@@ -13,18 +13,17 @@ const files = fs.readdirSync(folder);
 
 // Iterate over the files
 for (const file of files) {
-  // Check if the file is a JSON file
-  if (path.extname(file) === '.json') {
-    // Read the JSON file
-    const data = JSON.parse(fs.readFileSync(path.join(folder, file), 'utf8'));
+	// Check if the file is a JSON file
+	if (path.extname(file) === '.json') {
+		// Read the JSON file
+		const data = JSON.parse(fs.readFileSync(path.join(folder, file), 'utf8'));
+		// Modify the field name
+		if (data.hasOwnProperty(oldFieldName)) {
+			data[newFieldName] = data[oldFieldName];
+			delete data[oldFieldName];
+		}
 
-    // Modify the field name
-    if (data.hasOwnProperty(oldFieldName)) {
-      data[newFieldName] = data[oldFieldName];
-      delete data[oldFieldName];
-    }
-
-    // Write the modified JSON back to the file
-    fs.writeFileSync(path.join(folder, file), JSON.stringify(data, null, 2));
-  }
+		// Write the modified JSON back to the file
+		fs.writeFileSync(path.join(folder, file), JSON.stringify(data, null, 2));
+	}
 }

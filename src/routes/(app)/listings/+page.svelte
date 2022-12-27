@@ -5,9 +5,10 @@
 	import RangeSlider from 'svelte-range-slider-pips';
 	import numbro from 'numbro';
 	import { onMount } from 'svelte';
+	import type { Listings } from '$lib/types/Listings';
 
 	export let data: PageData;
-	let listings = data.listings;
+	let listings: Listings[] = data.listings;
 
 	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
 	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
@@ -212,7 +213,7 @@
 		</menu>
 		<div class="p-6 grid grid-cols-1 grid-flow-row auto-rows-fr gap-6">
 			{#each listings as listing}
-				<ListingCard listing="{listing}" extraClasses="" horizontal="true" />
+				<ListingCard listing="{listing}" extraClasses="" horizontal="{true}" />
 			{/each}
 		</div>
 	</div>
@@ -232,16 +233,6 @@
 		); /* inactive floating label background color */
 		--range-float: var(--range-handle-focus); /* floating label background color */
 		--range-float-text: white; /* text color on floating label */
-	}
-
-	.rangeSlider .rangeHandle .rangeNub {
-		background-color: black !important;
-		color: black !important;
-	}
-
-	.rangeSlider > .rangeHandle {
-		background-color: black !important;
-		color: black !important;
 	}
 
 	.mapboxgl-canvas {
