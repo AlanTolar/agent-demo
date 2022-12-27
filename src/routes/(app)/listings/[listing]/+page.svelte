@@ -4,9 +4,10 @@
 	import numbro from 'numbro';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
+	import type { Listings } from '$lib/types/Listings';
 
 	export let data: PageData;
-	const { listing } = data;
+	let listing: Listings = data.listing;
 
 	// create interface for image objects
 	interface SlideImage {
@@ -34,8 +35,8 @@
 	let slideSpeed = 500;
 	let slideTransition = eases.cubicOut;
 
-	function getImg(i: number) {
-		const imgURL = listing?.slideshow_images?.at(i % listing.slideshow_images.length);
+	function getImg(i: number): string {
+		const imgURL = listing?.slideshowImages?.at(i % listing.slideshowImages.length) || '';
 		return imgURL;
 	}
 
@@ -338,13 +339,13 @@
 												class="py-1 pr-4"
 												width="40"></iconify-icon>
 											<div>
-												{#if listing.summary.feature_categories}
+												{#if listing.summary.featureCategories}
 													<h4 class="subtitle-text">Property</h4>
 													<div class="mt-2 flex flex-col gap-2">
-														{#each listing.summary.feature_categories as feature}
+														{#each listing.summary.featureCategories as feature}
 															<div
 																><h5 class="font-bold"
-																	>{feature.feature_category}</h5
+																	>{feature.featureCategory}</h5
 																>
 																<p>{feature.features}</p>
 															</div>
@@ -359,10 +360,10 @@
 												class="py-1 pr-4"
 												width="40"></iconify-icon>
 											<div>
-												{#if listing.summary.land_details}
+												{#if listing.summary.landDetails}
 													<h4 class="subtitle-text">Land Details</h4>
 													<div class="mt-2">
-														<p>{listing.summary.land_details}</p>
+														<p>{listing.summary.landDetails}</p>
 													</div>
 												{/if}
 											</div>
@@ -469,7 +470,7 @@
 											<p
 												>{listing.address.city || ''}, {listing.address
 													.state || ''}
-												{listing.address.post_code || ''}</p
+												{listing.address.postCode || ''}</p
 											>
 											<p>{listing.address.county || ''}</p>
 										</div>

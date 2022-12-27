@@ -4,7 +4,6 @@
 	import type { PageData } from './$types';
 	import RangeSlider from 'svelte-range-slider-pips';
 	import numbro from 'numbro';
-	import { onMount } from 'svelte';
 	import type { Listings } from '$lib/types/Listings';
 
 	export let data: PageData;

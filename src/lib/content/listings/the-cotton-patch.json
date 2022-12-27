@@ -1,69 +1,45 @@
 {
-  "details": "<ul>\n  <li>20 acres of pristine farmland in Alamo, Georgia</li>\n  <li>Surrounded by nature and is only a short drive from the Appalachian Trail</li>\n  <li>Home to a variety of wildlife, including deer, turkey, and even the occasional bear</li>\n  <li>Property has a pond, perfect for fishing or swimming on hot summer days</li>\n  <li>There is creek that runs through the property, providing hours of fun for kids of all ages</li>\n  <li>Situated on a hill, providing stunning views of the surrounding countryside</li>\n  <li>The Cotton Patch is a true nature lover's paradise and would make an excellent primary residence or vacation home&nbsp;</li>\n</ul>",
-  "summary": {
-    "land_details": "Pasture, Timber, Tillable, Grass, Hay, Pond",
-    "test": [
-      {
-        "alt": "11",
-        "alt2": "1"
-      },
-      {
-        "alt": "adf",
-        "alt2": "asdf,asd"
-      }
-    ],
-    "utilities": [
-      {
-        "utility": "Electricity",
-        "availability": "Nearby"
-      },
-      {
-        "utility": "Water",
-        "availability": "Onsite"
-      }
-    ],
-    "feature_categories": [
-      {
-        "feature_category": "Land Type",
-        "features": [
-          "Recreational Land",
-          "Residential Land",
-          "Timberland"
-        ]
-      },
-      {
-        "feature_category": "Road Frontage",
-        "features": "State Highway"
-      }
-    ],
-    "distances": [
-      {
-        "location": "Interstate 20",
-        "distance": 2
-      }
-    ],
-    "housing": "4BD / 3BA / 2HB, 4500± sqft, Built in 1992",
-    "improvements": "Small Game, Big Game, Upland Game, Predators, Waterfowl, Fish, Trail Network, Gated Entrance"
-  },
-  "price": 1200000,
-  "slideshow_images": [
-    "/uploads/farmer-pointing.jpeg",
-    "/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg",
-    "/uploads/people-talking.jpeg",
-    "/uploads/map-long.png"
-  ],
-  "featured_image": "/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg",
-  "brouchure": "",
-  "date": "2022-12-08T17:00:30.545Z",
-  "address": {
-    "street": "123 Main Street",
-    "city": "Alamo",
-    "state": "Georgia",
-    "post-code": "12345",
-    "county": "Placeholder County"
-  },
-  "location": "{\"type\":\"Point\",\"coordinates\":[-88.668242,47.4659586]}",
-  "description": "<p>Nestled in the heart of Alamo, Georgia, The Cotton Patch is a stunning 20-acre property that would make an ideal home for someone looking for peace and quiet in a rural setting. The land is mostly wooded, with a small clearing near the center that would be perfect for building a home or farmhouse. There is a creek running through the property, and a small pond near the edge of the woods. The Cotton Patch is truly a nature lover's paradise, and would be perfect for someone looking to get away from the hustle and bustle of city life.</p>",
-  "acres": 20,
-  "title": "The Cotton Patch"
+	"details": "<ul>\n  <li>20 acres of pristine farmland in Alamo, Georgia</li>\n  <li>Surrounded by nature and is only a short drive from the Appalachian Trail</li>\n  <li>Home to a variety of wildlife, including deer, turkey, and even the occasional bear</li>\n  <li>Property has a pond, perfect for fishing or swimming on hot summer days</li>\n  <li>There is creek that runs through the property, providing hours of fun for kids of all ages</li>\n  <li>Situated on a hill, providing stunning views of the surrounding countryside</li>\n  <li>The Cotton Patch is a true nature lover's paradise and would make an excellent primary residence or vacation home&nbsp;</li>\n</ul>",
+	"summary": {
+		"test": [
+			{ "alt": "11", "alt2": "1" },
+			{ "alt": "adf", "alt2": "asdf,asd" }
+		],
+		"utilities": [
+			{ "utility": "Electricity", "availability": "Nearby" },
+			{ "utility": "Water", "availability": "Onsite" }
+		],
+		"distances": [{ "location": "Interstate 20", "distance": 2 }],
+		"housing": "4BD / 3BA / 2HB, 4500± sqft, Built in 1992",
+		"improvements": "Small Game, Big Game, Upland Game, Predators, Waterfowl, Fish, Trail Network, Gated Entrance",
+		"featureCategories": [
+			{
+				"features": ["Recreational Land", "Residential Land", "Timberland"],
+				"featureCategory": "Land Type"
+			},
+			{ "features": "State Highway", "featureCategory": "Road Frontage" }
+		],
+		"landDetails": "Pasture, Timber, Tillable, Grass, Hay, Pond"
+	},
+	"price": 1200000,
+	"brouchure": "",
+	"date": "2022-12-08T17:00:30.545Z",
+	"address": {
+		"street": "123 Main Street",
+		"city": "Alamo",
+		"state": "Georgia",
+		"county": "Placeholder County",
+		"postCode": "1234"
+	},
+	"location": "{\"type\":\"Point\",\"coordinates\":[-88.668242,47.4659586]}",
+	"title": "The Cotton Patch",
+	"description": "<p>Nestled in the heart of Alamo, Georgia, The Cotton Patch is a stunning 20-acre property that would make an ideal home for someone looking for peace and quiet in a rural setting. The land is mostly wooded, with a small clearing near the center that would be perfect for building a home or farmhouse. There is a creek running through the property, and a small pond near the edge of the woods. The Cotton Patch is truly a nature lover's paradise, and would be perfect for someone looking to get away from the hustle and bustle of city life.</p>",
+	"acres": 20,
+	"slideshowImages": [
+		"/uploads/farmer-pointing.jpeg",
+		"/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg",
+		"/uploads/people-talking.jpeg",
+		"/uploads/map-long.png"
+	],
+	"featuredImage": "/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg"
 }

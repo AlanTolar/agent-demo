@@ -1,11 +1,1 @@
-{
-  "address": {
-    "city": "Bellamy",
-    "state": "Alabama"
-  },
-  "acres": 12,
-  "price": 425000,
-  "featured_image": "/uploads/83d9f6dfd5d24163db2ddd6c2266c3c3-1-.jpeg",
-  "date": "2022-12-08T16:43:16.076Z",
-  "title": "The Old Mill Place"
-}
+{"address":{"city":"Bellamy","state":"Alabama"},"acres":12,"price":425000,"date":"2022-12-08T16:43:16.076Z","title":"The Old Mill Place","featuredImage":"/uploads/83d9f6dfd5d24163db2ddd6c2266c3c3-1-.jpeg"}

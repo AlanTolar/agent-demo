@@ -1,11 +1,1 @@
-{
-  "address": {
-    "city": "Dardanelle",
-    "state": "Arkansas"
-  },
-  "acres": 8,
-  "price": 695000,
-  "featured_image": "/uploads/d6dfa17e7aa48e257f137248f8dfeb97.jpeg",
-  "date": "2022-12-08T16:43:34.439Z",
-  "title": "The Pecan Orchard"
-}
+{"address":{"city":"Dardanelle","state":"Arkansas"},"acres":8,"price":695000,"date":"2022-12-08T16:43:34.439Z","title":"The Pecan Orchard","featuredImage":"/uploads/d6dfa17e7aa48e257f137248f8dfeb97.jpeg"}

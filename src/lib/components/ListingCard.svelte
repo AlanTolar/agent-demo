@@ -14,10 +14,10 @@
 	{#if horizontal}
 		<div
 			class="shrink w-1/2 object-cover rounded-l-xl bg-cover bg-center"
-			style:background-image="url('{listing.featured_image}')"></div>
+			style:background-image="url('{listing.featuredImage}')"></div>
 	{:else}
 		<div class="aspect-w-3 aspect-h-2">
-			<img class="rounded-t-xl" src="{listing.featured_image}" alt="" />
+			<img class="rounded-t-xl" src="{listing.featuredImage}" alt="" />
 		</div>
 	{/if}
 	<div class="{horizontal ? 'w-1/2' : ''} p-5 flex flex-col justify-between">

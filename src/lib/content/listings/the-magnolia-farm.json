@@ -1,11 +1,1 @@
-{
-  "address": {
-    "city": "Crenshaw",
-    "state": "Mississippi"
-  },
-  "acres": 15,
-  "price": 1350000,
-  "featured_image": "/uploads/08425d08565f60d193d1c76b31c5ad95.jpeg",
-  "date": "2022-12-08T16:43:01.150Z",
-  "title": "The Magnolia Farm"
-}
+{"address":{"city":"Crenshaw","state":"Mississippi"},"acres":15,"price":1350000,"date":"2022-12-08T16:43:01.150Z","title":"The Magnolia Farm","featuredImage":"/uploads/08425d08565f60d193d1c76b31c5ad95.jpeg"}

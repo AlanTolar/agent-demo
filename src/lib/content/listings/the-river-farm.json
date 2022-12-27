@@ -1,11 +1,1 @@
-{
-  "address": {
-    "city": "Clayton",
-    "state": "Georgia"
-  },
-  "acres": 10,
-  "price": 2099986,
-  "featured_image": "/uploads/0e608ef0bc5c4e0d77ca25ce8978c421.jpeg",
-  "date": "2022-12-08T16:43:44.380Z",
-  "title": "The River Farm"
-}
+{"address":{"city":"Clayton","state":"Georgia"},"acres":10,"price":2099986,"date":"2022-12-08T16:43:44.380Z","title":"The River Farm","featuredImage":"/uploads/0e608ef0bc5c4e0d77ca25ce8978c421.jpeg"}

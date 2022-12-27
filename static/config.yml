@@ -43,7 +43,7 @@ collections:
           - { label: "State", name: "state", widget: "string" }
           - {
               label: "Postal Code",
-              name: "post_code",
+              name: "postCode",
               widget: "string",
               required: false,
             }
@@ -65,10 +65,10 @@ collections:
         min: 0
       # Details and descriptions
       - label: "Featured Image"
-        name: "featured_image"
+        name: "featuredImage"
         widget: "image"
       - label: "Slideshow Images"
-        name: "slideshow_images"
+        name: "slideshowImages"
         widget: "list"
         required: false
         field: { label: "Slideshow Image", name: "image", widget: "image" }
@@ -87,13 +87,13 @@ collections:
         required: false
         fields:
           - label: "Feature Categories"
-            name: "feature_categories"
+            name: "featureCategories"
             widget: "list"
             required: false
             fields:
               - {
                   label: "Feature Category",
-                  name: "feature_category",
+                  name: "featureCategory",
                   widget: "string",
                 }
               - {
@@ -103,7 +103,7 @@ collections:
                 }
           - {
               label: "Land Details",
-              name: "land_details",
+              name: "landDetails",
               widget: "string",
               required: false,
             }

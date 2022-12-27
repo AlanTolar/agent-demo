@@ -1,11 +1,1 @@
-{
-  "address": {
-    "city": "Eufaula",
-    "state": "Alabama"
-  },
-  "acres": 5,
-  "price": 425000,
-  "featured_image": "/uploads/a8308d6f4b2836c74177677fababf98f.jpeg",
-  "date": "2022-12-08T17:00:05.436Z",
-  "title": "The Strawberry Farm"
-}
+{"address":{"city":"Eufaula","state":"Alabama"},"acres":5,"price":425000,"date":"2022-12-08T17:00:05.436Z","title":"The Strawberry Farm","featuredImage":"/uploads/a8308d6f4b2836c74177677fababf98f.jpeg"}

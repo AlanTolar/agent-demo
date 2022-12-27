@@ -1,11 +1,1 @@
-{
-  "address": {
-    "city": "New Hope",
-    "state": "Alabama"
-  },
-  "acres": 25,
-  "price": 2250000,
-  "featured_image": "/uploads/233-2332677_image-500580-placeholder-transparent.webp",
-  "date": "2022-12-08T16:40:39.381Z",
-  "title": "The Dogwood Farm"
-}
+{"address":{"city":"New Hope","state":"Alabama"},"acres":25,"price":2250000,"date":"2022-12-08T16:40:39.381Z","title":"The Dogwood Farm","featuredImage":"/uploads/233-2332677_image-500580-placeholder-transparent.webp"}

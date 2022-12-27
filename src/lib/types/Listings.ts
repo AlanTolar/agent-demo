@@ -2,12 +2,12 @@ export interface Address {
   street?: string;
   city: string;
   state: string;
-  post_code?: string;
+  postCode?: string;
   county?: string;
 }
 
 export interface FeatureCategories {
-  feature_category: string;
+  featureCategory: string;
   features: string;
 }
 
@@ -22,8 +22,8 @@ export interface Utilities {
 }
 
 export interface Summary {
-  feature_categories?: FeatureCategories[];
-  land_details?: string;
+  featureCategories?: FeatureCategories[];
+  landDetails?: string;
   distances: Distances[];
   utilities?: Utilities[];
   housing?: string;
@@ -36,8 +36,8 @@ export interface Listings {
   address: Address;
   acres: number;
   price: number;
-  featured_image: string;
-  slideshow_images?: string[];
+  featuredImage: string;
+  slideshowImages?: string[];
   description?: string;
   details?: string;
   summary?: Summary;
