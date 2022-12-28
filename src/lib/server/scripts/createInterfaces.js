@@ -17,6 +17,7 @@ const widgetToType = new Map([
 	['boolean', 'boolean'],
 	['datetime', 'Date'],
 	['number', 'number'],
+	['map', 'any'],
 ]);
 
 function createInterface(object) {

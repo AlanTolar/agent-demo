@@ -79,10 +79,6 @@
 					pushy
 					bind:values="{priceSliderRange}"
 				/>
-				<!-- <div class="flex justify-between">
-					<span>${minPriceDisplay}</span>
-					<span>${maxPriceDisplay}</span>
-				</div> -->
 			</li>
 			<li class="relative w-1/4">
 				<div class="flex justify-between items-baseline">
@@ -103,10 +99,6 @@
 					pushy
 					bind:values="{acresSliderRange}"
 				/>
-				<!-- <div class="flex justify-between">
-					<span>{numbro(minAcresSlider).format({ thousandSeparated: true })}</span>
-					<span>{numbro(maxAcresSlider).format({ thousandSeparated: true })}</span>
-				</div> -->
 			</li>
 			<li class="relative">
 				<button

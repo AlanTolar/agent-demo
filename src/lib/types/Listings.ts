@@ -42,5 +42,5 @@ export interface Listings {
   details?: string;
   summary?: Summary;
   brouchure?: string;
-  location?: string;
+  location?: any;
 }
