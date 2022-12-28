@@ -5,6 +5,9 @@
 	import RangeSlider from 'svelte-range-slider-pips';
 	import numbro from 'numbro';
 	import type { Listings } from '$lib/types/Listings';
+	import { writable } from 'svelte/store';
+
+	// Create a writable store to hold the value of the range input
 
 	export let data: PageData;
 	interface MapListing extends Listings {
@@ -49,22 +52,18 @@
 		});
 	};
 
-	const maxPrice = 2000000;
-	const minPrice = 0;
-	let priceSliderRange = [minPrice, maxPrice];
-	$: [minPriceSlider, maxPriceSlider] = priceSliderRange;
+	const [minPrice, maxPrice] = [0, 2000000];
+	let priceRange = [minPrice, maxPrice];
+	let [minPriceValue, maxPriceValue] = priceRange;
 
-	const maxAcres = 100;
-	const minAcres = 0;
-	let acresSliderRange = [minAcres, maxAcres];
-	$: [minAcresSlider, maxAcresSlider] = acresSliderRange;
-
-	let showFilterDropdown = false;
+	const [minAcres, maxAcres] = [0, 100];
+	let acresRange = [minAcres, maxAcres];
+	let [minAcresValue, maxAcresValue] = acresRange;
 
 	function filterListings(
 		listings: MapListing[],
-		minPriceSlider: number,
-		maxPriceSlider: number,
+		minPriceValue: number,
+		maxPriceValue: number,
 		minAcresSlider: number,
 		maxAcresSlider: number,
 	) {
@@ -72,25 +71,26 @@
 			const price = listing.price;
 			const acres = listing.acres;
 			const inPriceRange =
-				(price >= minPriceSlider || minPriceSlider == minPrice) &&
-				(price <= maxPriceSlider || maxPriceSlider == maxPrice);
+				(price >= minPriceValue || minPriceValue == minPrice) &&
+				(price <= maxPriceValue || maxPriceValue == maxPrice);
 			const inAcresRange =
 				(acres >= minAcresSlider || minAcresSlider == minAcres) &&
 				(acres <= maxAcresSlider || maxAcresSlider == maxAcres);
 			listing.visible = inPriceRange && inAcresRange;
 			return listing;
 		});
+		// console.log(listings);
 		return listings;
 	}
 
 	$: listings = filterListings(
 		listings,
-		minPriceSlider,
-		maxPriceSlider,
-		minAcresSlider,
-		maxAcresSlider,
+		minPriceValue,
+		maxPriceValue,
+		minAcresValue,
+		maxAcresValue,
 	);
-	$: console.log(listings);
+
 	numbro.zeroFormat('0');
 
 	function changeOrder(elem: EventTarget) {
@@ -129,9 +129,9 @@
 				<div class="flex justify-between items-baseline">
 					<label for="steps-range" class="label-texts">Price</label>
 					<span class="caption-text"
-						>${numbro(minPriceSlider).format({ average: true, totalLength: 2 })} - ${numbro(
-							maxPriceSlider,
-						).format({ average: true, totalLength: 2 })}{maxPriceSlider === maxPrice
+						>${numbro(priceRange[0]).format({ average: true, totalLength: 2 })} - ${numbro(
+							priceRange[1],
+						).format({ average: true, totalLength: 2 })}{priceRange[1] === maxPrice
 							? '+'
 							: ''}</span
 					>
@@ -142,16 +142,17 @@
 					step="{1000}"
 					range
 					pushy
-					bind:values="{priceSliderRange}"
+					bind:values="{priceRange}"
+					on:stop="{(event) => ([minPriceValue, maxPriceValue] = event.detail.values)}"
 				/>
 			</li>
 			<li class="relative w-1/3">
 				<div class="flex justify-between items-baseline">
 					<label for="steps-range" class="label-texts">Acres</label>
 					<span class="caption-text"
-						>{numbro(minAcresSlider).format({ thousandSeparated: true })} - {numbro(
-							maxAcresSlider,
-						).format({ thousandSeparated: true })}{maxAcresSlider === maxAcres
+						>{numbro(acresRange[0]).format({ thousandSeparated: true })} - {numbro(
+							acresRange[1],
+						).format({ thousandSeparated: true })}{acresRange[1] === maxAcres
 							? '+'
 							: ''} acres</span
 					>
@@ -162,7 +163,8 @@
 					step="{1}"
 					range
 					pushy
-					bind:values="{acresSliderRange}"
+					bind:values="{acresRange}"
+					on:stop="{(event) => ([minAcresValue, maxAcresValue] = event.detail.values)}"
 				/>
 			</li>
 			<!-- <li class="relative">
@@ -246,7 +248,9 @@
 
 	<div class="overflow-scroll w-[600px] border-l-2">
 		<menu class="flex justify-between sticky top-0 z-40 bg-slate-100 px-6 py-4">
-			<li class="text-primary-600 font-semibold"><span>{listings.length}</span> listings</li>
+			<li class="text-primary-600 font-semibold"
+				><span>{listings.filter((obj) => obj.visible).length}</span> listings</li
+			>
 			<li>
 				<div class="inset-y-0 right-0 flex items-center">
 					<label for="currency" class="sr-only">Currency</label>
