@@ -208,10 +208,10 @@
 						lng="{listing.location.coordinates[0]}"
 						lat="{listing.location.coordinates[1]}"
 						color="rgb(0,255,255)"
-						label="some marker label"
+						popupOptions="{{ closeButton: false, focusAfterOpen: false }}"
 					>
 						<div class="" slot="popup">
-							<div>
+							<!-- <div>
 								<span class="accent-text"
 									>{listing.address.city}, {listing.address.state}</span
 								>
@@ -236,7 +236,12 @@
 										thousandSeparated: true,
 									})}</span
 								>
-							</div>
+							</div> -->
+							<ListingCard
+								listing="{listing}"
+								extraClasses="min-h-[150px]"
+								horizontal="{false}"
+							/>
 						</div>
 					</Marker>
 				{/if}
@@ -302,10 +307,8 @@
 		--range-float-text: white; /* text color on floating label */
 	}
 
-	.mapboxgl-canvas {
-		width: 200px;
-		height: 600px;
-		/* max-width: 100%;
-		max-height: 100%; */
+	:global(.mapboxgl-popup-content) {
+		border-radius: theme(borderRadius.xl) !important;
+		padding: 0 !important;
 	}
 </style>
