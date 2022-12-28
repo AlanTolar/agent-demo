@@ -13,19 +13,19 @@
 >
 	{#if horizontal}
 		<div
-			class="shrink w-1/2 object-cover rounded-l-xl bg-cover bg-center"
+			class="shrink w-5/12 object-cover rounded-l-xl bg-cover bg-center"
 			style:background-image="url('{listing.featuredImage}')"></div>
 	{:else}
 		<div class="aspect-w-3 aspect-h-2">
 			<img class="rounded-t-xl" src="{listing.featuredImage}" alt="" />
 		</div>
 	{/if}
-	<div class="{horizontal ? 'w-1/2' : ''} p-5 flex flex-col justify-between">
+	<div class="p-5 flex flex-col justify-between">
 		<div>
 			<span class="accent-text">{listing.address.city}, {listing.address.state}</span>
 			<h3 class="mb-2 subtitle-text text-primary-600">{listing.title}</h3>
 		</div>
-		<div class="flex items-center gap-1 main-text">
+		<div class="flex items-center gap-1 main-text whitespace-nowrap flex-wrap">
 			<span>{numbro(listing.acres).format({ thousandSeparated: true })} acres</span>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
