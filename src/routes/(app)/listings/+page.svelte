@@ -7,7 +7,10 @@
 	import type { Listings } from '$lib/types/Listings';
 
 	export let data: PageData;
-	let listings: Listings[] = data.listings;
+	interface MapListing extends Listings {
+		visible: boolean;
+	}
+	let listings: MapListing[] = data.listings;
 
 	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
 	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
@@ -17,6 +20,7 @@
 	listings = listings.map((listing) => {
 		if (typeof listing?.location === 'string') listing.location = JSON.parse(listing.location);
 		if (listing?.location?.type === 'Point') coords.push(listing.location.coordinates);
+		listing.visible = true;
 		return listing;
 	});
 
@@ -45,42 +49,103 @@
 		});
 	};
 
-	const maxPrice = 2;
+	const maxPrice = 2000000;
 	const minPrice = 0;
 	let priceSliderRange = [minPrice, maxPrice];
 	$: [minPriceSlider, maxPriceSlider] = priceSliderRange;
 
-	const maxAcres = 1000;
+	const maxAcres = 100;
 	const minAcres = 0;
 	let acresSliderRange = [minAcres, maxAcres];
 	$: [minAcresSlider, maxAcresSlider] = acresSliderRange;
 
 	let showFilterDropdown = false;
+
+	function filterListings(
+		listings: MapListing[],
+		minPriceSlider: number,
+		maxPriceSlider: number,
+		minAcresSlider: number,
+		maxAcresSlider: number,
+	) {
+		listings = listings.map((listing) => {
+			const price = listing.price;
+			const acres = listing.acres;
+			const inPriceRange =
+				(price >= minPriceSlider || minPriceSlider == minPrice) &&
+				(price <= maxPriceSlider || maxPriceSlider == maxPrice);
+			const inAcresRange =
+				(acres >= minAcresSlider || minAcresSlider == minAcres) &&
+				(acres <= maxAcresSlider || maxAcresSlider == maxAcres);
+			listing.visible = inPriceRange && inAcresRange;
+			return listing;
+		});
+		return listings;
+	}
+
+	$: listings = filterListings(
+		listings,
+		minPriceSlider,
+		maxPriceSlider,
+		minAcresSlider,
+		maxAcresSlider,
+	);
+	$: console.log(listings);
+	numbro.zeroFormat('0');
+
+	function changeOrder(elem: EventTarget) {
+		const target = elem as HTMLSelectElement;
+		const selected = target.value;
+		// sort listings by price, acres, date and alphabetical order
+		if (selected === 'low-to-high') {
+			listings = listings.sort((a, b) => a.price - b.price);
+		} else if (selected === 'high-to-low') {
+			listings = listings.sort((a, b) => b.price - a.price);
+		} else if (selected === 'small-to-large') {
+			listings = listings.sort((a, b) => a.acres - b.acres);
+		} else if (selected === 'large-to-small') {
+			listings = listings.sort((a, b) => b.acres - a.acres);
+		} else if (selected === 'new-to-old') {
+			listings = listings.sort(
+				(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+			);
+		} else if (selected === 'old-to-new') {
+			listings = listings.sort(
+				(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+			);
+		} else if (selected === 'a-to-z') {
+			listings = listings.sort((a, b) => a.title.localeCompare(b.title));
+		} else if (selected === 'z-to-a') {
+			listings = listings.sort((a, b) => b.title.localeCompare(a.title));
+		}
+		console.log(listings);
+	}
 </script>
 
 <div class="flex h-[calc(100vh-64px)]">
 	<div class="grow flex flex-col">
 		<menu id="sliders" class="flex justify-around items-center py-2 border-b-2">
-			<li class="relative w-1/4">
+			<li class="relative w-1/3">
 				<div class="flex justify-between items-baseline">
 					<label for="steps-range" class="label-texts">Price</label>
 					<span class="caption-text"
-						>${minPriceSlider}{minPriceSlider < 1 ? 'K' : 'M'} - ${maxPriceSlider}{maxPriceSlider <
-						1
-							? 'K'
-							: 'M'}{maxPriceSlider === maxPrice ? '+' : ''}</span
+						>${numbro(minPriceSlider).format({ average: true, totalLength: 2 })} - ${numbro(
+							maxPriceSlider,
+						).format({ average: true, totalLength: 2 })}{maxPriceSlider === maxPrice
+							? '+'
+							: ''}</span
 					>
 				</div>
 				<RangeSlider
 					min="{minPrice}"
 					max="{maxPrice}"
-					step="{0.01}"
+					step="{1000}"
 					range
 					pushy
 					bind:values="{priceSliderRange}"
 				/>
 			</li>
-			<li class="relative w-1/4">
+			<li class="relative w-1/3">
 				<div class="flex justify-between items-baseline">
 					<label for="steps-range" class="label-texts">Acres</label>
 					<span class="caption-text"
@@ -100,7 +165,7 @@
 					bind:values="{acresSliderRange}"
 				/>
 			</li>
-			<li class="relative">
+			<!-- <li class="relative">
 				<button
 					class="text-label font-semibold text-primary-600 flex"
 					on:click="{() => (showFilterDropdown = !showFilterDropdown)}"
@@ -125,7 +190,7 @@
 						</fieldset>
 					</form>
 				{/if}
-			</li>
+			</li> -->
 		</menu>
 		<Map
 			accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
@@ -136,13 +201,12 @@
 			options="{{ scrollZoom: false }}"
 		>
 			{#each listings as listing}
-				{#if listing.location}
+				{#if listing.location && listing.visible}
 					<Marker
 						lng="{listing.location.coordinates[0]}"
 						lat="{listing.location.coordinates[1]}"
-						color="rgb(255,255,255)"
+						color="rgb(0,255,255)"
 						label="some marker label"
-						popupClassName="class-name"
 					>
 						<div class="" slot="popup">
 							<div>
@@ -153,7 +217,8 @@
 							</div>
 							<div class="flex items-center gap-1 main-text">
 								<span
-									>{numbro(listing.acres).format({ thousandSeparated: true })} acres</span
+									>{numbro(listing.acres).format({ thousandSeparated: true })}
+									acres</span
 								>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -189,22 +254,29 @@
 						id="currency"
 						name="currency"
 						class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 main-text"
+						on:change="{(e) => e.target && changeOrder(e.target)}"
 					>
-						<option value="">Date: New to Old</option>
-						<option value="">Date: Old to New</option>
-						<option value="">Acres: Small to Large</option>
-						<option value="">Acres: Large to Small</option>
-						<option value="">Price: Low to High</option>
-						<option value="">Price: High to Low</option>
-						<option value="">Name: A to Z</option>
-						<option value="">Name: Z to A</option>
+						<option value="new-to-old">Date: New to Old</option>
+						<option value="old-to-new">Date: Old to New</option>
+						<option value="small-to-large">Acres: Small to Large</option>
+						<option value="large-to-small">Acres: Large to Small</option>
+						<option value="low-to-high">Price: Low to High</option>
+						<option value="high-to-low">Price: High to Low</option>
+						<option value="a-to-z">Name: A to Z</option>
+						<option value="z-to-a">Name: Z to A</option>
 					</select>
 				</div>
 			</li>
 		</menu>
-		<div class="p-6 grid grid-cols-1 grid-flow-row auto-rows-fr gap-6">
+		<div class="p-6 grid grid-cols-1 grid-flow-row gap-6">
 			{#each listings as listing}
-				<ListingCard listing="{listing}" extraClasses="" horizontal="{true}" />
+				{#if listing.visible}
+					<ListingCard
+						listing="{listing}"
+						extraClasses="min-h-[150px]"
+						horizontal="{true}"
+					/>
+				{/if}
 			{/each}
 		</div>
 	</div>

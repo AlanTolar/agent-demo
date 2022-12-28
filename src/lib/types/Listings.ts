@@ -32,7 +32,7 @@ export interface Summary {
 
 export interface Listings {
   title: string;
-  date: Date;
+  date: string;
   address: Address;
   acres: number;
   price: number;

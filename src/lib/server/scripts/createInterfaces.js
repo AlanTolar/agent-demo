@@ -15,7 +15,7 @@ let interfaces = [];
 
 const widgetToType = new Map([
 	['boolean', 'boolean'],
-	['datetime', 'Date'],
+	// ['datetime', 'Date'],
 	['number', 'number'],
 	['map', 'any'],
 ]);

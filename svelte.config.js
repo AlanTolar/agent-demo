@@ -5,7 +5,7 @@ import { mdsvex } from 'mdsvex';
 
 const config = {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
 	},
 
 	extensions: ['.svelte', '.md'],
@@ -13,18 +13,18 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	preprocess: [
 		sveltePreprocess({
-			postcss: true
+			postcss: true,
 		}),
 		mdsvex({
-			extensions: ['.md']
-		})
+			extensions: ['.md'],
+		}),
 	],
 
 	vitePlugin: {
 		experimental: {
-		  inspector: true,
+			inspector: true,
 		},
-	  },
+	},
 };
 
 export default config;

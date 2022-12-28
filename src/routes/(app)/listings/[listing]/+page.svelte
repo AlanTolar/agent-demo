@@ -583,5 +583,5 @@
 		</div>
 	</div>
 {:else}
-	nope
+	No Listings
 {/if}
