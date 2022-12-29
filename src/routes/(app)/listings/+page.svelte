@@ -6,6 +6,7 @@
 	import Slider from '$lib/components/Slider.svelte';
 	import RadioField from '$lib/components/RadioField.svelte';
 	import DropdownOptions from '$lib/components/DropdownOptions.svelte';
+	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
 
 	// Create a writable store to hold the value of the range input
 
@@ -15,7 +16,6 @@
 	}
 	let listings: MapListing[] = data.listings;
 
-	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
 	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
 
 	type Coord = [number, number];
@@ -87,7 +87,7 @@
 </script>
 
 <div class="flex h-[calc(100vh-64px)]">
-	<div class="grow h-full">
+	<div class="grow flex flex-col">
 		<menu
 			class="flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
 		>
@@ -165,9 +165,9 @@
 		</Map>
 	</div>
 
-	<div class="overflow-scroll w-1/3 xl:w-[500px] border-l-2 bg-neutral-200">
+	<div class="relative overflow-scroll w-1/3 xl:w-[500px] border-l-2 bg-neutral-200">
 		<menu
-			class="flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+			class="sticky top-0 z-40 flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
 		>
 			<li class="text-primary-600 font-semibold w-[87px]"
 				><span>{numListings}</span> listings</li
