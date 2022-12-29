@@ -60,7 +60,6 @@
 	let [minAcresValue, maxAcresValue] = [minAcres, maxAcres];
 
 	function filterListings(
-		listings: MapListing[],
 		minPriceValue: number,
 		maxPriceValue: number,
 		minAcresSlider: number,
@@ -78,17 +77,9 @@
 			listing.visible = inPriceRange && inAcresRange;
 			return listing;
 		});
-		// console.log(listings);
-		return listings;
 	}
 
-	$: listings = filterListings(
-		listings,
-		minPriceValue,
-		maxPriceValue,
-		minAcresValue,
-		maxAcresValue,
-	);
+	$: filterListings(minPriceValue, maxPriceValue, minAcresValue, maxAcresValue);
 
 	numbro.zeroFormat('0');
 
@@ -119,7 +110,6 @@
 		} else if (selected === 'z-to-a') {
 			listings = listings.sort((a, b) => b.title.localeCompare(a.title));
 		}
-		console.log(listings);
 	}
 </script>
 
@@ -131,7 +121,7 @@
 					min="{minPrice}"
 					max="{maxPrice}"
 					name="Price"
-					symbol="$"
+					prefix="$"
 					on:stop="{(e) => {
 						minPriceValue = e.detail.values[0];
 						maxPriceValue = e.detail.values[1];
