@@ -5,6 +5,6 @@
 </script>
 
 <div>
-	<input type="checkbox" checked="{checked}" id="{name}" />
+	<input type="checkbox" bind:checked="{checked}" id="{name}" />
 	<label class="ml-1" for="{name}">{title}</label>
 </div>

@@ -80,166 +80,189 @@
 
 	$: filterListings(minPriceValue, maxPriceValue, minAcresValue, maxAcresValue);
 	$: numListings = listings.filter((listing) => listing.visible).length;
+
+	let filterShow = false;
+	let mapShow = true;
+	let listShow = false;
 </script>
 
-<div class="">
-	<menu class="flex justify-around items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-8">
-		<li class="w-3/12">
-			<Slider
-				min="{minPrice}"
-				max="{maxPrice}"
-				name="Price"
-				prefix="$"
-				on:stop="{(e) => {
-					minPriceValue = e.detail.values[0];
-					maxPriceValue = e.detail.values[1];
-				}}"
-			/>
-		</li>
-		<li class="w-3/12">
-			<Slider
-				min="{minAcres}"
-				max="{maxAcres}"
-				name="Acres"
-				on:stop="{(e) => {
-					console.log(e);
-					minAcresValue = e.detail.values[0];
-					maxAcresValue = e.detail.values[1];
-				}}"
-			/>
-		</li>
-		<li>
-			<DropdownOptions name="Filter By">
-				<form class="absolute flex bg-white right-0 z-10 rounded-lg py-4 divide-x">
-					<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
-						<span class="font-semibold">Land Type</span>
-						<CheckboxField name="hunting" title="Hunting" />
-						<CheckboxField name="home" title="Home" />
-						<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
-					</fieldset>
-					<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
-						<span class="font-semibold">Availability</span>
-						<CheckboxField name="available" title="Available" />
-						<CheckboxField name="under-contract" title="Under Contract" />
-						<CheckboxField name="sold" title="Sold" />
-					</fieldset>
-				</form>
-			</DropdownOptions>
-		</li>
-		<li>
-			<DropdownOptions name="Sort By">
-				<form class="absolute bg-white right-0 z-10 rounded-lg p-4 whitespace-nowrap">
-					<RadioField
-						name="order"
-						title="Date: New to Old"
-						checked="{true}"
-						on:change="{() => {
-							listings = listings.sort(
-								(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-							);
-						}}"
-					/>
-					<RadioField
-						name="order"
-						title="Date: Old to New"
-						on:change="{() => {
-							listings = listings.sort(
-								(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-							);
-						}}"
-					/>
-					<RadioField
-						name="order"
-						title="Acres: Small to Large"
-						on:change="{() => (listings = listings.sort((a, b) => a.acres - b.acres))}"
-					/>
-					<RadioField
-						name="order"
-						title="Acres: Large to Small"
-						on:change="{() => (listings = listings.sort((a, b) => b.acres - a.acres))}"
-					/>
-					<RadioField
-						name="order"
-						title="Price: Low to High"
-						on:change="{() => (listings = listings.sort((a, b) => a.price - b.price))}"
-					/>
-					<RadioField
-						name="order"
-						title="Price: High to Low"
-						on:change="{() => (listings = listings.sort((a, b) => b.price - a.price))}"
-					/>
-					<RadioField
-						name="order"
-						title="Name: A to Z"
-						on:change="{() =>
-							(listings = listings.sort((a, b) => a.title.localeCompare(b.title)))}"
-					/>
-					<RadioField
-						name="order"
-						title="Name: Z to A"
-						on:change="{() =>
-							(listings = listings.sort((a, b) => b.title.localeCompare(a.title)))}"
-					/>
-				</form>
-			</DropdownOptions>
-		</li>
-		<li class="text-primary-600 font-semibold w-[87px]"><span>{numListings}</span> listings</li>
-	</menu>
+<div class="flex h-[calc(100vh-64px)]">
+	<div class="grow h-full">
+		<menu
+			class="flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+		>
+			<li class="w-5/12">
+				<Slider
+					min="{minPrice}"
+					max="{maxPrice}"
+					name="Price"
+					prefix="$"
+					on:stop="{(e) => {
+						minPriceValue = e.detail.values[0];
+						maxPriceValue = e.detail.values[1];
+					}}"
+				/>
+			</li>
+			<li class="w-5/12">
+				<Slider
+					min="{minAcres}"
+					max="{maxAcres}"
+					name="Acres"
+					on:stop="{(e) => {
+						console.log(e);
+						minAcresValue = e.detail.values[0];
+						maxAcresValue = e.detail.values[1];
+					}}"
+				/>
+			</li>
+			<li class="whitespace-nowrap">
+				<DropdownOptions name="Filter By">
+					<form class="absolute flex bg-white right-0 z-40 rounded-lg py-4 divide-x">
+						<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
+							<span class="font-semibold">Land Type</span>
+							<CheckboxField name="hunting" title="Hunting" />
+							<CheckboxField name="home" title="Home" />
+							<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
+						</fieldset>
+						<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
+							<span class="font-semibold">Availability</span>
+							<CheckboxField name="available" title="Available" />
+							<CheckboxField name="under-contract" title="Under Contract" />
+							<CheckboxField name="sold" title="Sold" />
+						</fieldset>
+					</form>
+				</DropdownOptions>
+			</li>
+		</menu>
+		<Map
+			accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
+			bind:this="{mapComponent}"
+			on:ready="{() => initMap()}"
+			center="{center}"
+			zoom="2"
+			options="{{ scrollZoom: false }}"
+		>
+			{#each listings as listing}
+				{#if listing.location && listing.visible}
+					<Marker
+						lng="{listing.location.coordinates[0]}"
+						lat="{listing.location.coordinates[1]}"
+						color="rgb(0,255,255)"
+						popupOptions="{{ closeButton: false, focusAfterOpen: false }}"
+					>
+						<div class="" slot="popup">
+							<ListingCard
+								listing="{listing}"
+								extraClasses="min-h-[150px]"
+								horizontal="{false}"
+							/>
+						</div>
+					</Marker>
+				{/if}
+			{/each}
+			<NavigationControl />
+			<ScaleControl />
+		</Map>
+	</div>
 
-	<div class="flex h-[calc(100vh-64px-80px)]">
-		<div class="grow">
-			<Map
-				accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
-				bind:this="{mapComponent}"
-				on:ready="{() => initMap()}"
-				center="{center}"
-				zoom="2"
-				options="{{ scrollZoom: false }}"
+	<div class="overflow-scroll w-1/3 xl:w-[500px] border-l-2 bg-neutral-200">
+		<menu
+			class="flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+		>
+			<li class="text-primary-600 font-semibold w-[87px]"
+				><span>{numListings}</span> listings</li
 			>
-				{#each listings as listing}
-					{#if listing.location && listing.visible}
-						<Marker
-							lng="{listing.location.coordinates[0]}"
-							lat="{listing.location.coordinates[1]}"
-							color="rgb(0,255,255)"
-							popupOptions="{{ closeButton: false, focusAfterOpen: false }}"
-						>
-							<div class="" slot="popup">
-								<ListingCard
-									listing="{listing}"
-									extraClasses="min-h-[150px]"
-									horizontal="{false}"
-								/>
-							</div>
-						</Marker>
-					{/if}
-				{/each}
-				<NavigationControl />
-				<ScaleControl />
-			</Map>
-		</div>
-
-		<div class="overflow-scroll w-1/3 xl:w-[500px] border-l-2 bg-neutral-200">
-			<div class="p-6 grid grid-cols-1 grid-flow-row gap-6">
-				{#each listings as listing}
-					{#if listing.visible}
-						<ListingCard
-							listing="{listing}"
-							extraClasses="xl:hidden"
-							horizontal="{false}"
+			<li>
+				<DropdownOptions name="Sort By">
+					<form class="absolute bg-white right-0 z-40 rounded-lg p-4 whitespace-nowrap">
+						<RadioField
+							name="order"
+							title="Date: New to Old"
+							checked="{true}"
+							on:change="{() => {
+								listings = listings.sort(
+									(a, b) =>
+										new Date(b.date).getTime() - new Date(a.date).getTime(),
+								);
+							}}"
 						/>
-						<ListingCard
-							listing="{listing}"
-							extraClasses="min-h-[130px] max-xl:hidden"
-							horizontal="{true}"
+						<RadioField
+							name="order"
+							title="Date: Old to New"
+							on:change="{() => {
+								listings = listings.sort(
+									(a, b) =>
+										new Date(a.date).getTime() - new Date(b.date).getTime(),
+								);
+							}}"
 						/>
-					{/if}
-				{/each}
-			</div>
+						<RadioField
+							name="order"
+							title="Acres: Small to Large"
+							on:change="{() =>
+								(listings = listings.sort((a, b) => a.acres - b.acres))}"
+						/>
+						<RadioField
+							name="order"
+							title="Acres: Large to Small"
+							on:change="{() =>
+								(listings = listings.sort((a, b) => b.acres - a.acres))}"
+						/>
+						<RadioField
+							name="order"
+							title="Price: Low to High"
+							on:change="{() =>
+								(listings = listings.sort((a, b) => a.price - b.price))}"
+						/>
+						<RadioField
+							name="order"
+							title="Price: High to Low"
+							on:change="{() =>
+								(listings = listings.sort((a, b) => b.price - a.price))}"
+						/>
+						<RadioField
+							name="order"
+							title="Name: A to Z"
+							on:change="{() =>
+								(listings = listings.sort((a, b) =>
+									a.title.localeCompare(b.title),
+								))}"
+						/>
+						<RadioField
+							name="order"
+							title="Name: Z to A"
+							on:change="{() =>
+								(listings = listings.sort((a, b) =>
+									b.title.localeCompare(a.title),
+								))}"
+						/>
+					</form>
+				</DropdownOptions>
+			</li>
+		</menu>
+		<div class="p-6 grid grid-cols-1 grid-flow-row gap-6">
+			{#each listings as listing}
+				{#if listing.visible}
+					<ListingCard
+						listing="{listing}"
+						extraClasses="xl:hidden"
+						horizontal="{false}"
+					/>
+					<ListingCard
+						listing="{listing}"
+						extraClasses="min-h-[130px] max-xl:hidden"
+						horizontal="{true}"
+					/>
+				{/if}
+			{/each}
 		</div>
 	</div>
 </div>
 
+<!-- <menu class="flex justify-around items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-8">
+	<li> Map/List </li>
+	<li> Filter </li>
+</menu> -->
 <style>
 	:global(.mapboxgl-popup-content) {
 		border-radius: theme(borderRadius.xl) !important;
