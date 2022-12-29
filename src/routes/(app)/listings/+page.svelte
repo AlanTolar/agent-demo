@@ -79,35 +79,7 @@
 	}
 
 	$: filterListings(minPriceValue, maxPriceValue, minAcresValue, maxAcresValue);
-
-	let showFilterDropdown = false;
-
-	function changeOrder(elem: EventTarget) {
-		const target = elem as HTMLSelectElement;
-		const selected = target.value;
-		// sort listings by price, acres, date and alphabetical order
-		if (selected === 'low-to-high') {
-			listings = listings.sort((a, b) => a.price - b.price);
-		} else if (selected === 'high-to-low') {
-			listings = listings.sort((a, b) => b.price - a.price);
-		} else if (selected === 'small-to-large') {
-			listings = listings.sort((a, b) => a.acres - b.acres);
-		} else if (selected === 'large-to-small') {
-			listings = listings.sort((a, b) => b.acres - a.acres);
-		} else if (selected === 'new-to-old') {
-			listings = listings.sort(
-				(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-			);
-		} else if (selected === 'old-to-new') {
-			listings = listings.sort(
-				(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-			);
-		} else if (selected === 'a-to-z') {
-			listings = listings.sort((a, b) => a.title.localeCompare(b.title));
-		} else if (selected === 'z-to-a') {
-			listings = listings.sort((a, b) => b.title.localeCompare(a.title));
-		}
-	}
+	$: numListings = listings.filter((listing) => listing.visible).length;
 </script>
 
 <div class="">
@@ -160,6 +132,7 @@
 					<RadioField
 						name="order"
 						title="Date: New to Old"
+						checked="{true}"
 						on:change="{() => {
 							listings = listings.sort(
 								(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
@@ -199,20 +172,18 @@
 						name="order"
 						title="Name: A to Z"
 						on:change="{() =>
-							(listings = listings.sort((a, b) => a.name.localeCompare(b.name)))}"
+							(listings = listings.sort((a, b) => a.title.localeCompare(b.title)))}"
 					/>
 					<RadioField
 						name="order"
 						title="Name: Z to A"
 						on:change="{() =>
-							(listings = listings.sort((a, b) => b.name.localeCompare(a.name)))}"
+							(listings = listings.sort((a, b) => b.title.localeCompare(a.title)))}"
 					/>
 				</form>
 			</DropdownOptions>
 		</li>
-		<li class="text-primary-600 font-semibold"
-			><span>{listings.filter((obj) => obj.visible).length}</span> listings</li
-		>
+		<li class="text-primary-600 font-semibold w-[87px]"><span>{numListings}</span> listings</li>
 	</menu>
 
 	<div class="flex h-[calc(100vh-64px-80px)]">
