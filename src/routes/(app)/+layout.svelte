@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { clickOutside } from '$lib/utils/clickOutside.js';
+	import { clickOutside } from '$lib/utils/clickOutside';
 
 	const nav_items = [
 		{

@@ -12,9 +12,11 @@
 
 	$: minNum = numbro(range[0]).format({ average: true, totalLength: 2 });
 	$: maxNum = numbro(range[1]).format({ average: true, totalLength: 2 });
+
+	numbro.zeroFormat('0');
 </script>
 
-<div class="flex justify-between items-baseline">
+<div class="flex justify-between items-baseline px-2">
 	<label for="steps-range" class="label-texts">{name}</label>
 	<span class="caption-text"
 		>{prefix}{minNum} - {prefix}{maxNum}{range[1] === max ? '+' : ''}</span

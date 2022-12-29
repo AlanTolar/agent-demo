@@ -1,12 +1,11 @@
 <script lang="ts">
 	import ListingCard from '$lib/components/ListingCard.svelte';
-	import InputField from '$lib/components/InputField.svelte';
+	import CheckboxField from '$lib/components/CheckboxField.svelte';
 	import type { PageData } from './$types';
-	import numbro from 'numbro';
 	import type { Listings } from '$lib/types/Listings';
-	import { writable } from 'svelte/store';
-	import RangeSlider from 'svelte-range-slider-pips';
 	import Slider from '$lib/components/Slider.svelte';
+	import RadioField from '$lib/components/RadioField.svelte';
+	import DropdownOptions from '$lib/components/DropdownOptions.svelte';
 
 	// Create a writable store to hold the value of the range input
 
@@ -81,8 +80,6 @@
 
 	$: filterListings(minPriceValue, maxPriceValue, minAcresValue, maxAcresValue);
 
-	numbro.zeroFormat('0');
-
 	let showFilterDropdown = false;
 
 	function changeOrder(elem: EventTarget) {
@@ -114,8 +111,8 @@
 </script>
 
 <div class="">
-	<menu class="flex justify-around items-center h-[80px] gap-6 bg-neutral-100 border-b-2">
-		<li class="relative w-1/5">
+	<menu class="flex justify-around items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-8">
+		<li class="w-3/12">
 			<Slider
 				min="{minPrice}"
 				max="{maxPrice}"
@@ -127,7 +124,7 @@
 				}}"
 			/>
 		</li>
-		<li class="relative w-1/5">
+		<li class="w-3/12">
 			<Slider
 				min="{minAcres}"
 				max="{maxAcres}"
@@ -139,47 +136,79 @@
 				}}"
 			/>
 		</li>
-		<li class="relative">
-			<button
-				class="text-label font-semibold text-primary-600 flex"
-				on:click="{() => (showFilterDropdown = !showFilterDropdown)}"
-				>Filter By<iconify-icon
-					inline
-					icon="material-symbols:keyboard-arrow-down"
-					width="24"></iconify-icon></button
-			>
-			{#if showFilterDropdown}
+		<li>
+			<DropdownOptions name="Filter By">
 				<form class="absolute flex bg-white right-0 z-10 rounded-lg py-4 divide-x">
 					<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
 						<span class="font-semibold">Land Type</span>
-						<InputField name="hunting" title="Hunting" />
-						<InputField name="home" title="Home" />
-						<InputField name="farm-and-ranch" title="Farm & Ranch" />
+						<CheckboxField name="hunting" title="Hunting" />
+						<CheckboxField name="home" title="Home" />
+						<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
 					</fieldset>
 					<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
 						<span class="font-semibold">Availability</span>
-						<InputField name="available" title="Available" />
-						<InputField name="under-contract" title="Under Contract" />
-						<InputField name="sold" title="Sold" />
+						<CheckboxField name="available" title="Available" />
+						<CheckboxField name="under-contract" title="Under Contract" />
+						<CheckboxField name="sold" title="Sold" />
 					</fieldset>
 				</form>
-			{/if}
+			</DropdownOptions>
 		</li>
-
 		<li>
-			<select
-				class="h-full rounded-md border-transparent bg-neutral-200 py-0 main-text"
-				on:change="{(e) => e.target && changeOrder(e.target)}"
-			>
-				<option value="new-to-old">Date: New to Old</option>
-				<option value="old-to-new">Date: Old to New</option>
-				<option value="small-to-large">Acres: Small to Large</option>
-				<option value="large-to-small">Acres: Large to Small</option>
-				<option value="low-to-high">Price: Low to High</option>
-				<option value="high-to-low">Price: High to Low</option>
-				<option value="a-to-z">Name: A to Z</option>
-				<option value="z-to-a">Name: Z to A</option>
-			</select>
+			<DropdownOptions name="Sort By">
+				<form class="absolute bg-white right-0 z-10 rounded-lg p-4 whitespace-nowrap">
+					<RadioField
+						name="order"
+						title="Date: New to Old"
+						on:change="{() => {
+							listings = listings.sort(
+								(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+							);
+						}}"
+					/>
+					<RadioField
+						name="order"
+						title="Date: Old to New"
+						on:change="{() => {
+							listings = listings.sort(
+								(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+							);
+						}}"
+					/>
+					<RadioField
+						name="order"
+						title="Acres: Small to Large"
+						on:change="{() => (listings = listings.sort((a, b) => a.acres - b.acres))}"
+					/>
+					<RadioField
+						name="order"
+						title="Acres: Large to Small"
+						on:change="{() => (listings = listings.sort((a, b) => b.acres - a.acres))}"
+					/>
+					<RadioField
+						name="order"
+						title="Price: Low to High"
+						on:change="{() => (listings = listings.sort((a, b) => a.price - b.price))}"
+					/>
+					<RadioField
+						name="order"
+						title="Price: High to Low"
+						on:change="{() => (listings = listings.sort((a, b) => b.price - a.price))}"
+					/>
+					<RadioField
+						name="order"
+						title="Name: A to Z"
+						on:change="{() =>
+							(listings = listings.sort((a, b) => a.name.localeCompare(b.name)))}"
+					/>
+					<RadioField
+						name="order"
+						title="Name: Z to A"
+						on:change="{() =>
+							(listings = listings.sort((a, b) => b.name.localeCompare(a.name)))}"
+					/>
+				</form>
+			</DropdownOptions>
 		</li>
 		<li class="text-primary-600 font-semibold"
 			><span>{listings.filter((obj) => obj.visible).length}</span> listings</li
