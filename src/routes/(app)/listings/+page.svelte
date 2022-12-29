@@ -86,10 +86,12 @@
 	let listShow = false;
 </script>
 
-<div class="flex h-[calc(100vh-64px)]">
+<div class="h-[calc(100vh-64px-60px)] md:h-[calc(100vh-64px)] flex flex-row grow">
 	<div class="grow flex flex-col">
 		<menu
-			class="flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+			class="{filterShow
+				? ''
+				: 'hidden'} md:flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
 		>
 			<li class="w-5/12">
 				<Slider
@@ -109,7 +111,6 @@
 					max="{maxAcres}"
 					name="Acres"
 					on:stop="{(e) => {
-						console.log(e);
 						minAcresValue = e.detail.values[0];
 						maxAcresValue = e.detail.values[1];
 					}}"
@@ -134,40 +135,46 @@
 				</DropdownOptions>
 			</li>
 		</menu>
-		<Map
-			accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
-			bind:this="{mapComponent}"
-			on:ready="{() => initMap()}"
-			center="{center}"
-			zoom="2"
-			options="{{ scrollZoom: false }}"
-		>
-			{#each listings as listing}
-				{#if listing.location && listing.visible}
-					<Marker
-						lng="{listing.location.coordinates[0]}"
-						lat="{listing.location.coordinates[1]}"
-						color="rgb(0,255,255)"
-						popupOptions="{{ closeButton: false, focusAfterOpen: false }}"
-					>
-						<div class="" slot="popup">
-							<ListingCard
-								listing="{listing}"
-								extraClasses="min-h-[150px]"
-								horizontal="{false}"
-							/>
-						</div>
-					</Marker>
-				{/if}
-			{/each}
-			<NavigationControl />
-			<ScaleControl />
-		</Map>
+		<div class="{mapShow ? '' : 'hidden'} md:block h-full ">
+			<Map
+				accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
+				bind:this="{mapComponent}"
+				on:ready="{() => initMap()}"
+				center="{center}"
+				zoom="2"
+				options="{{ scrollZoom: false }}"
+			>
+				{#each listings as listing}
+					{#if listing.location && listing.visible}
+						<Marker
+							lng="{listing.location.coordinates[0]}"
+							lat="{listing.location.coordinates[1]}"
+							color="rgb(0,255,255)"
+							popupOptions="{{ closeButton: false, focusAfterOpen: false }}"
+						>
+							<div class="" slot="popup">
+								<ListingCard
+									listing="{listing}"
+									extraClasses="min-h-[150px]"
+									horizontal="{false}"
+								/>
+							</div>
+						</Marker>
+					{/if}
+				{/each}
+				<NavigationControl />
+				<ScaleControl />
+			</Map>
+		</div>
 	</div>
 
-	<div class="relative overflow-scroll w-1/3 xl:w-[500px] border-l-2 bg-neutral-200">
+	<div
+		class="{listShow
+			? ''
+			: 'hidden'} md:block relative overflow-scroll w-full md:w-1/3 xl:w-[500px] border-l-2 bg-neutral-200 "
+	>
 		<menu
-			class="sticky top-0 z-40 flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+			class="flex sticky top-0 z-40 justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
 		>
 			<li class="text-primary-600 font-semibold w-[87px]"
 				><span>{numListings}</span> listings</li
@@ -259,10 +266,44 @@
 	</div>
 </div>
 
-<!-- <menu class="flex justify-around items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-8">
-	<li> Map/List </li>
-	<li> Filter </li>
-</menu> -->
+<menu
+	class="md:hidden flex justify-around items-center h-[60px] gap-16 bg-neutral-100 border-b-2 px-8"
+>
+	<li>
+		<button
+			on:click="{() => {
+				mapShow = true;
+				listShow = false;
+				filterShow = false;
+			}}"
+		>
+			Map
+		</button>
+	</li>
+	<li>
+		<button
+			on:click="{() => {
+				mapShow = false;
+				listShow = true;
+				filterShow = false;
+			}}"
+		>
+			List
+		</button>
+	</li>
+	<li>
+		<button
+			on:click="{() => {
+				mapShow = false;
+				listShow = false;
+				filterShow = true;
+			}}"
+		>
+			Filter
+		</button>
+	</li>
+</menu>
+
 <style>
 	:global(.mapboxgl-popup-content) {
 		border-radius: theme(borderRadius.xl) !important;
