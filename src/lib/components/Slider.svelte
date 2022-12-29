@@ -20,4 +20,23 @@
 		>{prefix}{minNum} - {prefix}{maxNum}{range[1] === max ? '+' : ''}</span
 	>
 </div>
-<RangeSlider min="{min}" max="{max}" step="{step}" range pushy bind:values="{range}" on:stop />
+<div class="slider">
+	<RangeSlider min="{min}" max="{max}" step="{step}" range pushy bind:values="{range}" on:stop />
+</div>
+
+<style>
+	.slider {
+		--range-slider: #d7dada; /* slider main background color */
+		--range-handle-inactive: theme(colors.neutral.400); /* inactive handle color */
+		--range-handle: var(--range-handle-inactive); /* non-focussed handle color */
+		--range-handle-focus: var(--range-handle-inactive); /* focussed handle color */
+		--range-handle-border: var(--range-handle-inactive);
+		--range-range-inactive: theme(colors.primary.400); /* inactive range bar background color */
+		--range-range: var(--range-range-inactive); /* active range bar background color */
+		--range-float-inactive: var(
+			--range-handle-inactive
+		); /* inactive floating label background color */
+		--range-float: var(--range-handle-focus); /* floating label background color */
+		--range-float-text: white; /* text color on floating label */
+	}
+</style>

@@ -115,7 +115,7 @@
 
 <div class="flex h-[calc(100vh-64px)]">
 	<div class="grow flex flex-col">
-		<menu id="sliders" class="flex justify-around items-center py-2 border-b-2">
+		<menu class="flex justify-around items-center py-2 border-b-2">
 			<li class="relative w-1/3">
 				<Slider
 					min="{minPrice}"
@@ -241,21 +241,6 @@
 </div>
 
 <style>
-	#sliders {
-		--range-slider: #d7dada; /* slider main background color */
-		--range-handle-inactive: theme(colors.neutral.400); /* inactive handle color */
-		--range-handle: var(--range-handle-inactive); /* non-focussed handle color */
-		--range-handle-focus: var(--range-handle-inactive); /* focussed handle color */
-		--range-handle-border: var(--range-handle-inactive);
-		--range-range-inactive: theme(colors.primary.400); /* inactive range bar background color */
-		--range-range: var(--range-range-inactive); /* active range bar background color */
-		--range-float-inactive: var(
-			--range-handle-inactive
-		); /* inactive floating label background color */
-		--range-float: var(--range-handle-focus); /* floating label background color */
-		--range-float-text: white; /* text color on floating label */
-	}
-
 	:global(.mapboxgl-popup-content) {
 		border-radius: theme(borderRadius.xl) !important;
 		padding: 0 !important;
