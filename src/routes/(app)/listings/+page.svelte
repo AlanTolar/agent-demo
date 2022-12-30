@@ -103,14 +103,31 @@
 	let mapShow = true;
 	let listShow = false;
 	$: mobileView = ['sm', 'md'].includes(breakpoint);
+
+	let landTypeCheckboxes = [
+		{ name: 'hunting', title: 'Hunting', checked: false },
+		{ name: 'home', title: 'Home', checked: false },
+		{ name: 'farm-and-ranch', title: 'Farm & Ranch', checked: false },
+	];
+	let availabilityCheckboxes = [
+		{ name: 'available', title: 'Available', checked: false },
+		{ name: 'under-contract', title: 'Under Contract', checked: false },
+		{ name: 'sold', title: 'Sold', checked: false },
+	];
 </script>
 
-<div class="h-[calc(100vh-64px-60px)] md:h-[calc(100vh-64px)] flex flex-row grow">
+<div class="h-[calc(100vh-64px-50px)] md:h-[calc(100vh-64px)] flex flex-row grow">
 	<div class="grow flex flex-col">
+		<div
+			class="{filterShow && mobileView
+				? ''
+				: 'hidden'} text-primary-600 font-semibold px-6 py-2 whitespace-nowrap"
+			><span>{numListings}</span> listings</div
+		>
 		<menu
 			class="{filterShow && mobileView ? '' : 'hidden'} {mobileView
 				? 'relative overflow-scroll'
-				: ''} flex flex-col md:flex-row md:justify-between md:items-center h-full md:h-[80px] gap-6 md:gap-16 bg-neutral-100 border-b-2 p-6"
+				: ''} flex flex-col md:flex md:flex-row md:justify-between md:items-center h-full md:h-[80px] gap-6 md:gap-16 bg-neutral-100 border-b-2 p-6"
 		>
 			<li class="w-full md:w-5/12">
 				<Slider
@@ -142,33 +159,39 @@
 					>
 						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
 							<span class="font-semibold">Land Type</span>
-							<CheckboxField name="hunting" title="Hunting" />
-							<CheckboxField name="home" title="Home" />
-							<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
+							{#each landTypeCheckboxes as item}
+								<div>
+									<input
+										type="checkbox"
+										bind:checked="{item.checked}"
+										id="{item.name}"
+									/>
+									<label class="ml-1" for="{item.name}">{item.title}</label>
+								</div>
+							{/each}
 						</fieldset>
 						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
 							<span class="font-semibold">Availability</span>
-							<CheckboxField name="available" title="Available" />
-							<CheckboxField name="under-contract" title="Under Contract" />
-							<CheckboxField name="sold" title="Sold" />
-						</fieldset>
-						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
-							<span class="font-semibold">Land Type</span>
-							<CheckboxField name="hunting" title="Hunting" />
-							<CheckboxField name="home" title="Home" />
-							<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
-						</fieldset>
-						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
-							<span class="font-semibold">Availability</span>
-							<CheckboxField name="available" title="Available" />
-							<CheckboxField name="under-contract" title="Under Contract" />
-							<CheckboxField name="sold" title="Sold" />
+							{#each availabilityCheckboxes as item}
+								<div>
+									<input
+										type="checkbox"
+										bind:checked="{item.checked}"
+										id="{item.name}"
+									/>
+									<label class="ml-1" for="{item.name}">{item.title}</label>
+								</div>
+							{/each}
 						</fieldset>
 					</form>
 				</DropdownOptions>
 			</li>
 		</menu>
-		<div class="{mapShow && mobileView ? '' : 'hidden'} md:block h-full ">
+		<div class="{mapShow && mobileView ? '' : 'hidden'} md:block h-full relative">
+			<div
+				class="absolute md:hidden top-1 left-3 z-10 text-primary-600 font-semibold px-3 p-1 whitespace-nowrap bg-neutral-100 rounded-full"
+				><span>{numListings}</span> listings</div
+			>
 			<Map
 				accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
 				bind:this="{mapComponent}"
@@ -285,12 +308,12 @@
 				{#if listing.visible}
 					<ListingCard
 						listing="{listing}"
-						extraClasses="hidden md:block xl:hidden"
+						extraClasses="hidden md:max-xl:block"
 						horizontal="{false}"
 					/>
 					<ListingCard
 						listing="{listing}"
-						extraClasses="min-h-[130px] block md:hidden xl:block"
+						extraClasses="min-h-[130px] md:max-xl:hidden"
 						horizontal="{true}"
 					/>
 				{/if}
@@ -300,10 +323,11 @@
 </div>
 
 <menu
-	class="md:hidden flex justify-around items-center h-[60px] gap-16 bg-neutral-100 border-b-2 px-8"
+	class="md:hidden flex justify-center items-center h-[50px] gap-16 bg-neutral-200 border-b-2 px-8"
 >
 	<li>
 		<button
+			class="text-white button-sm drop-shadow-xl shine bg-primary-600"
 			on:click="{() => {
 				mapShow = true;
 				listShow = false;
@@ -315,6 +339,7 @@
 	</li>
 	<li>
 		<button
+			class="text-white button-sm drop-shadow-xl shine bg-primary-600"
 			on:click="{() => {
 				mapShow = false;
 				listShow = true;
@@ -326,6 +351,7 @@
 	</li>
 	<li>
 		<button
+			class="text-white button-sm drop-shadow-xl shine bg-primary-600"
 			on:click="{() => {
 				mapShow = false;
 				listShow = false;
