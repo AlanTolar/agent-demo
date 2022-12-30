@@ -102,16 +102,17 @@
 	let filterShow = false;
 	let mapShow = true;
 	let listShow = false;
+	$: mobileView = ['sm', 'md'].includes(breakpoint);
 </script>
 
 <div class="h-[calc(100vh-64px-60px)] md:h-[calc(100vh-64px)] flex flex-row grow">
 	<div class="grow flex flex-col">
 		<menu
-			class="{filterShow
-				? ''
-				: 'hidden'} md:flex justify-between items-center h-full md:h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+			class="{filterShow && mobileView ? '' : 'hidden'} {mobileView
+				? 'relative overflow-scroll'
+				: ''} flex flex-col md:flex-row md:justify-between md:items-center h-full md:h-[80px] gap-6 md:gap-16 bg-neutral-100 border-b-2 p-6"
 		>
-			<li class="md:w-5/12">
+			<li class="w-full md:w-5/12">
 				<Slider
 					min="{minPrice}"
 					max="{maxPrice}"
@@ -123,7 +124,7 @@
 					}}"
 				/>
 			</li>
-			<li class="md:w-5/12">
+			<li class="w-full md:w-5/12">
 				<Slider
 					min="{minAcres}"
 					max="{maxAcres}"
@@ -135,13 +136,22 @@
 				/>
 			</li>
 			<li class="whitespace-nowrap">
-				<DropdownOptions
-					name="Filter By"
-					escape="{filterShow && ['sm', 'md'].includes(breakpoint)}"
-				>
+				<DropdownOptions name="Filter By" escape="{filterShow && mobileView}">
 					<form
 						class="md:absolute flex flex-col md:flex-row bg-neutral-100 right-0 z-40 rounded-lg md:divide-x"
 					>
+						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
+							<span class="font-semibold">Land Type</span>
+							<CheckboxField name="hunting" title="Hunting" />
+							<CheckboxField name="home" title="Home" />
+							<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
+						</fieldset>
+						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
+							<span class="font-semibold">Availability</span>
+							<CheckboxField name="available" title="Available" />
+							<CheckboxField name="under-contract" title="Under Contract" />
+							<CheckboxField name="sold" title="Sold" />
+						</fieldset>
 						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
 							<span class="font-semibold">Land Type</span>
 							<CheckboxField name="hunting" title="Hunting" />
@@ -158,7 +168,7 @@
 				</DropdownOptions>
 			</li>
 		</menu>
-		<div class="{mapShow ? '' : 'hidden'} md:block h-full ">
+		<div class="{mapShow && mobileView ? '' : 'hidden'} md:block h-full ">
 			<Map
 				accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
 				bind:this="{mapComponent}"
@@ -192,12 +202,12 @@
 	</div>
 
 	<div
-		class="{listShow
+		class="{listShow && mobileView
 			? ''
 			: 'hidden'} md:block relative overflow-scroll w-full md:w-1/3 xl:w-[500px] border-l-2 bg-neutral-200 "
 	>
 		<menu
-			class="flex sticky top-0 z-40 justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+			class="flex sticky top-0 z-40 justify-between items-center md:h-[80px] gap-16 bg-neutral-100 border-b-2 p-6 py-2 md:p-6"
 		>
 			<li class="text-primary-600 font-semibold w-[87px]"
 				><span>{numListings}</span> listings</li
@@ -275,12 +285,12 @@
 				{#if listing.visible}
 					<ListingCard
 						listing="{listing}"
-						extraClasses="xl:hidden"
+						extraClasses="hidden md:block xl:hidden"
 						horizontal="{false}"
 					/>
 					<ListingCard
 						listing="{listing}"
-						extraClasses="min-h-[130px] max-xl:hidden"
+						extraClasses="min-h-[130px] block md:hidden xl:block"
 						horizontal="{true}"
 					/>
 				{/if}
