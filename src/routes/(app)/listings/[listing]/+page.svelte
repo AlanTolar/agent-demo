@@ -36,7 +36,8 @@
 	let slideTransition = eases.cubicOut;
 
 	function getImg(i: number): string {
-		const imgURL = listing?.slideshowImages?.at(i % listing.slideshowImages.length) || '';
+		const imgURL =
+			listing?.slideshowImages?.at(i % listing.slideshowImages.length) || '/placeholder.webp';
 		return imgURL;
 	}
 
@@ -438,7 +439,7 @@
 								</div>
 							</section>
 						{/if}
-						{#if listing.brouchure || listing.location || listing.address}
+						{#if listing.brouchure || listing.location || listing.address.street}
 							<section id="further-info-section" class="py-10">
 								<h3 class="heading-text-sm">Further Information</h3>
 								<div class="mt-4 grid sm:grid-cols-2 gap-6">
