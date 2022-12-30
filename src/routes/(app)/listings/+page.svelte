@@ -7,6 +7,24 @@
 	import RadioField from '$lib/components/RadioField.svelte';
 	import DropdownOptions from '$lib/components/DropdownOptions.svelte';
 	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
+	import { onMount } from 'svelte';
+	import { getBreakpoint } from '$lib/utils/getBreakpoint';
+
+	let breakpoint: string;
+	onMount(() => {
+		function handleResize() {
+			const breakpointCheck = getBreakpoint();
+			if (breakpoint !== breakpointCheck) {
+				breakpoint = breakpointCheck;
+				console.log('breakpoint: ', breakpoint);
+			}
+		}
+		handleResize();
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	});
 
 	// Create a writable store to hold the value of the range input
 
@@ -91,9 +109,9 @@
 		<menu
 			class="{filterShow
 				? ''
-				: 'hidden'} md:flex justify-between items-center h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
+				: 'hidden'} md:flex justify-between items-center h-full md:h-[80px] gap-16 bg-neutral-100 border-b-2 p-6"
 		>
-			<li class="w-5/12">
+			<li class="md:w-5/12">
 				<Slider
 					min="{minPrice}"
 					max="{maxPrice}"
@@ -105,7 +123,7 @@
 					}}"
 				/>
 			</li>
-			<li class="w-5/12">
+			<li class="md:w-5/12">
 				<Slider
 					min="{minAcres}"
 					max="{maxAcres}"
@@ -117,15 +135,20 @@
 				/>
 			</li>
 			<li class="whitespace-nowrap">
-				<DropdownOptions name="Filter By">
-					<form class="absolute flex bg-white right-0 z-40 rounded-lg py-4 divide-x">
-						<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
+				<DropdownOptions
+					name="Filter By"
+					escape="{filterShow && ['sm', 'md'].includes(breakpoint)}"
+				>
+					<form
+						class="md:absolute flex flex-col md:flex-row bg-neutral-100 right-0 z-40 rounded-lg md:divide-x"
+					>
+						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
 							<span class="font-semibold">Land Type</span>
 							<CheckboxField name="hunting" title="Hunting" />
 							<CheckboxField name="home" title="Home" />
 							<CheckboxField name="farm-and-ranch" title="Farm & Ranch" />
 						</fieldset>
-						<fieldset class="flex flex-col whitespace-nowrap gap-2 px-4">
+						<fieldset class="flex flex-col whitespace-nowrap gap-2 p-4">
 							<span class="font-semibold">Availability</span>
 							<CheckboxField name="available" title="Available" />
 							<CheckboxField name="under-contract" title="Under Contract" />
