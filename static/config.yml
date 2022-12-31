@@ -13,7 +13,7 @@ public_folder: "/uploads"
 
 collections:
   - name: listings
-    label: listings
+    label: Listings
     folder: src/lib/content/listings
     create: true
     extension: json
@@ -157,14 +157,36 @@ collections:
         name: "location"
         widget: "map"
         required: false
-
-  - name: team
-    label: team
-    folder: src/lib/content/team
+      - label: "Agent"
+        name: "agent"
+        widget: "relation"
+        collection: "agents"
+        value_field: agents
+        search_fields: ["name"]
+  - name: agents
+    label: Agents
+    folder: src/lib/content/agents
     create: true
     extension: json
-    widget: list
+    summary: "{{name}} (/{{filename}})" #customize w/ title, date and url button
+    identifier_field: name
+    preview_path: agents/{{slug}}
     fields:
-      - { label: Name, name: name, widget: string }
-      - { label: Position, name: position, widget: string }
-      - { label: Photo, name: photo, widget: image }
+      - { name: "name", label: "Name", widget: "string" }
+      - { name: "position", label: "Position", widget: "string" }
+      - { name: "email", label: "Email", widget: "string" }
+      - { name: "phone", label: "Phone", widget: "number" }
+      - { name: "location", label: "Location", widget: "string" }
+      - { name: "image", label: "Image", widget: "image" }
+      - { name: "bio", label: "Bio", widget: "markdown" }
+      - {
+          name: "reviews",
+          label: "Reviews",
+          widget: "list",
+          fields:
+            [
+              { name: "customer", label: "Customer", widget: "string" },
+              { name: "title", label: "Title", widget: "string" },
+              { name: "review", label: "Review", widget: "markdown" },
+            ],
+        }

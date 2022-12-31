@@ -43,4 +43,5 @@ export interface Listings {
   summary?: Summary;
   brouchure?: string;
   location?: any;
+  agent: string;
 }
