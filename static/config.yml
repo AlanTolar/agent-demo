@@ -12,7 +12,7 @@ public_folder: "/uploads"
 # logo_url: https://your-site.com/images/logo.svg
 
 collections:
-  - name: listings
+  - name: listing
     label: Listings
     folder: src/lib/content/listings
     create: true
@@ -163,7 +163,7 @@ collections:
         collection: "agents"
         value_field: agents
         search_fields: ["name"]
-  - name: agents
+  - name: agent
     label: Agents
     folder: src/lib/content/agents
     create: true
@@ -175,7 +175,7 @@ collections:
       - { name: "name", label: "Name", widget: "string" }
       - { name: "position", label: "Position", widget: "string" }
       - { name: "email", label: "Email", widget: "string" }
-      - { name: "phone", label: "Phone", widget: "number" }
+      - { name: "phone", label: "Phone", widget: "string" }
       - { name: "location", label: "Location", widget: "string" }
       - { name: "image", label: "Image", widget: "image" }
       - { name: "bio", label: "Bio", widget: "markdown" }

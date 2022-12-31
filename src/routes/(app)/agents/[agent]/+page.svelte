@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
-	import type { Agents } from '$lib/types/Agents';
+	import type { Agent } from '$lib/types/Agent';
 
 	export let data: PageData;
-	let agent: Agents = data.agent;
+	let agent: Agent = data.agent;
 	console.log('agent: ', agent);
 
 	let imgCover = true;

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import ListingCard from '$lib/components/ListingCard.svelte';
-	import CheckboxField from '$lib/components/CheckboxField.svelte';
 	import type { PageData } from './$types';
-	import type { Listings } from '$lib/types/Listings';
+	import type { Listing } from '$lib/types/Listing';
 	import Slider from '$lib/components/Slider.svelte';
 	import RadioField from '$lib/components/RadioField.svelte';
 	import DropdownOptions from '$lib/components/DropdownOptions.svelte';
@@ -29,7 +28,7 @@
 	// Create a writable store to hold the value of the range input
 
 	export let data: PageData;
-	interface MapListing extends Listings {
+	interface MapListing extends Listing {
 		visible: boolean;
 	}
 	let listings: MapListing[] = data.listings;

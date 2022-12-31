@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import { getAgents } from '$lib/utils/listings';
+import { getAgents } from '$lib/utils/cmsDataHandler';
 
 export const load = (({ params }) => {
 	return {

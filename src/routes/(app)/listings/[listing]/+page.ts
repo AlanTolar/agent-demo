@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { getListing } from '$lib/utils/listings';
+import { getListing } from '$lib/utils/cmsDataHandler';
 
 export const load = (({ params }) => {
 	const listing = getListing(params.listing);

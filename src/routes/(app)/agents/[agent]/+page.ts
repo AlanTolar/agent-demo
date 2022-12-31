@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { getAgent } from '$lib/utils/listings';
+import { getAgent } from '$lib/utils/cmsDataHandler';
 
 export const load = (({ params }) => {
 	const agent = getAgent(params.agent).default;

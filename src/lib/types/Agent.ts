@@ -4,11 +4,11 @@ export interface Reviews {
   review: string;
 }
 
-export interface Agents {
+export interface Agent {
   name: string;
   position: string;
   email: string;
-  phone: number;
+  phone: string;
   location: string;
   image: string;
   bio: string;

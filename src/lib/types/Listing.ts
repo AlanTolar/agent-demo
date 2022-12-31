@@ -30,7 +30,7 @@ export interface Summary {
   improvements?: string;
 }
 
-export interface Listings {
+export interface Listing {
   title: string;
   date: string;
   address: Address;

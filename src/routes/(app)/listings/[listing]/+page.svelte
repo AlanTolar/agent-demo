@@ -4,10 +4,10 @@
 	import numbro from 'numbro';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
-	import type { Listings } from '$lib/types/Listings';
+	import type { Listing } from '$lib/types/Listing';
 
 	export let data: PageData;
-	let listing: Listings = data.listing;
+	let listing: Listing = data.listing;
 
 	// create interface for image objects
 	interface SlideImage {
