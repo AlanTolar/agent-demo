@@ -36,10 +36,9 @@
 	"description": "<p>Nestled in the heart of Alamo, Georgia, The Cotton Patch is a stunning 20-acre property that would make an ideal home for someone looking for peace and quiet in a rural setting. The land is mostly wooded, with a small clearing near the center that would be perfect for building a home or farmhouse. There is a creek running through the property, and a small pond near the edge of the woods. The Cotton Patch is truly a nature lover's paradise, and would be perfect for someone looking to get away from the hustle and bustle of city life.</p>",
 	"acres": 20,
 	"slideshowImages": [
-		"/uploads/farmer-pointing.jpeg",
+		"/farmer-pointing.jpeg",
 		"/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg",
-		"/uploads/people-talking.jpeg",
-		"/uploads/map-long.png"
+		"/people-talking.jpeg"
 	],
 	"featuredImage": "/uploads/918b6d46e2b09af2d5bc5c359548a622.jpeg"
 }

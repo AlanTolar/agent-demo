@@ -11,7 +11,7 @@
 	}
 </script>
 
-<section id="hero-section" class="bg-[url('/uploads/hero-backdrop.jpeg')] bg-cover bg-center">
+<section id="hero-section" class="bg-[url('/hero-backdrop.jpeg')] bg-cover bg-center">
 	<div class="custom-container">
 		<div class="w-full max-w-[450px] bg-primary-800/60 py-16 sm:py-24 px-12 backdrop-blur"
 			><h1 class="mb-6 text-white display-text">Acres & Acres Real Estate</h1>
@@ -148,7 +148,7 @@
 </section>
 <section id="find-agent-section">
 	<div class="grid md:grid-cols-3 pt-20 custom-container">
-		<img class="md:col-span-2" src="/uploads/farmer-pointing.jpeg" alt="" />
+		<img class="md:col-span-2" src="/farmer-pointing.jpeg" alt="" />
 		<div
 			class="self-center p-2 w-[90%] sm:w-[80%] mx-auto -mt-[15%] md:w-fit md:-ml-32 bg-neutral-100"
 		>
@@ -181,7 +181,7 @@
 	</div>
 	<img
 		class="absolute mask bottom-[-25%] sm:top-[10%] ml-8 left-[50%] h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] object-cover"
-		src="/uploads/people-talking.jpeg"
+		src="/people-talking.jpeg"
 		alt=""
 	/>
 </section>

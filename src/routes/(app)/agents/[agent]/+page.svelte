@@ -12,7 +12,7 @@
 
 <section
 	id="hero-section"
-	class="bg-[url('/uploads/hero-backdrop.jpeg')] bg-cover bg-center h-[40vh] max-h-[400px]"
+	class="bg-[url('/hero-backdrop.jpeg')] bg-cover bg-center h-[40vh] max-h-[400px]"
 >
 </section>
 
@@ -31,7 +31,7 @@
 					? 'object-cover'
 					: 'object-contain'} border-neutral-800 border-[10px]"
 			>
-				<img class="object-cover" src="/uploads/farmer-pointing.jpeg" alt="" />
+				<img class="object-cover" src="/farmer-pointing.jpeg" alt="" />
 			</div>
 		</div>
 

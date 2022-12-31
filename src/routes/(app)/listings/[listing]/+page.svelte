@@ -492,11 +492,7 @@
 						<div class="grid grid-cols-3">
 							<div class="col-span-1">
 								<div class="aspect-w-1 aspect-h-1">
-									<img
-										class="object-cover"
-										src="/uploads/farmer-pointing.jpeg"
-										alt=""
-									/>
+									<img class="object-cover" src="/farmer-pointing.jpeg" alt="" />
 								</div>
 							</div>
 							<div class="col-span-2 pl-10 flex flex-col gap-4">
