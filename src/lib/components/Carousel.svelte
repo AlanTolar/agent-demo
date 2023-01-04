@@ -80,7 +80,7 @@
 {/if}
 
 {#if btnLocation === 'bottom'}
-	<div class="flex flex-row justify-center gap-20 py-6">
+	<div class="flex flex-row justify-center gap-20 pt-6">
 		<button class="cursor-pointer focus:outline-none" on:click="{() => prevSlide()}">
 			<slot name="previousBtn">
 				<span

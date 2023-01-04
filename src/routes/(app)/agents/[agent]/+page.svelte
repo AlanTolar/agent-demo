@@ -15,21 +15,7 @@
 	console.log('agent: ', agent);
 	console.log('listing: ', listings);
 
-	let slides = [
-		{ src: '/farmer-pointing.jpeg', caption: 'Image 1' },
-		{ src: '/hero-backdrop.jpeg', caption: 'Image 2' },
-		{ src: '/people-talking.jpeg', caption: 'Image 3' },
-	];
-
 	let imgCover = true;
-
-	let testElm;
-
-	onMount(() => {
-		console.log('testElm: ', testElm);
-		console.log(`scrollHeight: ${testElm.scrollHeight}`);
-		console.log(`offsetHeight: ${testElm.clientHeight}`);
-	});
 </script>
 
 <section
@@ -54,13 +40,37 @@
 		</div>
 
 		<div>
-			<h1 class="text-4xl font-bold text-neutral-800">{agent.name}</h1>
-			<p class="text-neutral-800">{agent.position ?? ''}</p>
+			<h1 class="text-3xl font-bold text-neutral-800">{agent.name}</h1>
+			<p class="mt-2 subtitle-text">{agent.position ?? ''}</p>
 		</div>
-		<div>
-			<div>{agent.location ?? ''}</div>
-			<div>{agent.email ?? ''}</div>
-			<div>{agent.phone ?? ''}</div>
+		<div class="flex flex-col gap-3">
+			{#if agent.location}
+				<div>
+					<Icon
+						icon="material-symbols:location-on-rounded"
+						inline="{true}"
+						class="inline-block mr-2"
+					/>{agent.location}
+				</div>
+			{/if}
+			{#if agent.email}
+				<div
+					><Icon
+						icon="mdi:email"
+						inline="{true}"
+						class="inline-block mr-2"
+					/>{agent.email}</div
+				>
+			{/if}
+			{#if agent.phone}
+				<div
+					><Icon
+						icon="mdi:phone-dial"
+						inline="{true}"
+						class="inline-block mr-2"
+					/>{agent.phone}</div
+				>
+			{/if}
 		</div>
 	</div>
 </section>
