@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import * as eases from 'svelte/easing';
 	import numbro from 'numbro';
-	import { onMount } from 'svelte';
+	import { onMount, getContext } from 'svelte';
 	import type { PageData } from './$types';
 	import type { Listing } from '$lib/types/Listing';
 	import type { Agent } from '$lib/types/Agent';
@@ -12,6 +12,9 @@
 	let agent: Agent = data.agent;
 	console.log('agent: ', agent);
 	console.log('listing: ', listing);
+
+	let scroll = getContext('scroll');
+	$: contentCovered = $scroll !== 0;
 
 	// create interface for image objects
 	interface SlideImage {
@@ -106,33 +109,11 @@
 		if (!movingForward) imgElem5.src = img5.slidingURL;
 		movingImages = false;
 	}
-
-	let mainContentElem: HTMLDivElement;
-	let factsBarElem: HTMLDivElement;
-	let contentCovered = false;
-	onMount(() => {
-		const btmBarPx =
-			window.innerHeight -
-			factsBarElem.getBoundingClientRect().y -
-			factsBarElem.getBoundingClientRect().height;
-		let observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					contentCovered = entry.isIntersecting;
-				});
-			},
-			{
-				rootMargin: `0px 0px -${btmBarPx}px 0px`,
-				threshold: 0,
-			},
-		);
-		observer.observe(mainContentElem);
-	});
 </script>
 
 {#if listing}
 	<div class="sticky top-0 z-40 {contentCovered ? 'bg-neutral-200' : ''}">
-		<div class="h-20 max-w-screen-xl mx-auto" bind:this="{factsBarElem}">
+		<div class="h-20 max-w-screen-xl mx-auto">
 			<div class="flex justify-center w-[100%] px-7 xl:px-0 h-full">
 				<div
 					class="px-3 w-full xl:w-8/12 shrink-0 flex justify-between gap-x-8 align-middle whitespace-nowrap flex-wrap"
@@ -238,10 +219,7 @@
 					</div>
 				{/if}
 			</div>
-			<div
-				class="shrink-0 flex justify-center w-[100%] flex-col xl:flex-row"
-				bind:this="{mainContentElem}"
-			>
+			<div class="shrink-0 flex justify-center w-[100%] flex-col xl:flex-row">
 				<div class="relative w-full xl:w-8/12 shrink-0 carousel-item">
 					<div class="aspect-w-5 aspect-h-3">
 						<!-- Slider controls -->

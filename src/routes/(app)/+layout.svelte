@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { clickOutside } from '$lib/utils/clickOutside';
+	import { onMount, setContext } from 'svelte';
+
+	import { writable } from 'svelte/store';
 
 	const nav_items = [
 		{
@@ -20,6 +23,18 @@
 	let showMobileNav = false;
 	let btmBarShow: Boolean;
 	$: btmBarShow = $page.url.pathname !== '/listings';
+
+	let mainContent: HTMLElement;
+	let mainContentScroll = writable(0);
+	setContext('scroll', $mainContentScroll);
+
+	onMount(() => {
+		mainContent.addEventListener('scroll', () => {
+			$mainContentScroll = mainContent.scrollTop;
+		});
+	});
+
+	setContext('scroll', mainContentScroll);
 </script>
 
 <div class="flex flex-col h-screen">
@@ -98,7 +113,7 @@
 		</div>
 	</header>
 
-	<main class="grow overflow-scroll flex flex-col">
+	<main class="grow overflow-scroll flex flex-col" bind:this="{mainContent}">
 		<div class="grow">
 			<slot />
 		</div>
