@@ -14,6 +14,12 @@
 	// console.log('agent: ', agent);
 	// console.log('listing: ', listings);
 
+	let slides = [
+		{ src: '/farmer-pointing.jpeg', caption: 'Image 1' },
+		{ src: '/hero-backdrop.jpeg', caption: 'Image 2' },
+		{ src: '/people-talking.jpeg', caption: 'Image 3' },
+	];
+
 	let imgCover = true;
 </script>
 
@@ -81,7 +87,15 @@
 						<Icon icon="material-symbols:arrow-forward" width="24" />
 					</div>
 				</section>
-				<Carousel btnLocation="{'bottom'}">d</Carousel>
+				<Carousel btnLocation="{'bottom'}" slides="{slides}" let:prop="{item}">
+					<svelte:fragment slot="slide-structure">
+						<img
+							src="{item.src}"
+							class="h-full w-full object-cover object-center"
+							alt="..."
+						/>
+					</svelte:fragment>
+				</Carousel>
 			{/if}
 			{#if listings.length}
 				<section id="listings-section" class="py-10">

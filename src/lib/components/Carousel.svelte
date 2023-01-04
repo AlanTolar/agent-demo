@@ -4,12 +4,9 @@
 
 	export let btnLocation = 'center';
 
+	export let slides;
+
 	let currentIndex = 0;
-	let slides = [
-		{ id: 1, src: '/farmer-pointing.jpeg', caption: 'Image 1' },
-		{ id: 2, src: '/hero-backdrop.jpeg', caption: 'Image 2' },
-		{ id: 3, src: '/people-talking.jpeg', caption: 'Image 3' },
-	];
 
 	let slideDirection = 'left';
 
@@ -38,18 +35,14 @@
 <div class="relative">
 	<!-- Carousel wrapper -->
 	<div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-		{#each slides as slide}
-			{#if slide.id === slides[currentIndex].id}
+		{#each slides as slide, index}
+			{#if index === currentIndex}
 				<div
 					class="absolute h-full w-full"
 					in:carousel="{{ state: 'in' }}"
 					out:carousel="{{ state: 'out' }}"
 				>
-					<img
-						src="{slide.src}"
-						class="h-full w-full object-cover object-center"
-						alt="..."
-					/>
+					<slot name="slide-structure" prop="{slide}" />
 				</div>
 			{/if}
 		{/each}
