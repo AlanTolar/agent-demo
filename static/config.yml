@@ -31,7 +31,8 @@ collections:
         name: "agent"
         widget: "relation"
         collection: "agent"
-        value_field: name
+        value_field: "{{slug}}"
+        display_fields: ["{{name}} (/{{slug}})"]
         search_fields: ["name"]
       # Basic facts
       - label: "Address"

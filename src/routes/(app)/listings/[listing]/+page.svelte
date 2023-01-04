@@ -5,9 +5,13 @@
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import type { Listing } from '$lib/types/Listing';
+	import type { Agent } from '$lib/types/Agent';
 
 	export let data: PageData;
 	let listing: Listing = data.listing;
+	let agent: Agent = data.agent;
+	console.log('agent: ', agent);
+	console.log('listing: ', listing);
 
 	// create interface for image objects
 	interface SlideImage {
@@ -492,17 +496,20 @@
 						<div class="grid grid-cols-3">
 							<div class="col-span-1">
 								<div class="aspect-w-1 aspect-h-1">
-									<img class="object-cover" src="/farmer-pointing.jpeg" alt="" />
+									<img class="object-cover" src="{agent?.image}" alt="" />
 								</div>
 							</div>
 							<div class="col-span-2 pl-10 flex flex-col gap-4">
 								<div>
-									<h2 class="heading-text">John Doe</h2>
-									<p class="subtitle-text">999-999-9999</p>
+									<h2 class="heading-text">{agent?.name ?? ''}</h2>
+									<p class="subtitle-text">{agent?.phone ?? ''}</p>
 								</div>
-								<a class="label-text underline text-neutral-600 font-semibold"
-									>View Profile</a
-								>
+								{#if listing.agent}
+									<a
+										class="label-text underline text-neutral-600 font-semibold"
+										href="/agents/{listing?.agent}">View Profile</a
+									>
+								{/if}
 							</div>
 						</div>
 						<div class="mt-10 flex flex-col gap-6">

@@ -31,8 +31,8 @@ export function getAgents(num = 100): Agent[] {
 
 export function getAgent(agentName: string): Agent {
 	const modules = import.meta.glob('/src/lib/content/agents/*.json', { eager: true });
-	const listing = modules[`/src/lib/content/agents/${agentName}.json`];
-	return listing;
+	const agent = modules[`/src/lib/content/agents/${agentName}.json`];
+	return agent;
 }
 
 export function getListingsOfAgent(agentName: string): Listing[] {
