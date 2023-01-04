@@ -27,6 +27,12 @@ collections:
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
+      - label: "Agent"
+        name: "agent"
+        widget: "relation"
+        collection: "agent"
+        value_field: name
+        search_fields: ["name"]
       # Basic facts
       - label: "Address"
         name: "address"
@@ -157,12 +163,7 @@ collections:
         name: "location"
         widget: "map"
         required: false
-      - label: "Agent"
-        name: "agent"
-        widget: "relation"
-        collection: "agents"
-        value_field: agents
-        search_fields: ["name"]
+
   - name: agent
     label: Agents
     folder: src/lib/content/agents

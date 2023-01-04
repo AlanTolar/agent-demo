@@ -4,6 +4,18 @@
   "email": "johndoe@acresandacres.com",
   "phone": "999-999-9999",
   "location": "Bristol, Tennessee",
-  "image": "/uploads/picture.png",
-  "bio": "I'm John Doe, a land specialist from Bristol, Tennessee. I've been in real estate since 2002, and I absolutely love what I do. I help people find the perfect piece of land for their needs, whether it's for a family home, an investment property, or even just a weekend getaway spot.\n\nMy favorite part of the job is getting to know my clients and helping them achieve their real estate goals. I'm passionate about my work and I'm always available to answer any questions my clients may have. I'm committed to matching people with the right property, and I take pride in helping my clients make the best possible decision for their future."
+  "image": "/uploads/5b02dcbf400b84af24b1bf9213b531d2.jpeg",
+  "bio": "I'm John Doe, a land specialist from Bristol, Tennessee. I've been in real estate since 2002, and I absolutely love what I do. I help people find the perfect piece of land for their needs, whether it's for a family home, an investment property, or even just a weekend getaway spot.\n\nMy favorite part of the job is getting to know my clients and helping them achieve their real estate goals. I'm passionate about my work and I'm always available to answer any questions my clients may have. I'm committed to matching people with the right property, and I take pride in helping my clients make the best possible decision for their future.",
+  "reviews": [
+    {
+      "review": "John was extremely knowledgeable and helpful throughout the entire process of selling our land. He was always available to answer our questions and helped us to get the best possible price for our property.",
+      "customer": "Micheal Gough",
+      "title": "Sold 25 acres in New Hope, Alabama"
+    },
+    {
+      "review": "John was an amazing real estate agent. He was patient, informative, and always available to answer any questions I had. I couldn't have asked for a better experience working with him.",
+      "customer": "Rowan Jones",
+      "title": "Sold 10 acres in Augusta, Georgia"
+    }
+  ]
 }
