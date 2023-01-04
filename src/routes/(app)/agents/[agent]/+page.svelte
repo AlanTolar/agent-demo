@@ -6,7 +6,6 @@
 	import ListingCard from '$lib/components/ListingCard.svelte';
 	import Icon from '@iconify/svelte';
 	import Carousel from '$lib/components/Carousel.svelte';
-	import Carousel2 from '$lib/components/Carousel2.svelte';
 
 	export let data: PageData;
 	let agent: Agent = data.agent;
@@ -82,8 +81,7 @@
 						<Icon icon="material-symbols:arrow-forward" width="24" />
 					</div>
 				</section>
-				<Carousel />
-				<Carousel2 />
+				<Carousel btnLocation="{'bottom'}">d</Carousel>
 			{/if}
 			{#if listings.length}
 				<section id="listings-section" class="py-10">

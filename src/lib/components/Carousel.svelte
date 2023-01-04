@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { linear } from 'svelte/easing';
+	import Icon from '@iconify/svelte';
+
+	export let btnLocation = 'center';
 
 	let currentIndex = 0;
 	let slides = [
@@ -20,8 +23,8 @@
 	}
 
 	function carousel(node, params) {
-		let direction = slideDirection === 'left' ? 1 : -1;
-		if (params.direction === 'in') direction *= -1;
+		let direction = slideDirection === 'left' ? -1 : 1;
+		if (params.state === 'in') direction *= -1;
 		return {
 			duration: 800,
 			easing: params.easing || linear,
@@ -39,8 +42,8 @@
 			{#if slide.id === slides[currentIndex].id}
 				<div
 					class="absolute h-full w-full"
-					in:carousel="{{ direction: 'in' }}"
-					out:carousel="{{ direction: 'out' }}"
+					in:carousel="{{ state: 'in' }}"
+					out:carousel="{{ state: 'out' }}"
 				>
 					<img
 						src="{slide.src}"
@@ -51,103 +54,70 @@
 			{/if}
 		{/each}
 	</div>
-	<!-- Slider indicators -->
-	<div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+
+	{#if btnLocation === 'center'}
 		<button
-			type="button"
-			class="w-3 h-3 rounded-full"
-			aria-current="false"
-			aria-label="Slide 1"
-			data-carousel-slide-to="0"></button>
-		<button
-			type="button"
-			class="w-3 h-3 rounded-full"
-			aria-current="false"
-			aria-label="Slide 2"
-			data-carousel-slide-to="1"></button>
-		<button
-			type="button"
-			class="w-3 h-3 rounded-full"
-			aria-current="false"
-			aria-label="Slide 3"
-			data-carousel-slide-to="2"></button>
-	</div>
-	<!-- Slider controls -->
-	<button
-		type="button"
-		class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-		data-carousel-prev
-		on:click="{() => prevSlide()}"
-	>
-		<span
-			class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+			class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+			on:click="{() => prevSlide()}"
 		>
-			<svg
-				aria-hidden="true"
-				class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-				fill="none"
-				stroke="currentColor"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-				><path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M15 19l-7-7 7-7"></path></svg
-			>
-			<span class="sr-only">Previous</span>
-		</span>
-	</button>
-	<button
-		type="button"
-		class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-		data-carousel-next
-		on:click="{() => nextSlide()}"
-	>
-		<span
-			class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+			<slot name="previousBtn">
+				<span
+					class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-gray-300/50"
+				>
+					<Icon
+						icon="material-symbols:arrow-back"
+						class="w-5 h-5 text-black sm:w-6 sm:h-6"
+					/>
+					<span class="sr-only">Previous</span>
+				</span>
+			</slot>
+		</button>
+		<button
+			class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+			on:click="{() => nextSlide()}"
 		>
-			<svg
-				aria-hidden="true"
-				class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-				fill="none"
-				stroke="currentColor"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-				><path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M9 5l7 7-7 7"></path></svg
-			>
-			<span class="sr-only">Next</span>
-		</span>
-	</button>
+			<slot name="nextBtn">
+				<span
+					class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-gray-300/50"
+				>
+					<Icon
+						icon="material-symbols:arrow-forward"
+						class="w-5 h-5 text-black sm:w-6 sm:h-6"
+					/>
+					<span class="sr-only">Next</span>
+				</span>
+			</slot>
+		</button>
+	{/if}
+
+	{#if btnLocation === 'bottom'}
+		<div class="flex flex-row justify-center gap-20 py-6">
+			<button class="cursor-pointer focus:outline-none" on:click="{() => prevSlide()}">
+				<slot name="previousBtn">
+					<span
+						class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 "
+					>
+						<Icon
+							icon="material-symbols:arrow-back"
+							class="w-5 h-5 text-black sm:w-6 sm:h-6"
+						/>
+						<span class="sr-only">Previous</span>
+					</span>
+				</slot>
+			</button>
+			<button class="cursor-pointer focus:outline-none" on:click="{() => nextSlide()}">
+				<slot name="nextBtn">
+					<span
+						class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 "
+					>
+						<Icon
+							icon="material-symbols:arrow-forward"
+							class="w-5 h-5 text-black sm:w-6 sm:h-6"
+						/>
+						<span class="sr-only">Next</span>
+					</span>
+				</slot>
+			</button>
+		</div>
+	{/if}
 </div>
-
-<style>
-	.right {
-		animation: right 1s linear forwards;
-	}
-	.left {
-		animation: left 1s linear forwards;
-	}
-
-	@keyframes right {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(100%);
-		}
-	}
-
-	@keyframes left {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(-100%);
-		}
-	}
-</style>
