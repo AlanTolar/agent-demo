@@ -6,13 +6,14 @@
 	import ListingCard from '$lib/components/ListingCard.svelte';
 	import Icon from '@iconify/svelte';
 	import Carousel from '$lib/components/Carousel.svelte';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
 	let agent: Agent = data.agent;
 	let listings: Listing[] = data.listings;
 
-	// console.log('agent: ', agent);
-	// console.log('listing: ', listings);
+	console.log('agent: ', agent);
+	console.log('listing: ', listings);
 
 	let slides = [
 		{ src: '/farmer-pointing.jpeg', caption: 'Image 1' },
@@ -21,6 +22,14 @@
 	];
 
 	let imgCover = true;
+
+	let testElm;
+
+	onMount(() => {
+		console.log('testElm: ', testElm);
+		console.log(`scrollHeight: ${testElm.scrollHeight}`);
+		console.log(`offsetHeight: ${testElm.clientHeight}`);
+	});
 </script>
 
 <section
@@ -34,10 +43,6 @@
 	class="bg-neutral-200 h-[25vh] max-h-[250px] outline outline-2 outline-neutral-800 outline-offset-[-8px]"
 >
 	<div class="custom-container h-3/4 flex flex-row items-end gap-24">
-		<!-- <div class="bg-black w-40 h-60 z-10"></div> -->
-		<!-- <div class="aspect-w-3 aspect-h-2">
-			<img class="" src="/uploads/picture.png" alt="" />
-		</div> -->
 		<div class="w-1/3 md:w-1/6">
 			<div
 				class="aspect-w-4 aspect-h-6 {imgCover
@@ -74,28 +79,17 @@
 			{#if agent.reviews}
 				<section id="reviews-section" class="py-10">
 					<h3 class="heading-text-sm">Reviews</h3>
-					{#each agent.reviews as review}
-						<div class="mt-6 prose main-paragraph max-w-none">
-							{@html review.review}
-						</div>
-						<div class="mt-3">
-							<span class="font-medium">{review.customer}</span> / {review.title}
-						</div>
-					{/each}
-					<div class="flex flex-row justify-center gap-20 mt-8 items-center">
-						<Icon icon="material-symbols:arrow-back" width="24" />
-						<Icon icon="material-symbols:arrow-forward" width="24" />
-					</div>
+					<Carousel btnLocation="{'bottom'}" slides="{agent.reviews}" let:prop="{review}">
+						<svelte:fragment slot="slide-structure">
+							<div class="mt-6 prose main-paragraph max-w-none">
+								{@html review.review}
+							</div>
+							<div class="mt-3">
+								<span class="font-medium">{review.customer}</span> / {review.title}
+							</div>
+						</svelte:fragment>
+					</Carousel>
 				</section>
-				<Carousel btnLocation="{'bottom'}" slides="{slides}" let:prop="{item}">
-					<svelte:fragment slot="slide-structure">
-						<img
-							src="{item.src}"
-							class="h-full w-full object-cover object-center"
-							alt="..."
-						/>
-					</svelte:fragment>
-				</Carousel>
 			{/if}
 			{#if listings.length}
 				<section id="listings-section" class="py-10">

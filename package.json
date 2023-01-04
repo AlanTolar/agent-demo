@@ -53,6 +53,7 @@
 	"dependencies": {
 		"@magidoc/plugin-svelte-marked": "^2.14.2",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"@tailwindcss/line-clamp": "^0.4.2",
 		"@types/marked": "^4.0.7",
 		"change-case": "^4.1.2",
 		"markdown-it": "^13.0.1",

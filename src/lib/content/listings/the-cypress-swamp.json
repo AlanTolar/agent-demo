@@ -8,5 +8,6 @@
   "date": "2022-12-08T16:40:27.792Z",
   "title": "The Cypress Swamp",
   "featuredImage": "/uploads/233-2332677_image-500580-placeholder-transparent.webp",
-  "location": "{\"type\":\"Point\",\"coordinates\":[-110.5554199,37.0135191]}"
+  "location": "{\"type\":\"Point\",\"coordinates\":[-110.5554199,37.0135191]}",
+  "agent": "John Doe"
 }
