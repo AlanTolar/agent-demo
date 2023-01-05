@@ -38,8 +38,8 @@
 		{#if index === currentIndex}
 			<div
 				class="absolute h-full w-full"
-				in:carousel="{{ state: 'in' }}"
-				out:carousel="{{ state: 'out' }}"
+				in:carousel|local="{{ state: 'in' }}"
+				out:carousel|local="{{ state: 'out' }}"
 			>
 				<slot name="slide-structure" prop="{slide}" />
 			</div>

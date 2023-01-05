@@ -35,10 +35,12 @@
 		</div>
 
 		<div class="w-[200px] h-[110px]"></div>
-		<div class="flex flex-col sm:flex-row gap-6 sm:gap-12 lg:gap-24">
+		<div class="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-12 lg:gap-24">
 			<div>
 				<h1 class="text-3xl font-bold text-neutral-800">{agent.name}</h1>
-				<p class="mt-2 subtitle-text">{agent.position ?? ''}</p>
+				<p class="mt-2 subtitle-text"
+					>{agent.position === 'manager' ? 'Regional Manager' : 'Broker'}</p
+				>
 			</div>
 			<div class="flex flex-col gap-3">
 				{#if agent.location}

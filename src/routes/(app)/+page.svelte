@@ -15,7 +15,7 @@
 	<div class="custom-container">
 		<div class="w-full max-w-[450px] bg-primary-800/60 py-16 sm:py-24 px-12 backdrop-blur"
 			><h1 class="mb-6 text-white display-text">Acres & Acres Real Estate</h1>
-			<p class="text-white subtitle-text">A blank canvas for you to make your mark.</p>
+			<p class="text-white subtitle-text">A blank canvas for you to make your mark</p>
 		</div>
 	</div>
 </section>

@@ -175,7 +175,13 @@ collections:
     preview_path: agents/{{slug}}
     fields:
       - { name: "name", label: "Name", widget: "string" }
-      - { name: "position", label: "Position", widget: "string" }
+      - label: "Position"
+        name: "position"
+        widget: "select"
+        multiple: false
+        options:
+          - { label: "Broker", value: "broker" }
+          - { label: "Regional Manager", value: "manager" }
       - { name: "email", label: "Email", widget: "string" }
       - { name: "phone", label: "Phone", widget: "string" }
       - { name: "location", label: "Location", widget: "string" }

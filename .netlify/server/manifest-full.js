@@ -11,6 +11,7 @@ export const manifest = {
 			() => import('./nodes/2.js'),
 			() => import('./nodes/3.js'),
 			() => import('./nodes/4.js'),
+			() => import('./nodes/5.js'),
 			() => import('./nodes/6.js'),
 			() => import('./nodes/7.js'),
 			() => import('./nodes/8.js'),
@@ -33,38 +34,45 @@ export const manifest = {
 				endpoint: null
 			},
 			{
+				id: "/(app)/agents",
+				pattern: /^\/agents\/?$/,
+				params: [],
+				page: { layouts: [0,2], errors: [1,,], leaf: 5 },
+				endpoint: null
+			},
+			{
 				id: "/(app)/agents/[agent]",
 				pattern: /^\/agents\/([^/]+?)\/?$/,
 				params: [{"name":"agent","optional":false,"rest":false,"chained":false}],
-				page: { layouts: [0,2], errors: [1,,], leaf: 5 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 6 },
 				endpoint: null
 			},
 			{
 				id: "/(app)/listings",
 				pattern: /^\/listings\/?$/,
 				params: [],
-				page: { layouts: [0,2], errors: [1,,], leaf: 6 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 7 },
 				endpoint: null
 			},
 			{
 				id: "/(app)/listings/[listing]",
 				pattern: /^\/listings\/([^/]+?)\/?$/,
 				params: [{"name":"listing","optional":false,"rest":false,"chained":false}],
-				page: { layouts: [0,2], errors: [1,,], leaf: 7 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 8 },
 				endpoint: null
 			},
 			{
 				id: "/(app)/preview",
 				pattern: /^\/preview\/?$/,
 				params: [],
-				page: { layouts: [0,2], errors: [1,,], leaf: 8 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 9 },
 				endpoint: null
 			},
 			{
 				id: "/(app)/sell",
 				pattern: /^\/sell\/?$/,
 				params: [],
-				page: { layouts: [0,2], errors: [1,,], leaf: 9 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 10 },
 				endpoint: null
 			}
 		],

@@ -19,6 +19,38 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+const is_client = typeof window !== "undefined";
+let now = is_client ? () => window.performance.now() : () => Date.now();
+let raf = is_client ? (cb) => requestAnimationFrame(cb) : noop;
+const tasks = /* @__PURE__ */ new Set();
+function run_tasks(now2) {
+  tasks.forEach((task) => {
+    if (!task.c(now2)) {
+      tasks.delete(task);
+      task.f();
+    }
+  });
+  if (tasks.size !== 0)
+    raf(run_tasks);
+}
+function loop(callback) {
+  let task;
+  if (tasks.size === 0)
+    raf(run_tasks);
+  return {
+    promise: new Promise((fulfill) => {
+      tasks.add(task = { c: callback, f: fulfill });
+    }),
+    abort() {
+      tasks.delete(task);
+    }
+  };
+}
+function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+  const e = document.createEvent("CustomEvent");
+  e.initCustomEvent(type, bubbles, cancelable, detail);
+  return e;
+}
 let current_component;
 function set_current_component(component) {
   current_component = component;
@@ -28,6 +60,23 @@ function get_current_component() {
     throw new Error("Function called outside component initialization");
   return current_component;
 }
+function onDestroy(fn) {
+  get_current_component().$$.on_destroy.push(fn);
+}
+function createEventDispatcher() {
+  const component = get_current_component();
+  return (type, detail, { cancelable = false } = {}) => {
+    const callbacks = component.$$.callbacks[type];
+    if (callbacks) {
+      const event = custom_event(type, detail, { cancelable });
+      callbacks.slice().forEach((fn) => {
+        fn.call(component, event);
+      });
+      return !event.defaultPrevented;
+    }
+    return true;
+  };
+}
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
   return context;
@@ -36,6 +85,91 @@ function getContext(key) {
   return get_current_component().$$.context.get(key);
 }
 Promise.resolve();
+const boolean_attributes = /* @__PURE__ */ new Set([
+  "allowfullscreen",
+  "allowpaymentrequest",
+  "async",
+  "autofocus",
+  "autoplay",
+  "checked",
+  "controls",
+  "default",
+  "defer",
+  "disabled",
+  "formnovalidate",
+  "hidden",
+  "inert",
+  "ismap",
+  "itemscope",
+  "loop",
+  "multiple",
+  "muted",
+  "nomodule",
+  "novalidate",
+  "open",
+  "playsinline",
+  "readonly",
+  "required",
+  "reversed",
+  "selected"
+]);
+const invalid_attribute_name_character = /[\s'">/=\u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{1FFFE}\u{1FFFF}\u{2FFFE}\u{2FFFF}\u{3FFFE}\u{3FFFF}\u{4FFFE}\u{4FFFF}\u{5FFFE}\u{5FFFF}\u{6FFFE}\u{6FFFF}\u{7FFFE}\u{7FFFF}\u{8FFFE}\u{8FFFF}\u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u{CFFFF}\u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u{10FFFE}\u{10FFFF}]/u;
+function spread(args, attrs_to_add) {
+  const attributes = Object.assign({}, ...args);
+  if (attrs_to_add) {
+    const classes_to_add = attrs_to_add.classes;
+    const styles_to_add = attrs_to_add.styles;
+    if (classes_to_add) {
+      if (attributes.class == null) {
+        attributes.class = classes_to_add;
+      } else {
+        attributes.class += " " + classes_to_add;
+      }
+    }
+    if (styles_to_add) {
+      if (attributes.style == null) {
+        attributes.style = style_object_to_string(styles_to_add);
+      } else {
+        attributes.style = style_object_to_string(merge_ssr_styles(attributes.style, styles_to_add));
+      }
+    }
+  }
+  let str = "";
+  Object.keys(attributes).forEach((name) => {
+    if (invalid_attribute_name_character.test(name))
+      return;
+    const value = attributes[name];
+    if (value === true)
+      str += " " + name;
+    else if (boolean_attributes.has(name.toLowerCase())) {
+      if (value)
+        str += " " + name;
+    } else if (value != null) {
+      str += ` ${name}="${value}"`;
+    }
+  });
+  return str;
+}
+function merge_ssr_styles(style_attribute, style_directive) {
+  const style_object = {};
+  for (const individual_style of style_attribute.split(";")) {
+    const colon_index = individual_style.indexOf(":");
+    const name = individual_style.slice(0, colon_index).trim();
+    const value = individual_style.slice(colon_index + 1).trim();
+    if (!name)
+      continue;
+    style_object[name] = value;
+  }
+  for (const name in style_directive) {
+    const value = style_directive[name];
+    if (value) {
+      style_object[name] = value;
+    } else {
+      delete style_object[name];
+    }
+  }
+  return style_object;
+}
 const ATTR_REGEX = /[&"]/g;
 const CONTENT_REGEX = /[&<]/g;
 function escape(value, is_attr = false) {
@@ -51,6 +185,17 @@ function escape(value, is_attr = false) {
     last = i + 1;
   }
   return escaped + str.substring(last);
+}
+function escape_attribute_value(value) {
+  const should_escape = typeof value === "string" || value && typeof value === "object";
+  return should_escape ? escape(value, true) : value;
+}
+function escape_object(obj) {
+  const result = {};
+  for (const key in obj) {
+    result[key] = escape_attribute_value(obj[key]);
+  }
+  return result;
 }
 function each(items, fn) {
   let str = "";
@@ -111,6 +256,13 @@ function add_attribute(name, value, boolean) {
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
   return ` ${name}${assignment}`;
 }
+function style_object_to_string(style_object) {
+  return Object.keys(style_object).filter((key) => style_object[key]).map((key) => `${key}: ${escape_attribute_value(style_object[key])};`).join(" ");
+}
+function add_styles(style_object) {
+  const styles = style_object_to_string(style_object);
+  return styles ? ` style="${styles}"` : "";
+}
 export {
   safe_not_equal as a,
   subscribe as b,
@@ -119,8 +271,15 @@ export {
   escape as e,
   add_attribute as f,
   getContext as g,
+  add_styles as h,
+  spread as i,
+  escape_object as j,
+  createEventDispatcher as k,
+  now as l,
   missing_component as m,
   noop as n,
+  onDestroy as o,
+  loop as p,
   setContext as s,
   validate_component as v
 };
