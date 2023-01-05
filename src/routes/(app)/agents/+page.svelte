@@ -12,8 +12,8 @@
 		}, []);
 	}
 
-	agents = dup(agents);
-	agents = dup(agents);
+	// agents = dup(agents);
+	// agents = dup(agents);
 
 	const managers = agents.filter((agent) => agent.position === 'manager');
 	const brokers = agents.filter((agent) => agent.position === 'broker');
@@ -22,7 +22,7 @@
 <HeroSection
 	title="Find an Agent"
 	subtitle="We know the ins and outs of the market"
-	coverImgUrl="sunshine-field.jpeg"
+	coverImgUrl="/sunshine-field.jpeg"
 />
 
 {#if brokers.length > 0}

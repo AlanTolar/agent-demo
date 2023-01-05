@@ -1,29 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import type { Agent } from '$lib/types/Agent';
 	import type { Listing } from '$lib/types/Listing';
 	import ListingCard from '$lib/components/ListingCard.svelte';
 	import Icon from '@iconify/svelte';
 	import Carousel from '$lib/components/Carousel.svelte';
-	import { onMount } from 'svelte';
+	import HeroSection from '$lib/components/HeroSection.svelte';
 
 	export let data: PageData;
 	let agent: Agent = data.agent;
 	let listings: Listing[] = data.listings;
-
-	let imgCover = true;
 </script>
 
-<section
-	id="hero-section"
-	class="bg-[url('/hero-backdrop.jpeg')] bg-cover bg-center h-[40vh] max-h-[400px]"
->
-</section>
+<HeroSection coverImgUrl="/hero-backdrop.jpeg" />
 
 <section
 	id="banner-section"
-	class="bg-neutral-200  outline outline-2 outline-neutral-800 outline-offset-[-8px]"
+	class="bg-neutral-200 outline outline-2 outline-neutral-800 outline-offset-[-8px]"
 >
 	<div
 		class="relative custom-container h-3/4 flex flex-col md:flex-row md:items-end gap-8 md:gap-12 lg:gap-24 p-10"

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ListingCard from '$lib/components/ListingCard.svelte';
 	import type { PageData } from './$types';
+	import HeroSection from '$lib/components/HeroSection.svelte';
 
 	export let data: PageData;
 	const listings = data.listings;
@@ -11,14 +12,11 @@
 	}
 </script>
 
-<section id="hero-section" class="bg-[url('/hero-backdrop.jpeg')] bg-cover bg-center">
-	<div class="custom-container">
-		<div class="w-full max-w-[450px] bg-primary-800/60 py-16 sm:py-24 px-12 backdrop-blur"
-			><h1 class="mb-6 text-white display-text">Acres & Acres Real Estate</h1>
-			<p class="text-white subtitle-text">A blank canvas for you to make your mark</p>
-		</div>
-	</div>
-</section>
+<HeroSection
+	title="Acres & Acres Real Estate"
+	subtitle="A blank canvas for you to make your mark"
+	coverImgUrl="/hero-backdrop.jpeg"
+/>
 <section id="services-section">
 	<div class="flex flex-col gap-16 py-20 md:flex-row md:gap-12 custom-container">
 		<div class="max-w-[500px] mx-auto flex md:flex-col items-center">
