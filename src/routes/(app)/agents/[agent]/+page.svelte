@@ -12,9 +12,6 @@
 	let agent: Agent = data.agent;
 	let listings: Listing[] = data.listings;
 
-	console.log('agent: ', agent);
-	console.log('listing: ', listings);
-
 	let imgCover = true;
 </script>
 
@@ -26,51 +23,52 @@
 
 <section
 	id="banner-section"
-	class="bg-neutral-200 h-[25vh] max-h-[250px] outline outline-2 outline-neutral-800 outline-offset-[-8px]"
+	class="bg-neutral-200  outline outline-2 outline-neutral-800 outline-offset-[-8px]"
 >
-	<div class="custom-container h-3/4 flex flex-row items-end gap-24">
-		<div class="w-1/3 md:w-1/6">
-			<div
-				class="aspect-w-4 aspect-h-6 {imgCover
-					? 'object-cover'
-					: 'object-contain'} border-neutral-800 border-[10px]"
-			>
-				<img class="object-cover" src="{agent.image}" alt="" />
-			</div>
+	<div
+		class="relative custom-container h-3/4 flex flex-col md:flex-row md:items-end gap-8 md:gap-12 lg:gap-24 p-10"
+	>
+		<div
+			class="h-[300px] w-[200px] border-neutral-800 border-[10px] absolute top-0 -translate-y-1/2"
+		>
+			<img class="object-cover h-full w-full" src="{agent.image}" alt="" />
 		</div>
 
-		<div>
-			<h1 class="text-3xl font-bold text-neutral-800">{agent.name}</h1>
-			<p class="mt-2 subtitle-text">{agent.position ?? ''}</p>
-		</div>
-		<div class="flex flex-col gap-3">
-			{#if agent.location}
-				<div>
-					<Icon
-						icon="material-symbols:location-on-rounded"
-						inline="{true}"
-						class="inline-block mr-2"
-					/>{agent.location}
-				</div>
-			{/if}
-			{#if agent.email}
-				<div
-					><Icon
-						icon="mdi:email"
-						inline="{true}"
-						class="inline-block mr-2"
-					/>{agent.email}</div
-				>
-			{/if}
-			{#if agent.phone}
-				<div
-					><Icon
-						icon="mdi:phone-dial"
-						inline="{true}"
-						class="inline-block mr-2"
-					/>{agent.phone}</div
-				>
-			{/if}
+		<div class="w-[200px] h-[110px]"></div>
+		<div class="flex flex-col sm:flex-row gap-6 sm:gap-12 lg:gap-24">
+			<div>
+				<h1 class="text-3xl font-bold text-neutral-800">{agent.name}</h1>
+				<p class="mt-2 subtitle-text">{agent.position ?? ''}</p>
+			</div>
+			<div class="flex flex-col gap-3">
+				{#if agent.location}
+					<div>
+						<Icon
+							icon="material-symbols:location-on-rounded"
+							inline="{true}"
+							class="inline-block mr-2"
+						/>{agent.location}
+					</div>
+				{/if}
+				{#if agent.email}
+					<div
+						><Icon
+							icon="mdi:email"
+							inline="{true}"
+							class="inline-block mr-2"
+						/>{agent.email}</div
+					>
+				{/if}
+				{#if agent.phone}
+					<div
+						><Icon
+							icon="mdi:phone-dial"
+							inline="{true}"
+							class="inline-block mr-2"
+						/>{agent.phone}</div
+					>
+				{/if}
+			</div>
 		</div>
 	</div>
 </section>
@@ -108,7 +106,7 @@
 						{#each listings as listing}
 							<ListingCard
 								listing="{listing}"
-								extraClasses="min-h-[130px] md:max-xl:hidden"
+								extraClasses="min-h-[130px]"
 								horizontal="{true}"
 							/>
 						{/each}
