@@ -17,6 +17,8 @@
 
 	const managers = agents.filter((agent) => agent.position === 'manager');
 	const brokers = agents.filter((agent) => agent.position === 'broker');
+
+	let grayout = false;
 </script>
 
 <HeroSection
@@ -35,7 +37,14 @@
 
 		<div class="pt-10 flex flex-wrap justify-center gap-x-20 gap-y-20">
 			{#each brokers as agent}
-				<a class="hover:scale-105 tranistion duration-300 ease-out" href="{agent.url}">
+				<a
+					class="hover:scale-110 tranistion duration-300 ease-out {grayout
+						? 'grayscale hover:grayscale-0'
+						: ''}"
+					href="{agent.url}"
+					on:mouseenter="{() => (grayout = true)}"
+					on:mouseleave="{() => (grayout = false)}"
+				>
 					<div class="h-[300px] w-[200px] border-neutral-800 border-[10px]">
 						<img class="object-cover h-full w-full" src="{agent.image}" alt="" />
 					</div>
@@ -56,7 +65,14 @@
 
 		<div class="pt-10 flex flex-wrap justify-center gap-x-20 gap-y-20">
 			{#each managers as agent}
-				<a class="hover:scale-105 tranistion duration-300 ease-out" href="{agent.url}">
+				<a
+					class="hover:scale-110 tranistion duration-300 ease-out {grayout
+						? 'grayscale hover:grayscale-0'
+						: ''}"
+					href="{agent.url}"
+					on:mouseenter="{() => (grayout = true)}"
+					on:mouseleave="{() => (grayout = false)}"
+				>
 					<div class="h-[300px] w-[200px] border-neutral-800 border-[10px]">
 						<img class="object-cover h-full w-full" src="{agent.image}" alt="" />
 					</div>
