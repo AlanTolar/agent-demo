@@ -6,7 +6,6 @@
 	import type { PageData } from './$types';
 	import type { Listing } from '$lib/types/Listing';
 	import type { Agent } from '$lib/types/Agent';
-	import TextInput from '$lib/components/TextInput.svelte';
 
 	export let data: PageData;
 	let listing: Listing = data.listing;
@@ -498,6 +497,10 @@
 							<input class="text-input" placeholder="Phone Number" type="tel" />
 							<textarea class="text-input" placeholder="Message" rows="5" cols="33"
 							></textarea>
+							<button
+								class="text-white button popup bg-primary-600 w-full md:self-center"
+								type="submit">Contact {agent?.name}</button
+							>
 						</form>
 					</div>
 				</div>

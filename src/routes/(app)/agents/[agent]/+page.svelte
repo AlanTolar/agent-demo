@@ -114,16 +114,19 @@
 				class="bg-neutral-200 text-black p-10 rounded-[4%] drop-shadow-lg shine-lg  flex flex-col divide-y-2 divide-neutral-800"
 			>
 				<div class="pb-5">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ad aspernatur
-					facilis unde molestiae accusantium quod.
+					Let us know how we can help you. We will get back to you as soon as possible.
 				</div>
-				<div class="flex flex-col gap-6 pt-5">
+				<form class="flex flex-col gap-6 pt-5">
 					<input class="text-input" placeholder="Full Name" type="text" />
 					<input class="text-input" placeholder="Email" type="email" />
 					<input class="text-input" placeholder="Phone Number" type="tel" />
 					<textarea class="text-input" placeholder="Message" rows="5" cols="33"
 					></textarea>
-				</div>
+					<button
+						class="text-white button popup bg-primary-600 w-full md:self-center"
+						type="submit">Contact {agent.name}</button
+					>
+				</form>
 			</div>
 		</div>
 	</div>
