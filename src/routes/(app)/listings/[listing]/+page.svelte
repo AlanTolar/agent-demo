@@ -137,244 +137,246 @@
 	</div>
 </div>
 
-<!-- Contact Form -->
-<div class="absolute z-20" style="top: {topForm}px; left:{leftInfoBar}px; width:{widthInfoBar}px;">
-	<div
-		class="bg-neutral-200  {contentCovered
-			? 'mt-2'
-			: ''} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10"
-	>
-		<div class="grid grid-cols-3">
-			<div class="col-span-1">
-				<div class="aspect-w-1 aspect-h-1">
-					<img class="object-cover" src="{agent?.image}" alt="" />
-				</div>
+<div class="flex max-w-[1200px] mx-auto relative">
+	<!-- Left Side -->
+	<div id="main-content-container" class="flex flex-col max-w-[800px] divide-y">
+		<!-- Image Carousel -->
+		<div class="custom-grid">
+			<div style="grid-column: 4;">
+				<button
+					class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
+					disabled="{movingImages}"
+					on:click="{() => moveLastToFront(slides)}">L</button
+				>
 			</div>
-			<div class="col-span-2 pl-10 flex flex-col gap-4">
-				<div>
-					<h2 class="heading-text">{agent?.name ?? ''}</h2>
-					<p class="subtitle-text">{agent?.phone ?? ''}</p>
-				</div>
-				{#if listing.agent}
-					<a
-						class="label-text underline text-neutral-600 font-semibold"
-						href="/agents/{listing?.agent}">View Profile</a
-					>
-				{/if}
+			<div style="grid-column: 6;">
+				<button
+					class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
+					disabled="{movingImages}"
+					on:click="{() => moveFrontToEnd(slides)}">R</button
+				>
 			</div>
+			<div bind:this="{formGap}" style="grid-column: 7;"></div>
+
+			{#each slides as slide, index (slide.id)}
+				{@const usedCols = [1, 3, 5, 9, 11]}
+				{@const col = usedCols[index]}
+				{@const dur = index === 4 ? 0 : 2000}
+				<div
+					animate:flip="{{
+						delay: 0,
+						duration: (d) =>
+							(index === 4 && direction === 'backwards') ||
+							(index === 0 && direction === 'forwards')
+								? 0
+								: 2000,
+						easing: quintOut,
+					}}"
+					style="grid-column: {col};"
+					class="relative"
+				>
+					<img src="{slide.url}" alt="" />
+				</div>
+			{/each}
 		</div>
-		<form class="mt-10 flex flex-col gap-6" autocomplete="off">
-			<!-- <TextInput /> -->
-			<input class="text-input" placeholder="Full Name" type="text" />
-			<input class="text-input" placeholder="Email" type="email" />
-			<input class="text-input" placeholder="Phone Number" type="tel" />
-			<textarea class="text-input" placeholder="Message" rows="5" cols="33"></textarea>
-			<button
-				class="text-white button popup bg-primary-600 w-full md:self-center"
-				type="submit">Contact {agent?.name}</button
-			>
-		</form>
+
+		<!-- Main Content -->
+		{#if listing.description}
+			<section id="description-section" class="py-10">
+				<h3 class="heading-text-sm">Description</h3>
+				<div class="mt-4 prose main-paragraph max-w-none">
+					{@html listing.description}
+				</div>
+			</section>
+		{/if}
+		{#if listing.details}
+			<section id="details-section" class="py-10">
+				<h3 class="heading-text-sm">Details</h3>
+				<div class="mt-4 prose main-paragraph max-w-none">
+					{@html listing.details}
+				</div>
+			</section>
+		{/if}
+		{#if listing.summary}
+			<section id="summary-section" class="py-10">
+				<h3 class="heading-text-sm">Summary</h3>
+				<div class="mt-4 grid sm:grid-cols-2 gap-6">
+					<div class="flex flex-col gap-6">
+						<div class="flex">
+							<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
+							></iconify-icon>
+							<div>
+								{#if listing.summary.featureCategories}
+									<h4 class="subtitle-text">Property</h4>
+									<div class="mt-2 flex flex-col gap-2">
+										{#each listing.summary.featureCategories as feature}
+											<div
+												><h5 class="font-bold">{feature.featureCategory}</h5
+												>
+												<p>{feature.features}</p>
+											</div>
+										{/each}
+									</div>
+								{/if}
+							</div>
+						</div>
+						<div class="flex">
+							<iconify-icon
+								icon="majesticons:checkbox-list-detail-line"
+								class="py-1 pr-4"
+								width="40"></iconify-icon>
+							<div>
+								{#if listing.summary.landDetails}
+									<h4 class="subtitle-text">Land Details</h4>
+									<div class="mt-2">
+										<p>{listing.summary.landDetails}</p>
+									</div>
+								{/if}
+							</div>
+						</div>
+						<div class="flex">
+							<iconify-icon icon="mingcute:road-line" class="py-1 pr-4" width="40"
+							></iconify-icon>
+							<div>
+								{#if listing.summary.distances}
+									<h4 class="subtitle-text">Distances</h4>
+									<div class="mt-2">
+										{#each listing.summary.distances as distances}
+											<p
+												>{distances.distance} miles from
+												{distances.location}</p
+											>
+										{/each}
+									</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+					<div class="flex flex-col gap-6">
+						<div class="flex">
+							<iconify-icon
+								icon="eos-icons:pipeline-outlined"
+								class="py-1 pr-4"
+								width="40"></iconify-icon>
+							<div>
+								{#if listing.summary.utilities}
+									<h4 class="subtitle-text">Utilities</h4>
+									<div class="mt-2">
+										{#each listing.summary.utilities as utilities}
+											<p>{utilities.utility}: {utilities.availability}</p>
+										{/each}
+									</div>
+								{/if}
+							</div>
+						</div>
+						<div class="flex">
+							<iconify-icon
+								icon="material-symbols:house-outline"
+								class="py-1 pr-4"
+								width="40"></iconify-icon>
+							<div>
+								{#if listing.summary.housing}
+									<h4 class="subtitle-text">Housing</h4>
+									<div class="mt-2">
+										<p>{listing.summary.housing}</p>
+									</div>
+								{/if}
+							</div>
+						</div>
+						<div class="flex">
+							<iconify-icon
+								icon="material-symbols:trending-up"
+								class="py-1 pr-4"
+								width="40"></iconify-icon>
+							<div>
+								{#if listing.summary.improvements}
+									<h4 class="subtitle-text">Improvements</h4>
+									<div class="mt-2">
+										<p>{listing.summary.improvements}</p>
+									</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		{/if}
+		{#if listing.brouchure || listing.location || listing.address.street}
+			<section id="further-info-section" class="py-10">
+				<h3 class="heading-text-sm">Further Information</h3>
+				<div class="mt-4 grid sm:grid-cols-2 gap-6">
+					<div class="flex flex-col gap-4 items-center">
+						{#if listing.brouchure}
+							<a
+								href="{listing.brouchure}"
+								class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
+								><iconify-icon inline icon="ic:baseline-download" class="mr-2"
+								></iconify-icon>Download Files</a
+							>
+						{/if}
+						{#if listing.location}
+							<a
+								href="{listing.location}"
+								class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
+								><iconify-icon inline icon="mdi:map-marker" class="mr-2"
+								></iconify-icon>Get Directions</a
+							>
+						{/if}
+					</div>
+					<div class="flex justify-center">
+						<div>
+							<p>{listing.address.street || ''}</p>
+							<p
+								>{listing.address.city || ''}, {listing.address.state || ''}
+								{listing.address.postCode || ''}</p
+							>
+							<p>{listing.address.county || ''}</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		{/if}
 	</div>
-</div>
 
-<!-- Image Carousel -->
-<div class="overflow-clip relative">
-	<div class="custom-grid">
-		<div style="grid-column: 4;">
-			<button
-				class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
-				disabled="{movingImages}"
-				on:click="{() => moveLastToFront(slides)}">L</button
-			>
-		</div>
-		<div style="grid-column: 6;">
-			<button
-				class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
-				disabled="{movingImages}"
-				on:click="{() => moveFrontToEnd(slides)}">R</button
-			>
-		</div>
-		<div bind:this="{formGap}" style="grid-column: 7;"></div>
-
-		{#each slides as slide, index (slide.id)}
-			{@const usedCols = [1, 3, 5, 9, 11]}
-			{@const col = usedCols[index]}
-			{@const dur = index === 4 ? 0 : 2000}
-			<div
-				animate:flip="{{
-					delay: 0,
-					duration: (d) =>
-						(index === 4 && direction === 'backwards') ||
-						(index === 0 && direction === 'forwards')
-							? 0
-							: 2000,
-					easing: quintOut,
-				}}"
-				style="grid-column: {col};"
-				class="relative"
-			>
-				<img src="{slide.url}" alt="" />
-			</div>
-		{/each}
-	</div>
-</div>
-
-<!-- Main Content -->
-<div id="main-content-container" class="flex flex-col py-10 max-w-[800px] mx-auto divide-y">
-	{#if listing.description}
-		<section id="description-section" class="py-10">
-			<h3 class="heading-text-sm">Description</h3>
-			<div class="mt-4 prose main-paragraph max-w-none">
-				{@html listing.description}
-			</div>
-		</section>
-	{/if}
-	{#if listing.details}
-		<section id="details-section" class="py-10">
-			<h3 class="heading-text-sm">Details</h3>
-			<div class="mt-4 prose main-paragraph max-w-none">
-				{@html listing.details}
-			</div>
-		</section>
-	{/if}
-	{#if listing.summary}
-		<section id="summary-section" class="py-10">
-			<h3 class="heading-text-sm">Summary</h3>
-			<div class="mt-4 grid sm:grid-cols-2 gap-6">
-				<div class="flex flex-col gap-6">
-					<div class="flex">
-						<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
-						></iconify-icon>
-						<div>
-							{#if listing.summary.featureCategories}
-								<h4 class="subtitle-text">Property</h4>
-								<div class="mt-2 flex flex-col gap-2">
-									{#each listing.summary.featureCategories as feature}
-										<div
-											><h5 class="font-bold">{feature.featureCategory}</h5>
-											<p>{feature.features}</p>
-										</div>
-									{/each}
-								</div>
-							{/if}
-						</div>
-					</div>
-					<div class="flex">
-						<iconify-icon
-							icon="majesticons:checkbox-list-detail-line"
-							class="py-1 pr-4"
-							width="40"></iconify-icon>
-						<div>
-							{#if listing.summary.landDetails}
-								<h4 class="subtitle-text">Land Details</h4>
-								<div class="mt-2">
-									<p>{listing.summary.landDetails}</p>
-								</div>
-							{/if}
-						</div>
-					</div>
-					<div class="flex">
-						<iconify-icon icon="mingcute:road-line" class="py-1 pr-4" width="40"
-						></iconify-icon>
-						<div>
-							{#if listing.summary.distances}
-								<h4 class="subtitle-text">Distances</h4>
-								<div class="mt-2">
-									{#each listing.summary.distances as distances}
-										<p
-											>{distances.distance} miles from
-											{distances.location}</p
-										>
-									{/each}
-								</div>
-							{/if}
-						</div>
+	<!-- Right Side -->
+	<div class="ml-16 relative">
+		<!-- Contact Form -->
+		<div
+			class="bg-neutral-200 sticky  {contentCovered
+				? 'top-[100px]'
+				: 'top-[80px]'}  text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10"
+		>
+			<div class="grid grid-cols-3">
+				<div class="col-span-1">
+					<div class="aspect-w-1 aspect-h-1">
+						<img class="object-cover" src="{agent?.image}" alt="" />
 					</div>
 				</div>
-				<div class="flex flex-col gap-6">
-					<div class="flex">
-						<iconify-icon
-							icon="eos-icons:pipeline-outlined"
-							class="py-1 pr-4"
-							width="40"></iconify-icon>
-						<div>
-							{#if listing.summary.utilities}
-								<h4 class="subtitle-text">Utilities</h4>
-								<div class="mt-2">
-									{#each listing.summary.utilities as utilities}
-										<p>{utilities.utility}: {utilities.availability}</p>
-									{/each}
-								</div>
-							{/if}
-						</div>
-					</div>
-					<div class="flex">
-						<iconify-icon
-							icon="material-symbols:house-outline"
-							class="py-1 pr-4"
-							width="40"></iconify-icon>
-						<div>
-							{#if listing.summary.housing}
-								<h4 class="subtitle-text">Housing</h4>
-								<div class="mt-2">
-									<p>{listing.summary.housing}</p>
-								</div>
-							{/if}
-						</div>
-					</div>
-					<div class="flex">
-						<iconify-icon
-							icon="material-symbols:trending-up"
-							class="py-1 pr-4"
-							width="40"></iconify-icon>
-						<div>
-							{#if listing.summary.improvements}
-								<h4 class="subtitle-text">Improvements</h4>
-								<div class="mt-2">
-									<p>{listing.summary.improvements}</p>
-								</div>
-							{/if}
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	{/if}
-	{#if listing.brouchure || listing.location || listing.address.street}
-		<section id="further-info-section" class="py-10">
-			<h3 class="heading-text-sm">Further Information</h3>
-			<div class="mt-4 grid sm:grid-cols-2 gap-6">
-				<div class="flex flex-col gap-4 items-center">
-					{#if listing.brouchure}
-						<a
-							href="{listing.brouchure}"
-							class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
-							><iconify-icon inline icon="ic:baseline-download" class="mr-2"
-							></iconify-icon>Download Files</a
-						>
-					{/if}
-					{#if listing.location}
-						<a
-							href="{listing.location}"
-							class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
-							><iconify-icon inline icon="mdi:map-marker" class="mr-2"
-							></iconify-icon>Get Directions</a
-						>
-					{/if}
-				</div>
-				<div class="flex justify-center">
+				<div class="col-span-2 pl-10 flex flex-col gap-4">
 					<div>
-						<p>{listing.address.street || ''}</p>
-						<p
-							>{listing.address.city || ''}, {listing.address.state || ''}
-							{listing.address.postCode || ''}</p
-						>
-						<p>{listing.address.county || ''}</p>
+						<h2 class="heading-text">{agent?.name ?? ''}</h2>
+						<p class="subtitle-text">{agent?.phone ?? ''}</p>
 					</div>
+					{#if listing.agent}
+						<a
+							class="label-text underline text-neutral-600 font-semibold"
+							href="/agents/{listing?.agent}">View Profile</a
+						>
+					{/if}
 				</div>
 			</div>
-		</section>
-	{/if}
+			<form class="mt-10 flex flex-col gap-6" autocomplete="off">
+				<input class="text-input" placeholder="Full Name" type="text" />
+				<input class="text-input" placeholder="Email" type="email" />
+				<input class="text-input" placeholder="Phone Number" type="tel" />
+				<textarea class="text-input" placeholder="Message" rows="5" cols="33"></textarea>
+				<button
+					class="text-white button popup bg-primary-600 w-full md:self-center"
+					type="submit">Contact {agent?.name}</button
+				>
+			</form>
+		</div>
+	</div>
 </div>
 
 <style>
@@ -384,8 +386,8 @@
 		column-gap: 2em;
 		position: relative;
 		left: 50%;
-		transform: translateX(-50%);
-		width: 90%;
+		transform: translateX(-45%);
+		width: 600%;
 		/* max-width: 1200px; */
 	}
 </style>
