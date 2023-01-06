@@ -9,6 +9,9 @@
 	import { onMount } from 'svelte';
 	import { getBreakpoint } from '$lib/utils/getBreakpoint';
 
+	import { flip } from 'svelte/animate';
+	import { quintOut } from 'svelte/easing';
+
 	let breakpoint: string;
 	onMount(() => {
 		function handleResize() {
@@ -302,20 +305,24 @@
 				</DropdownOptions>
 			</li>
 		</menu>
-		<div class="p-6 grid grid-cols-1 grid-flow-row gap-6">
-			{#each listings as listing}
-				{#if listing.visible}
-					<ListingCard
-						listing="{listing}"
-						extraClasses="hidden md:max-xl:block"
-						horizontal="{false}"
-					/>
-					<ListingCard
-						listing="{listing}"
-						extraClasses="min-h-[130px] md:max-xl:hidden"
-						horizontal="{true}"
-					/>
-				{/if}
+		<div class="p-6 grid grid-cols-1 grid-flow-row">
+			{#each listings as listing (listing.date)}
+				<div animate:flip="{{ delay: 0, duration: 500, easing: quintOut }}">
+					{#if listing.visible}
+						<div class="py-3">
+							<ListingCard
+								listing="{listing}"
+								extraClasses="hidden md:max-xl:block"
+								horizontal="{false}"
+							/>
+							<ListingCard
+								listing="{listing}"
+								extraClasses="min-h-[130px] md:max-xl:hidden"
+								horizontal="{true}"
+							/>
+						</div>
+					{/if}
+				</div>
 			{/each}
 		</div>
 	</div>
