@@ -1,0 +1,21 @@
+{
+  "name": "Garrison Mercer",
+  "location": "Greenville, Alabama",
+  "email": "garrisonmercer@acresandacres.com",
+  "position": "broker",
+  "phone": "999-999-9999",
+  "image": "/uploads/94435067b8c444aa765c0614cd804f66.jpeg",
+  "bio": "I got into the land real estate business because I have always had a love for the outdoors and a desire to help others find their dream properties. Growing up in Greenville, Alabama, I spent a lot of time exploring the various forests and fields in the area, and I quickly developed a deep appreciation for the natural beauty of the southeastern United States.\n\nMy favorite part of my job is helping my clients find the perfect piece of land for their needs. Whether it's a small hunting tract or a large farm, I take great satisfaction in knowing that I am able to assist them in finding the property of their dreams. I truly believe that owning land is one of the greatest joys in life, and I am honored to be able to play a small role in making that dream a reality for others.",
+  "reviews": [
+    {
+      "review": "Garrison was a great help in selling our family's land. He was knowledgeable about the area and gave us valuable advice throughout the process. He made it easy for us to understand all of the paperwork and was always available to answer our questions.",
+      "customer": "Tim Thompson",
+      "title": "Sold 12 acres in Montgomery, Alabama"
+    },
+    {
+      "review": "I recently purchased a piece of land with the help of Garrison, and it was an excellent experience. He was patient and answered all of our questions thoroughly. He went above and beyond to make sure we found the perfect property for our needs.",
+      "customer": "Sara Johnson",
+      "title": "Bought 20 acres in Birmingham, Alabama"
+    }
+  ]
+}

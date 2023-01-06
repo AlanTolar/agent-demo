@@ -1,0 +1,21 @@
+{
+  "name": "Georgia Jones",
+  "email": "georgiajones@acresandacres.com",
+  "position": "manager",
+  "location": "Franklin, Tennessee",
+  "phone": "999-999-9999",
+  "image": "/uploads/f2bc6095be0db07fa2632b46a0e8a430.jpeg",
+  "bio": "I got into the land real estate profession after working for many years in the finance industry. I always had a passion for real estate and knew I wanted to make a career change. I decided to get my real estate license and start working as a land real estate agent.\n\nMy favorite part of the job is being able to help clients find the perfect piece of land for their needs. It's so rewarding to see their excitement when we find a property that fits all of their criteria. I love being able to assist them through the entire process, from start to finish. It's truly a fulfilling career.",
+  "reviews": [
+    {
+      "review": "I highly recommend Georgia to anyone looking to buy or sell land. She found me the perfect property and made the process so smooth. Thank you Georgia for all of your help!",
+      "customer": "Tim Johnson",
+      "title": "Bought 23 acres in Madison, Tennessee"
+    },
+    {
+      "customer": "Rachel Davis",
+      "title": "Bought 12 acres in Hendersonville, Tennessee",
+      "review": "Georgia was a fantastic agent to work with. She helped me find the perfect property and made the process of buying land so easy. I highly recommend her to anyone looking to buy or sell land."
+    }
+  ]
+}

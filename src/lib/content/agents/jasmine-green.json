@@ -1,0 +1,21 @@
+{
+  "name": "Jasmine Green",
+  "location": "Rockville, Kentucky",
+  "phone": "999-999-9999",
+  "email": "jasminegreen@acresandacres.com",
+  "position": "manager",
+  "image": "/uploads/01c9a0b55c7e66cec7ef48e58f29b886.jpeg",
+  "bio": "I got into the land real estate business because I have always had a passion for helping people find their dream property. Growing up, my family owned a small farm and I spent a lot of time exploring the land and learning about all the different types of properties out there. When I learned that I could turn my love of real estate into a career, I knew that it was the perfect fit for me.\n\nMy favorite part of this job is getting to know my clients and helping them find the perfect piece of land to call their own. Whether they are looking for a small plot to build their dream home on or a large farm to start a new business, I love being able to use my knowledge and expertise to help them find exactly what they are looking for. It's extremely satisfying to see the look on their faces when they finally find the perfect property.",
+  "reviews": [
+    {
+      "review": "J﻿asmine was very helpful and made the process of selling my land very easy. I was very happy with the price I received for my property and would highly recommend this agent to anyone looking to sell land.",
+      "customer": "Gina Rodriguez",
+      "title": "Sold 50 acres in Bardstown, Kentucky"
+    },
+    {
+      "review": "Jasmine was an incredible land real estate agent to work with. She was very responsive and helped me find the perfect plot of land to build my dream home on.",
+      "customer": "Lauren Johnson",
+      "title": "Bought 25 acres in Frankfort, Kentucky"
+    }
+  ]
+}

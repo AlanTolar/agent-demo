@@ -1,1 +1,28 @@
-{"address":{"city":"Clayton","state":"Georgia"},"acres":10,"price":2099986,"date":"2022-12-08T16:43:44.380Z","title":"The River Farm","featuredImage":"/uploads/0e608ef0bc5c4e0d77ca25ce8978c421.jpeg"}
+{
+  "details": "<ul>\n  <li>Property borders the Black Warrior River, which is a large river that flows through central and western Alabama</li>\n  <li>Mostly flat terrain, with some slight elevation changes</li>\n  <li>Partially wooded, with a mix of deciduous and evergreen trees</li>\n  <li>Soil is mostly loamy, with good drainage and fertility</li>\n  <li>Located in a region with a temperate climate, with mild winters and hot, humid summers</li>\n  <li>Area is prone to thunderstorms and occasional tornadoes</li>\n  <li>Aptly named Riverside Acres, as the property is located along the river and has a natural water source</li>\n  <li>Surrounded by rolling hills and valleys, providing a stunning backdrop for the property</li>\n  <li>Located in a rural area, providing plenty of privacy and seclusion</li>\n  <li>Abundant wildlife in the surrounding area, including deer, birds, and small game.</li>\n</ul>",
+  "agent": "garrison-mercer",
+  "summary": {
+    "featureCategories": [
+      {
+        "featureCategory": "Land Type",
+        "features": "vacant land, residential land, riverfront property"
+      },
+      {
+        "featureCategory": "Access Roads",
+        "features": "paved road, public road"
+      }
+    ],
+    "landDetails": "riverfront, flat terrain, wooded, loamy soil, temperate climate, rolling hills, valleys, rural area, abundant wildlife"
+  },
+  "price": 97000,
+  "featuredImage": "/uploads/0e608ef0bc5c4e0d77ca25ce8978c421.jpeg",
+  "date": "2022-12-08T16:43:44.380Z",
+  "address": {
+    "city": "Cloverdale",
+    "state": "Alabama"
+  },
+  "location": "{\"type\":\"Point\",\"coordinates\":[-86.6353928,33.8956104]}",
+  "title": "Riverside Acres",
+  "description": "<p>Riverside Acres is a beautiful 10-acre property located in the charming town of Cloverdale, Alabama. The land is mostly flat and partially wooded, making it perfect for building your dream home or using as a recreational retreat. With the Black Warrior River running along the edge of the property, you'll have plenty of opportunities to fish, swim, and enjoy the great outdoors. The property is also located just a short drive from all the amenities of the town, including shopping, dining, and entertainment. This is a rare opportunity to own a large piece of land in a peaceful and picturesque setting, so don't miss out!</p>",
+  "acres": 10
+}

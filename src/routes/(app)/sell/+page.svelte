@@ -51,10 +51,10 @@
 					facilis unde molestiae accusantium quod.
 				</div>
 				<div class="flex flex-col gap-6 pt-5">
-					<input class="rounded-lg" placeholder="Full Name" type="text" />
-					<input class="rounded-lg" placeholder="Email" type="email" />
-					<input class="rounded-lg" placeholder="Phone Number" type="tel" />
-					<textarea class="rounded-lg" placeholder="Message" rows="5" cols="33"
+					<input class="text-input" placeholder="Full Name" type="text" />
+					<input class="text-input" placeholder="Email" type="email" />
+					<input class="text-input" placeholder="Phone Number" type="tel" />
+					<textarea class="text-input" placeholder="Message" rows="5" cols="33"
 					></textarea>
 				</div>
 			</div>

@@ -47,7 +47,7 @@
 	{/each}
 </div>
 
-{#if btnLocation === 'center'}
+{#if btnLocation === 'center' && slides.length > 1}
 	<button
 		class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
 		on:click="{() => prevSlide()}"
@@ -79,7 +79,7 @@
 	</button>
 {/if}
 
-{#if btnLocation === 'bottom'}
+{#if btnLocation === 'bottom' && slides.length > 1}
 	<div class="flex flex-row justify-center gap-20 pt-6">
 		<button class="cursor-pointer focus:outline-none" on:click="{() => prevSlide()}">
 			<slot name="previousBtn">

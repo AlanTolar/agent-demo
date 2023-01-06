@@ -6,6 +6,7 @@
 	import type { PageData } from './$types';
 	import type { Listing } from '$lib/types/Listing';
 	import type { Agent } from '$lib/types/Agent';
+	import TextInput from '$lib/components/TextInput.svelte';
 
 	export let data: PageData;
 	let listing: Listing = data.listing;
@@ -362,7 +363,7 @@
 													<div class="mt-2">
 														{#each listing.summary.distances as distances}
 															<p
-																>{distances.distance} from {distances.location}</p
+																>{distances.distance} miles from {distances.location}</p
 															>
 														{/each}
 													</div>
@@ -490,13 +491,14 @@
 								{/if}
 							</div>
 						</div>
-						<div class="mt-10 flex flex-col gap-6">
-							<input class="rounded-lg" placeholder="Full Name" type="text" />
-							<input class="rounded-lg" placeholder="Email" type="email" />
-							<input class="rounded-lg" placeholder="Phone Number" type="tel" />
-							<textarea class="rounded-lg" placeholder="Message" rows="5" cols="33"
+						<form class="mt-10 flex flex-col gap-6" autocomplete="off">
+							<!-- <TextInput /> -->
+							<input class="text-input" placeholder="Full Name" type="text" />
+							<input class="text-input" placeholder="Email" type="email" />
+							<input class="text-input" placeholder="Phone Number" type="tel" />
+							<textarea class="text-input" placeholder="Message" rows="5" cols="33"
 							></textarea>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>

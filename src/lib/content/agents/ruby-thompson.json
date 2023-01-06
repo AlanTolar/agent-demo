@@ -1,0 +1,21 @@
+{
+  "position": "broker",
+  "name": "Ruby Thompson",
+  "location": "Greenville, South Carolina",
+  "email": "rubythompson@acresandacres.com",
+  "phone": "999-999-9999",
+  "image": "/uploads/5885854ab9e76e8dccc2cba23a06ae69.jpeg",
+  "bio": "I got into the land real estate industry about 10 years ago after starting out as a salesperson for a local agency. I quickly discovered my passion for helping people find their dream properties and decided to become a full-fledged agent.\n\nOne of my favorite parts of this job is getting to know my clients and working with them to find the perfect piece of land. I have experience with a variety of property types and take pride in being able to find the right fit for my clients. Good communication and understanding my clients' needs and wants are key to a successful transaction, and I believe that's what sets me apart in this industry. If you're looking to buy or sell land in the Southeast, I would be more than happy to work with you.",
+  "reviews": [
+    {
+      "review": "I recently worked with Ruby to sell my 10 acre property and it was a great experience. She was knowledgeable, professional, and made the entire process smooth and stress-free. I highly recommend her to anyone looking to buy or sell real estate.",
+      "customer": "Max Luna",
+      "title": "Sold 10 acres in Greenville, South Carolina"
+    },
+    {
+      "review": "I had the pleasure of working with Ruby to purchase my dream property and she exceeded all of my expectations. She was patient, understanding, and went above and beyond to make sure I found exactly what I was looking for. I highly recommend her to anyone in the market.",
+      "customer": "Bill Anderson",
+      "title": "Bought 15 acres in Aiken, South Carolina"
+    }
+  ]
+}

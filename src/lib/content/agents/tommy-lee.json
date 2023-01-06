@@ -1,0 +1,21 @@
+{
+  "name": "Tommy Lee",
+  "location": "Augusta, Georgia",
+  "email": "tommylee@acresandacres.com",
+  "position": "manager",
+  "phone": "999-999-9999",
+  "bio": "I've always had a passion for real estate and helping people find their dream homes. After working in the industry for a few years, I decided to become a land real estate agent. I love being able to help my clients find the perfect piece of land to build their dream home on.\n\nOne of my favorite parts of this job is getting to know my clients and their needs. I take pride in being able to find the perfect piece of land for them and seeing their excitement when we close the deal. It's a great feeling to be able to make someone's dream of owning their own piece of land a reality.",
+  "image": "/uploads/d212dc5e71ee1c70e34527821b46191f.jpeg",
+  "reviews": [
+    {
+      "review": "Tommy was a great agent to work with. He helped us sell our land quickly and for a great price. We would definitely recommend him to anyone looking to sell their land.",
+      "customer": "Samantha Smith",
+      "title": "Sold 5 acres in Macon, Georgia"
+    },
+    {
+      "review": "We recently purchased land through Tommy and couldn't be happier. He was knowledgeable and patient throughout the process and we felt like he really listened to what we were looking for. We would definitely work with him again in the future.",
+      "customer": "Benjamin Thompson",
+      "title": "Bought 5 acres in Savannah, Georgia"
+    }
+  ]
+}
