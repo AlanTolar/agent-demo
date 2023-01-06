@@ -1,0 +1,67 @@
+{
+  "details": "<ul>\n  <li>Bordered by dense forest for privacy and natural habitat</li>\n  <li>Small stream running through the property</li>\n  <li>Mature oak trees present</li>\n  <li>Rolling hills with picturesque views</li>\n  <li>Property situated on a rise with panoramic views of distant mountains</li>\n  <li>Clearing in the center of the land offers a spacious, open area</li>\n  <li>Wildflowers and native plants found throughout the property</li>\n  <li>Mild winters and warm summers in the region</li>\n  <li>Hiking and biking trails in nearby forests</li>\n  <li>Southern exposure ensures plenty of sunlight throughout the day</li>\n</ul>",
+  "agent": "tommy-lee",
+  "summary": {
+    "featureCategories": [
+      {
+        "featureCategory": "Land Type",
+        "features": "Residential, Agricultural, Undeveloped"
+      },
+      {
+        "featureCategory": "Access Roads",
+        "features": "Paved, Gravel"
+      }
+    ],
+    "landDetails": "Stream, Hills, Trees, Wildflowers, Native Plants",
+    "distances": [
+      {
+        "location": "Newberry",
+        "distance": 5
+      },
+      {
+        "location": "Columbia",
+        "distance": 40
+      },
+      {
+        "location": "Lake Murray",
+        "distance": 25
+      },
+      {
+        "location": "Sumter National Forest",
+        "distance": 50
+      },
+      {
+        "location": "Clemson University",
+        "distance": 60
+      }
+    ],
+    "utilities": [
+      {
+        "utility": "Electric",
+        "availability": "Onsite"
+      },
+      {
+        "utility": "Sewer",
+        "availability": "Onsite"
+      },
+      {
+        "utility": "Internet",
+        "availability": "Nearby"
+      }
+    ]
+  },
+  "price": 150000,
+  "featuredImage": "/uploads/tomasz-filipek-cuwc-6mrcng-unsplash.jpeg",
+  "date": "2023-01-06T04:07:33.149Z",
+  "address": {
+    "city": "Newberry",
+    "state": "South Carolina",
+    "street": "534 Oak Grove Road",
+    "postCode": "29108",
+    "county": "Newberry County"
+  },
+  "location": "{\"type\":\"Point\",\"coordinates\":[-81.5142353,34.27226]}",
+  "title": "Oak Grove Acres",
+  "description": "<p>Oak Grove Acres is a beautiful piece of land located in the charming town of Newberry, South Carolina. This property spans 10 acres and is surrounded by lush forests, providing a peaceful and secluded retreat. The land is mostly flat and open, making it suitable for a variety of uses such as building a dream home, starting a small farm, or even developing a nature reserve. With easy access to local amenities and the beauty of the surrounding area, Oak Grove Acres is an opportunity not to be missed.</p>",
+  "acres": 18
+}

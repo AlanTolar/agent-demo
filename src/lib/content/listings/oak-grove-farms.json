@@ -1,0 +1,59 @@
+{
+  "details": "<ul>\n  <li>Creek running through the property</li>\n  <li>Fertile soil suitable for farming</li>\n  <li>Abundance of wildlife, including deer and turkey</li>\n  <li>Mature trees providing shade and privacy</li>\n  <li>Private drive leading to the property</li>\n  <li>Panoramic views of the surrounding countryside</li>\n  <li>Convenient access to hiking and biking trails</li>\n  <li>Close proximity to a lake, perfect for fishing and boating</li>\n</ul>",
+  "agent": "john-doe",
+  "summary": {
+    "featureCategories": [
+      {
+        "featureCategory": "Land Type",
+        "features": "Residential, Agricultural, Undeveloped"
+      },
+      {
+        "featureCategory": "Access Roads",
+        "features": "Paved, Private"
+      }
+    ],
+    "landDetails": "Rolling Hills, Oak Groves, Creek, Fertile Soil",
+    "distances": [
+      {
+        "distance": 12,
+        "location": "Mount Dora"
+      },
+      {
+        "location": "Disney World",
+        "distance": 38
+      },
+      {
+        "distance": 30,
+        "location": "Orlando, Florida"
+      }
+    ],
+    "utilities": [
+      {
+        "utility": "Electric",
+        "availability": "Onsite"
+      },
+      {
+        "utility": "Sewer",
+        "availability": "Onsite"
+      },
+      {
+        "utility": "Internet",
+        "availability": "Onsite"
+      }
+    ]
+  },
+  "price": 125000,
+  "featuredImage": "/uploads/rodion-kutsaiev-qdi8uvgd1ww-unsplash.jpeg",
+  "date": "2023-01-06T03:25:38.983Z",
+  "address": {
+    "city": "Mount Dora",
+    "state": "Florida",
+    "street": "123 Oak Grove Lane",
+    "postCode": "32757",
+    "county": "Lake County"
+  },
+  "location": "{\"type\":\"Point\",\"coordinates\":[-81.5834061,28.9917999]}",
+  "title": "Oak Grove Farms",
+  "description": "<p>Oak Grove Farms is a stunning 10-acre property located in Mount Dora, Florida. The rolling hills and oak groves provide the perfect setting for a small farm or a private retreat. The property is just a short drive from downtown Mount Dora, which offers a variety of shopping, dining, and entertainment options. This piece of real estate is sure to be highly sought after due to its picturesque setting and convenient location. Whether you're looking to start a farm, build your dream home, or simply enjoy the peaceful Florida countryside, Oak Grove Farms is the perfect opportunity.</p>",
+  "acres": 10
+}

@@ -1,0 +1,59 @@
+{
+  "details": "<ul>\n  <li>Surrounded by dense pine forests</li>\n  <li>Rolling hills and grassy meadows</li>\n  <li>A small stream runs through one corner of the property</li>\n  <li>Picturesque views of the surrounding countryside</li>\n  <li>Mostly flat terrain</li>\n  <li>Abundant wildlife, including deer and birds</li>\n  <li>Located near a public nature preserve</li>\n  <li>Close to hiking and biking trails</li>\n  <li>A short drive from a tranquil lake</li>\n  <li>Scenic drives through the nearby countryside</li>\n</ul>",
+  "agent": "georgia-jones",
+  "summary": {
+    "featureCategories": [
+      {
+        "featureCategory": "Land Type",
+        "features": "Residential, Agricultural, Undeveloped"
+      },
+      {
+        "featureCategory": "Access Roads",
+        "features": "Paved, Public"
+      }
+    ],
+    "landDetails": "Pine Forests, Rolling Hills, Grass Meadows, Stream, Wildlife",
+    "distances": [
+      {
+        "location": "Harmony",
+        "distance": 5
+      },
+      {
+        "location": "Lake Okeechobee",
+        "distance": 20
+      },
+      {
+        "location": "Orlando",
+        "distance": 60
+      },
+      {
+        "location": "Kennedy Space Center",
+        "distance": 78
+      }
+    ],
+    "utilities": [
+      {
+        "utility": "Electric",
+        "availability": "Nearby"
+      },
+      {
+        "utility": "Sewer",
+        "availability": "Onsite"
+      }
+    ]
+  },
+  "price": 85000,
+  "featuredImage": "/uploads/dominique-knobben-sekndragfyu-unsplash.jpeg",
+  "date": "2023-01-06T03:57:19.393Z",
+  "address": {
+    "city": "Harmony",
+    "state": "Florida",
+    "postCode": "34534",
+    "county": "Harmony County",
+    "street": "2345 Pine Grove Way"
+  },
+  "location": "{\"type\":\"Point\",\"coordinates\":[-81.0911841,28.4238695]}",
+  "title": "Pine Grove Retreat",
+  "description": "<p>The Pine Grove Retreat is a beautiful piece of land located in the charming town of Harmony, Florida. This 7.5 acre property is surrounded by lush pine forests and boasts picturesque views of the surrounding countryside. It is the perfect spot for anyone looking to build their dream home in a peaceful, natural setting. The land is mostly flat, with a small stream running through one corner of the property. It is located just a short drive from all the amenities of town, but feels like a world away from the hustle and bustle of city life. This is a rare opportunity to own a piece of paradise in a serene and idyllic location.</p>",
+  "acres": 7.5
+}

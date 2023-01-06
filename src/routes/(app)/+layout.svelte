@@ -154,7 +154,9 @@
 						><iconify-icon inline icon="mdi:instagram" width="20"></iconify-icon></a
 					>
 				</nav>
-				<span class="caption-text">© 2022 Acres and Acres, Inc. All rights reserved.</span>
+				<span class="caption-text"
+					>© {new Date().getFullYear()} Acres and Acres, Inc. All rights reserved.</span
+				>
 			</div>
 		</footer>
 	</main>

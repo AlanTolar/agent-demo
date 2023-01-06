@@ -1,0 +1,53 @@
+{
+  "details": "<ul>\n  <li>Flat terrain with rolling hills</li>\n  <li>Dense forest with a mix of oak and pine trees</li>\n  <li>Small stream running through the property</li>\n  <li>Abundant wildlife, including deer and birds</li>\n  <li>Rock formations and outcroppings present</li>\n  <li>Soil suitable for farming and gardening</li>\n  <li>Several acres of open meadow</li>\n  <li>Located in a region with a moderate climate</li>\n  <li>Expansive views of the surrounding countryside</li>\n  <li>Scenic vistas from high points on the property</li>\n</ul>",
+  "agent": "garrison-mercer",
+  "summary": {
+    "featureCategories": [
+      {
+        "features": "Residential, Farm, Vacant",
+        "featureCategory": "Land Type"
+      },
+      {
+        "featureCategory": "Access Roads",
+        "features": "Paved, Dirt"
+      }
+    ],
+    "landDetails": "Forested, Stream, Rolling Hills, Moderate Climate, Scenic Views",
+    "distances": [
+      {
+        "location": "Lawrenceville, Georgia",
+        "distance": 2
+      },
+      {
+        "location": "Atlanta",
+        "distance": 30
+      },
+      {
+        "location": "Stone Mountain Park",
+        "distance": 25
+      },
+      {
+        "location": "Lake Lanier",
+        "distance": 20
+      },
+      {
+        "location": "Mall of Georgia",
+        "distance": 20
+      }
+    ]
+  },
+  "price": 450000,
+  "featuredImage": "/uploads/lucas-van-oort-idg5lxbzptg-unsplash.jpeg",
+  "date": "2023-01-06T03:40:02.445Z",
+  "address": {
+    "city": "Lawrenceville",
+    "state": "Georgia",
+    "street": "100 Old Mill Road",
+    "county": "Gwinnett County",
+    "postCode": "30044"
+  },
+  "location": "{\"type\":\"Point\",\"coordinates\":[-84.0755562,34.1755958]}",
+  "title": "Old Mill Farm",
+  "description": "<p>Old Mill Farm is a beautiful property located in Lawrenceville, Georgia. The 10 acres of land is perfect for those looking to build their dream home or for those looking for a small farm. The land is flat and has plenty of space for gardening, raising livestock, or just enjoying the outdoors. The property is just a short drive from downtown Lawrenceville, which offers all the amenities you need. This is a great opportunity to own a piece of land in a charming, small town in the Southeast United States.</p>\n\n<p>The property is priced at $450,000, which is a great value considering the size of the land and its location. With plenty of space and a desirable location, Old Mill Farm is a great opportunity for anyone looking to own a piece of land in the Southeast United States.</p>",
+  "acres": 15
+}

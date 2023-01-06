@@ -1,25 +1,33 @@
 {
   "details": "<ul>\n  <li>Property borders the Black Warrior River, which is a large river that flows through central and western Alabama</li>\n  <li>Mostly flat terrain, with some slight elevation changes</li>\n  <li>Partially wooded, with a mix of deciduous and evergreen trees</li>\n  <li>Soil is mostly loamy, with good drainage and fertility</li>\n  <li>Located in a region with a temperate climate, with mild winters and hot, humid summers</li>\n  <li>Area is prone to thunderstorms and occasional tornadoes</li>\n  <li>Aptly named Riverside Acres, as the property is located along the river and has a natural water source</li>\n  <li>Surrounded by rolling hills and valleys, providing a stunning backdrop for the property</li>\n  <li>Located in a rural area, providing plenty of privacy and seclusion</li>\n  <li>Abundant wildlife in the surrounding area, including deer, birds, and small game.</li>\n</ul>",
   "agent": "garrison-mercer",
+  "slideshowImages": [
+    "/uploads/aldrin-rachman-pradana-k51kzbpbe0e-unsplash.jpeg",
+    "/uploads/guido-klinge-oehzaqr4rlm-unsplash.jpeg",
+    "/uploads/dillon-fancher-wszox-0duya-unsplash.jpeg"
+  ],
   "summary": {
     "featureCategories": [
       {
         "featureCategory": "Land Type",
-        "features": "vacant land, residential land, riverfront property"
+        "features": "Vacant, Residential, Riverfront"
       },
       {
         "featureCategory": "Access Roads",
-        "features": "paved road, public road"
+        "features": "Paved, Public"
       }
     ],
-    "landDetails": "riverfront, flat terrain, wooded, loamy soil, temperate climate, rolling hills, valleys, rural area, abundant wildlife"
+    "landDetails": "Riverfront, Flat Terrain, Wooded, Loamy Soil, Temperate Climate, Rolling Hills, Valleys, Rural Area, Abundant Wildlife"
   },
   "price": 97000,
   "featuredImage": "/uploads/0e608ef0bc5c4e0d77ca25ce8978c421.jpeg",
   "date": "2022-12-08T16:43:44.380Z",
   "address": {
     "city": "Cloverdale",
-    "state": "Alabama"
+    "state": "Alabama",
+    "street": "123 Riverside Drive",
+    "postCode": "35444",
+    "county": "Brentwood County"
   },
   "location": "{\"type\":\"Point\",\"coordinates\":[-86.6353928,33.8956104]}",
   "title": "Riverside Acres",
