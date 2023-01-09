@@ -82,7 +82,7 @@
 	let formPhone = '';
 	let formMessage = '';
 
-	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'map';
+	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'photo';
 	$: console.log('mainContent: ', mainContent);
 
 	// const bbox = getBbox(coords);
@@ -202,10 +202,10 @@
 		{/if}
 
 		<!-- Video -->
-		{#if mainContent === 'video'}
+		{#if mainContent === 'video' && listing?.videoURL}
 			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
 				<iframe
-					src="https://www.youtube.com/embed/f2yCa1q3-9w"
+					src="{listing.videoURL}"
 					title="The Ocean 4K - Sea Animals for Relaxation, Beautiful Coral Reef Fish in Aquarium (4K Video Ultra HD)"
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -214,7 +214,7 @@
 		{/if}
 
 		<!-- Map -->
-		{#if mainContent === 'map'}
+		{#if mainContent === 'map' && listing?.boundaryCoordinates}
 			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3 ">
 				<div class="h-full w-full">
 					<Map
@@ -233,57 +233,65 @@
 		{/if}
 
 		<!-- 3D Model -->
-		{#if mainContent === 'model'}
+		{#if mainContent === 'model' && listing?.modelURL}
 			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
 				<div class="flex justify-center items-center display-text">
 					<iframe
 						class="w-full h-full"
 						title="3D Model"
 						id="model-iframe"
-						src="https://www.landlistingpro.com/3d-model/111/display"
+						src="{listing.modelURL}"
 						allowfullscreen></iframe>
 				</div>
 			</div>
 		{/if}
 
 		<!-- View Toggle -->
-		<div
-			class="relative flex flex-wrap justify-center mt-4 md:-mt-6 z-20 gap-1 md:gap-0 mx-auto"
-			role="group"
-		>
-			<button
-				type="button"
-				class="button  bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-				on:click="{() => (mainContent = 'photo')}"
+		{#if listing?.videoURL || listing?.modelURL || listing?.boundaryCoordinates}
+			<div
+				class="relative flex flex-wrap justify-center mt-4 md:-mt-6 z-20 gap-1 md:gap-0 mx-auto"
+				role="group"
 			>
-				<Icon icon="material-symbols:photo-library" width="20" />
-				<span class="ml-2">Photos</span>
-			</button>
-			<button
-				type="button"
-				class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-				on:click="{() => (mainContent = 'video')}"
-			>
-				<Icon icon="material-symbols:video-camera-back" width="20" />
-				<span class="ml-2">Video</span>
-			</button>
-			<button
-				type="button"
-				class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-				on:click="{() => (mainContent = 'map')}"
-			>
-				<Icon icon="material-symbols:map-outline" width="20" />
-				<span class="ml-2">Map</span>
-			</button>
-			<button
-				type="button"
-				class="button  bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-				on:click="{() => (mainContent = 'model')}"
-			>
-				<Icon icon="iconoir:3d-select-face" width="20" />
-				<span class="ml-2">3D Model</span>
-			</button>
-		</div>
+				<button
+					type="button"
+					class="button  bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+					on:click="{() => (mainContent = 'photo')}"
+				>
+					<Icon icon="material-symbols:photo-library" width="20" />
+					<span class="ml-2">Photos</span>
+				</button>
+				{#if listing?.videoURL}
+					<button
+						type="button"
+						class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+						on:click="{() => (mainContent = 'video')}"
+					>
+						<Icon icon="material-symbols:video-camera-back" width="20" />
+						<span class="ml-2">Video</span>
+					</button>
+				{/if}
+				{#if listing?.boundaryCoordinates}
+					<button
+						type="button"
+						class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+						on:click="{() => (mainContent = 'map')}"
+					>
+						<Icon icon="material-symbols:map-outline" width="20" />
+						<span class="ml-2">Map</span>
+					</button>
+				{/if}
+				{#if listing?.modelURL}
+					<button
+						type="button"
+						class="button  bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+						on:click="{() => (mainContent = 'model')}"
+					>
+						<Icon icon="iconoir:3d-select-face" width="20" />
+						<span class="ml-2">3D Model</span>
+					</button>
+				{/if}
+			</div>
+		{/if}
 
 		<!-- Text Body -->
 		<main>

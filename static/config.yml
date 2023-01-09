@@ -164,6 +164,18 @@ collections:
         name: "location"
         widget: "map"
         required: false
+      - label: "Video URL"
+        name: "videoURL"
+        widget: "string"
+        required: false
+      - label: "Boundary Coordinates"
+        name: "boundaryCoordinates"
+        widget: "string"
+        required: false
+      - label: "3D Model URL"
+        name: "modelURL"
+        widget: "string"
+        required: false
 
   - name: agent
     label: Agents

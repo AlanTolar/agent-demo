@@ -33,6 +33,7 @@ export interface Summary {
 export interface Listing {
   title: string;
   date: string;
+  agent: string;
   address: Address;
   acres: number;
   price: number;
@@ -43,5 +44,7 @@ export interface Listing {
   summary?: Summary;
   brouchure?: string;
   location?: any;
-  agent: string;
+  videoURL?: string;
+  boundaryCoordinates?: string;
+  modelURL?: string;
 }
