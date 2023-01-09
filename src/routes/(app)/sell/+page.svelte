@@ -55,9 +55,8 @@
 					<input class="text-input" placeholder="Phone Number" type="tel" />
 					<textarea class="text-input" placeholder="Message" rows="5" cols="33"
 					></textarea>
-					<button
-						class="text-white button popup bg-primary-600 w-full md:self-center"
-						type="submit">Contact Us</button
+					<button class="text-white button popup bg-primary-600 w-full" type="submit"
+						>Contact Us</button
 					>
 				</form>
 			</div>

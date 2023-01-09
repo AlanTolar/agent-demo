@@ -144,7 +144,7 @@
 
 <div class="xl:flex relative custom-container gap-10">
 	<!-- Left Side -->
-	<div class="w-full xl:w-8/12">
+	<div class="w-full xl:w-8/12 relative">
 		<!-- Image Carousel -->
 		<div class="custom-grid z-20">
 			<div style="grid-column: 6; padding:0;">
@@ -250,6 +250,41 @@
 					<img src="{slide.url}" alt="" />
 				</div>
 			{/each}
+		</div>
+
+		<!-- View Toggle -->
+		<div
+			class="relative flex flex-wrap justify-center mt-4 md:-mt-6 z-20 gap-1 md:gap-0 mx-auto"
+			role="group"
+		>
+			<button
+				type="button"
+				class="button  bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+			>
+				<Icon icon="material-symbols:photo-library" width="20" />
+				<span class="ml-2">Photos</span>
+			</button>
+			<button
+				type="button"
+				class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+			>
+				<Icon icon="material-symbols:video-camera-back" width="20" />
+				<span class="ml-2">Video</span>
+			</button>
+			<button
+				type="button"
+				class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+			>
+				<Icon icon="material-symbols:map-outline" width="20" />
+				<span class="ml-2">Map</span>
+			</button>
+			<button
+				type="button"
+				class="button  bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+			>
+				<Icon icon="iconoir:3d-select-face" width="20" />
+				<span class="ml-2">3D Model</span>
+			</button>
 		</div>
 
 		<!-- Main Content -->
