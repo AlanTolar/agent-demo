@@ -101,10 +101,13 @@
 	let formEmail = '';
 	let formPhone = '';
 	let formMessage = '';
+
+	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'video';
+	$: console.log('mainContent: ', mainContent);
 </script>
 
 <!-- Info Bar -->
-<div class="sticky top-0 z-40 {contentCovered ? 'bg-neutral-200' : ''}" bind:this="{infoNav}">
+<div class="sticky top-0 z-30 {contentCovered ? 'bg-neutral-200' : ''}" bind:this="{infoNav}">
 	<div class="h-20 custom-container flex gap-x-10">
 		<div
 			class="w-full xl:w-8/12 shrink-0 flex justify-between gap-x-10 align-middle whitespace-nowrap flex-wrap"
@@ -146,111 +149,144 @@
 	<!-- Left Side -->
 	<div class="w-full xl:w-8/12 relative">
 		<!-- Image Carousel -->
-		<div class="custom-grid z-20">
-			<div style="grid-column: 6; padding:0;">
-				<button
-					class="absolute top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
-					disabled="{movingImages}"
-					on:click="{() => moveLastToFront(slides)}"
-				>
-					<Icon
-						icon="material-symbols:arrow-back"
-						class="w-5 h-5 text-neutral-200 sm:w-7 sm:h-7 m-auto"
-					/>
-				</button>
-			</div>
-			<div style="grid-column: 8; padding:0;">
-				<button
-					class="absolute top-1/2 -translate-y-1/2 -translate-x-full w-10 h-10 sm:w-12 sm:h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20 "
-					disabled="{movingImages}"
-					on:click="{() => moveFrontToEnd(slides)}"
-					><Icon
-						icon="material-symbols:arrow-forward"
-						class="w-5 h-5 text-neutral-200 sm:w-7 sm:h-7 m-auto"
-					/></button
-				>
-			</div>
-			<div bind:this="{formGap}" style="grid-column: 9;" class="h-0 hidden xl:block z-30">
-				<div class="h-[2000px]">
-					<!-- Contact Form Vertical -->
-					<div
-						class="bg-neutral-200 sticky  {contentCovered
-							? 'top-[100px]'
-							: 'top-[80px]'}  text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10"
+		{#if mainContent === 'photo'}
+			<div class="custom-grid z-20">
+				<!-- Left Buttons -->
+				<div style="grid-column: 6; padding: 0;">
+					<button
+						class="absolute top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
+						disabled="{movingImages}"
+						on:click="{() => moveLastToFront(slides)}"
 					>
-						<div class="grid grid-cols-3">
-							<div class="col-span-1">
-								<div class="aspect-w-1 aspect-h-1">
-									<img class="object-cover" src="{agent?.image}" alt="" />
+						<Icon
+							icon="material-symbols:arrow-back"
+							class="w-5 h-5 text-neutral-200 sm:w-7 sm:h-7 m-auto"
+						/>
+					</button>
+				</div>
+
+				<!-- Right Buttons -->
+				<div style="grid-column: 8; padding: 0;">
+					<button
+						class="absolute top-1/2 -translate-y-1/2 -translate-x-full w-10 h-10 sm:w-12 sm:h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
+						disabled="{movingImages}"
+						on:click="{() => moveFrontToEnd(slides)}"
+						><Icon
+							icon="material-symbols:arrow-forward"
+							class="w-5 h-5 text-neutral-200 sm:w-7 sm:h-7 m-auto"
+						/></button
+					>
+				</div>
+
+				<!-- Vertical Form -->
+				<div bind:this="{formGap}" style="grid-column: 9;" class="h-0 hidden xl:block z-30">
+					<div class="h-[2000px]">
+						<div
+							class="bg-neutral-200 sticky {contentCovered
+								? 'top-[100px]'
+								: 'top-[80px]'} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10"
+						>
+							<div class="grid grid-cols-3">
+								<div class="col-span-1">
+									<div class="aspect-w-1 aspect-h-1">
+										<img class="object-cover" src="{agent?.image}" alt="" />
+									</div>
+								</div>
+								<div class="col-span-2 pl-10 flex flex-col gap-4">
+									<div>
+										<h2 class="heading-text">{agent?.name ?? ''}</h2>
+										<p class="subtitle-text">{agent?.phone ?? ''}</p>
+									</div>
+									{#if listing.agent}
+										<a
+											class="label-text underline text-neutral-600 font-semibold"
+											href="/agents/{listing?.agent}">View Profile</a
+										>
+									{/if}
 								</div>
 							</div>
-							<div class="col-span-2 pl-10 flex flex-col gap-4">
-								<div>
-									<h2 class="heading-text">{agent?.name ?? ''}</h2>
-									<p class="subtitle-text">{agent?.phone ?? ''}</p>
-								</div>
-								{#if listing.agent}
-									<a
-										class="label-text underline text-neutral-600 font-semibold"
-										href="/agents/{listing?.agent}">View Profile</a
-									>
-								{/if}
-							</div>
+							<form class="mt-10 flex flex-col gap-6" autocomplete="off">
+								<input
+									class="text-input"
+									placeholder="Full Name"
+									type="text"
+									bind:value="{formName}"
+								/>
+								<input
+									class="text-input"
+									placeholder="Email"
+									type="email"
+									bind:value="{formEmail}"
+								/>
+								<input
+									class="text-input"
+									placeholder="Phone Number"
+									type="tel"
+									bind:value="{formPhone}"
+								/>
+								<textarea
+									class="text-input"
+									placeholder="Message"
+									rows="5"
+									cols="33"
+									bind:value="{formMessage}"></textarea>
+								<button
+									class="text-white button popup bg-primary-600 w-full"
+									type="submit">Contact {agent?.name}</button
+								>
+							</form>
 						</div>
-						<form class="mt-10 flex flex-col gap-6" autocomplete="off">
-							<input
-								class="text-input"
-								placeholder="Full Name"
-								type="text"
-								bind:value="{formName}"
-							/>
-							<input
-								class="text-input"
-								placeholder="Email"
-								type="email"
-								bind:value="{formEmail}"
-							/>
-							<input
-								class="text-input"
-								placeholder="Phone Number"
-								type="tel"
-								bind:value="{formPhone}"
-							/>
-							<textarea
-								class="text-input"
-								placeholder="Message"
-								rows="5"
-								cols="33"
-								bind:value="{formMessage}"></textarea>
-							<button
-								class="text-white button popup bg-primary-600 w-full"
-								type="submit">Contact {agent?.name}</button
-							>
-						</form>
 					</div>
 				</div>
-			</div>
 
-			{#each slides as slide, index (slide.id)}
-				{@const usedCols = [3, 5, 7, 11, 13]}
-				{@const col = usedCols[index]}
-				<div
-					animate:flip="{{
-						delay: 0,
-						duration: (d) =>
-							(index === 4 && direction === 'backwards') ||
-							(index === 0 && direction === 'forwards')
-								? 0
-								: 700,
-						easing: quintOut,
-					}}"
-					style="grid-column: {col};"
-					class="relative"
-				>
-					<img src="{slide.url}" alt="" />
-				</div>
-			{/each}
-		</div>
+				<!-- Images -->
+				{#each slides as slide, index (slide.id)}
+					{@const usedCols = [3, 5, 7, 11, 13]}
+					{@const col = usedCols[index]}
+					<div
+						animate:flip="{{
+							delay: 0,
+							duration: (d) =>
+								(index === 4 && direction === 'backwards') ||
+								(index === 0 && direction === 'forwards')
+									? 0
+									: 700,
+							easing: quintOut,
+						}}"
+						style="grid-column: {col};"
+						class="relative"
+					>
+						<img src="{slide.url}" alt="" />
+					</div>
+				{/each}
+			</div>
+		{/if}
+
+		<!-- Video -->
+		{#if mainContent === 'video'}
+			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
+				<iframe
+					src="https://www.youtube.com/embed/f2yCa1q3-9w"
+					title="The Ocean 4K - Sea Animals for Relaxation, Beautiful Coral Reef Fish in Aquarium (4K Video Ultra HD)"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen></iframe>
+			</div>
+		{/if}
+
+		<!-- Map -->
+		{#if mainContent === 'map'}
+			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
+				<div class="flex justify-center items-center display-text">Map Placeholder</div>
+			</div>
+		{/if}
+
+		<!-- 3D Model -->
+		{#if mainContent === 'model'}
+			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
+				<div class="flex justify-center items-center display-text">Model Placeholder</div>
+			</div>
+		{/if}
 
 		<!-- View Toggle -->
 		<div
@@ -260,6 +296,7 @@
 			<button
 				type="button"
 				class="button  bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+				on:click="{() => (mainContent = 'photo')}"
 			>
 				<Icon icon="material-symbols:photo-library" width="20" />
 				<span class="ml-2">Photos</span>
@@ -267,6 +304,7 @@
 			<button
 				type="button"
 				class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+				on:click="{() => (mainContent = 'video')}"
 			>
 				<Icon icon="material-symbols:video-camera-back" width="20" />
 				<span class="ml-2">Video</span>
@@ -274,6 +312,7 @@
 			<button
 				type="button"
 				class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+				on:click="{() => (mainContent = 'map')}"
 			>
 				<Icon icon="material-symbols:map-outline" width="20" />
 				<span class="ml-2">Map</span>
@@ -281,13 +320,14 @@
 			<button
 				type="button"
 				class="button  bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+				on:click="{() => (mainContent = 'model')}"
 			>
 				<Icon icon="iconoir:3d-select-face" width="20" />
 				<span class="ml-2">3D Model</span>
 			</button>
 		</div>
 
-		<!-- Main Content -->
+		<!-- Text Body -->
 		<main>
 			{#if listing.description}
 				<section id="description-section" class="py-10">
