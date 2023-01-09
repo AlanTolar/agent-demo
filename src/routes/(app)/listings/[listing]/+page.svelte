@@ -10,6 +10,10 @@
 
 	import Icon from '@iconify/svelte';
 
+	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
+	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
+	import { getBbox } from '$lib/utils/mapHelpers';
+
 	export let data: PageData;
 	let listing: Listing = data.listing;
 	let agent: Agent = data.agent;
@@ -51,6 +55,7 @@
 		},
 	];
 
+	let direction = 'forwards';
 	function moveLastToFront(arr) {
 		mainImgIndex -= 1;
 		direction = 'forwards';
@@ -59,10 +64,8 @@
 		arr.unshift(lastItem);
 		slides = arr;
 
-		// movingImages = true;
 		slides[0].url = getImg(mainImgIndex);
 	}
-
 	function moveFrontToEnd(arr) {
 		mainImgIndex += 1;
 		direction = 'backwards';
@@ -71,43 +74,40 @@
 		arr.push(firstItem);
 		slides = arr;
 
-		// movingImages = true;
 		slides[4].url = getImg(mainImgIndex + 4);
 	}
-
-	$: console.log(slides);
-
-	let direction = 'forwards';
-	// let leftInfoBar: number;
-	// let widthInfoBar: number;
-	// let topForm: number;
-	let formGap: HTMLDivElement;
-	let infoNav: HTMLDivElement;
-
-	// onMount(() => {
-	// 	topForm = infoNav.getBoundingClientRect().bottom;
-	// 	leftInfoBar = formGap.getBoundingClientRect().left;
-	// 	widthInfoBar = formGap.getBoundingClientRect().width;
-	// 	console.log(formGap.getBoundingClientRect());
-
-	// 	window.addEventListener('resize', () => {
-	// 		leftInfoBar = formGap.getBoundingClientRect().left;
-	// 		widthInfoBar = formGap.getBoundingClientRect().width;
-	// 		console.log(formGap.getBoundingClientRect());
-	// 	});
-	// });
 
 	let formName = '';
 	let formEmail = '';
 	let formPhone = '';
 	let formMessage = '';
 
-	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'video';
+	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'map';
 	$: console.log('mainContent: ', mainContent);
+
+	// const bbox = getBbox(coords);
+	// const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
+	let center: [number, number] = [-97.5, 35.5];
+	if (typeof listing?.location === 'string') {
+		console.log(listing.location);
+		const location = JSON.parse(listing.location);
+		if (location?.type === 'Point') {
+			center = location.coordinates;
+		}
+	}
+
+	// fit map to marker's bounding box
+	let mapComponent: Map;
+	const initMap = () => {
+		mapComponent.resize(); // resize map to fit container
+		// mapComponent.fitBounds(bbox, {
+		// 	padding: { top: 70, bottom: 70, left: 70, right: 70 },
+		// });
+	};
 </script>
 
 <!-- Info Bar -->
-<div class="sticky top-0 z-30 {contentCovered ? 'bg-neutral-200' : ''}" bind:this="{infoNav}">
+<div class="sticky top-0 z-30 {contentCovered ? 'bg-neutral-200' : ''}">
 	<div class="h-20 custom-container flex gap-x-10">
 		<div
 			class="w-full xl:w-8/12 shrink-0 flex justify-between gap-x-10 align-middle whitespace-nowrap flex-wrap"
@@ -178,67 +178,6 @@
 					>
 				</div>
 
-				<!-- Vertical Form -->
-				<div bind:this="{formGap}" style="grid-column: 9;" class="h-0 hidden xl:block z-30">
-					<div class="h-[2000px]">
-						<div
-							class="bg-neutral-200 sticky {contentCovered
-								? 'top-[100px]'
-								: 'top-[80px]'} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10"
-						>
-							<div class="grid grid-cols-3">
-								<div class="col-span-1">
-									<div class="aspect-w-1 aspect-h-1">
-										<img class="object-cover" src="{agent?.image}" alt="" />
-									</div>
-								</div>
-								<div class="col-span-2 pl-10 flex flex-col gap-4">
-									<div>
-										<h2 class="heading-text">{agent?.name ?? ''}</h2>
-										<p class="subtitle-text">{agent?.phone ?? ''}</p>
-									</div>
-									{#if listing.agent}
-										<a
-											class="label-text underline text-neutral-600 font-semibold"
-											href="/agents/{listing?.agent}">View Profile</a
-										>
-									{/if}
-								</div>
-							</div>
-							<form class="mt-10 flex flex-col gap-6" autocomplete="off">
-								<input
-									class="text-input"
-									placeholder="Full Name"
-									type="text"
-									bind:value="{formName}"
-								/>
-								<input
-									class="text-input"
-									placeholder="Email"
-									type="email"
-									bind:value="{formEmail}"
-								/>
-								<input
-									class="text-input"
-									placeholder="Phone Number"
-									type="tel"
-									bind:value="{formPhone}"
-								/>
-								<textarea
-									class="text-input"
-									placeholder="Message"
-									rows="5"
-									cols="33"
-									bind:value="{formMessage}"></textarea>
-								<button
-									class="text-white button popup bg-primary-600 w-full"
-									type="submit">Contact {agent?.name}</button
-								>
-							</form>
-						</div>
-					</div>
-				</div>
-
 				<!-- Images -->
 				{#each slides as slide, index (slide.id)}
 					{@const usedCols = [3, 5, 7, 11, 13]}
@@ -276,15 +215,34 @@
 
 		<!-- Map -->
 		{#if mainContent === 'map'}
-			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
-				<div class="flex justify-center items-center display-text">Map Placeholder</div>
+			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3 ">
+				<div class="h-full w-full">
+					<Map
+						accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
+						bind:this="{mapComponent}"
+						on:ready="{() => initMap()}"
+						center="{center}"
+						zoom="2"
+						options="{{ scrollZoom: false }}"
+					>
+						<NavigationControl />
+						<ScaleControl />
+					</Map>
+				</div>
 			</div>
 		{/if}
 
 		<!-- 3D Model -->
 		{#if mainContent === 'model'}
 			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
-				<div class="flex justify-center items-center display-text">Model Placeholder</div>
+				<div class="flex justify-center items-center display-text">
+					<iframe
+						class="w-full h-full"
+						title="3D Model"
+						id="model-iframe"
+						src="https://www.landlistingpro.com/3d-model/111/display"
+						allowfullscreen></iframe>
+				</div>
 			</div>
 		{/if}
 
@@ -490,11 +448,11 @@
 
 	<!-- Right Side -->
 	<div class="relative w-full xl:w-4/12">
-		<!-- Contact Form Horizontal -->
+		<!-- Vertical Form -->
 		<div
-			class="bg-neutral-200 sticky  {contentCovered
+			class="bg-neutral-200 sticky {contentCovered
 				? 'top-[100px]'
-				: 'top-[80px]'}  text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10 xl:hidden max-w-[800px] mx-auto mt-10"
+				: 'top-[80px]'} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10 max-w-[600px] mx-auto z-30"
 		>
 			<div class="grid grid-cols-3">
 				<div class="col-span-1">
@@ -556,7 +514,7 @@
 		position: relative;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 650%;
+		width: 644%;
 		/* max-width: 1200px; */
 	}
 	.custom-grid > * {

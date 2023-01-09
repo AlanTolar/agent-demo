@@ -6,11 +6,13 @@
 	import RadioField from '$lib/components/RadioField.svelte';
 	import DropdownOptions from '$lib/components/DropdownOptions.svelte';
 	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
+	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
 	import { onMount } from 'svelte';
 	import { getBreakpoint } from '$lib/utils/getBreakpoint';
 
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
+	import { getBbox } from '$lib/utils/mapHelpers';
 
 	let breakpoint: string;
 	onMount(() => {
@@ -36,8 +38,6 @@
 	}
 	let listings: MapListing[] = data.listings;
 
-	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
-
 	type Coord = [number, number];
 	let coords: Coord[] = [];
 	listings = listings.map((listing) => {
@@ -47,19 +47,6 @@
 		return listing;
 	});
 
-	// function that filters listings to get the bounding box from the coordinates in the location key
-	function getBbox(coords: Coord[]): Coord[] {
-		const lngs = coords.map((coord) => coord[0]);
-		const lats = coords.map((coord) => coord[1]);
-		const minLng = Math.min(...lngs);
-		const maxLng = Math.max(...lngs);
-		const minLat = Math.min(...lats);
-		const maxLat = Math.max(...lats);
-		return [
-			[minLng, minLat],
-			[maxLng, maxLat],
-		];
-	}
 	const bbox = getBbox(coords);
 	const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
 
