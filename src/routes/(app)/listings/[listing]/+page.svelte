@@ -10,9 +10,10 @@
 
 	import Icon from '@iconify/svelte';
 
-	import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
-	const { GeolocateControl, NavigationControl, ScaleControl } = controls;
-	import { getBbox } from '$lib/utils/mapHelpers';
+	// import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
+	// const { GeolocateControl, NavigationControl, ScaleControl } = controls;
+	import { getBbox, createBoundingBox, addPropertyBoundary } from '$lib/utils/mapHelpers';
+	import mapboxgl from 'mapbox-gl';
 
 	export let data: PageData;
 	let listing: Listing = data.listing;
@@ -83,13 +84,11 @@
 	let formMessage = '';
 
 	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'photo';
-	$: console.log('mainContent: ', mainContent);
 
 	// const bbox = getBbox(coords);
 	// const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
-	let center: [number, number] = [-97.5, 35.5];
+	let center: [number, number];
 	if (typeof listing?.location === 'string') {
-		console.log(listing.location);
 		const location = JSON.parse(listing.location);
 		if (location?.type === 'Point') {
 			center = location.coordinates;
@@ -97,16 +96,48 @@
 	}
 
 	// fit map to marker's bounding box
-	let mapComponent: Map;
-	const initMap = () => {
-		mapComponent.resize(); // resize map to fit container
-		// mapComponent.fitBounds(bbox, {
-		// 	padding: { top: 70, bottom: 70, left: 70, right: 70 },
-		// });
-	};
+	let coordinates: [number, number][];
+	try {
+		coordinates = JSON.parse(listing.boundaryCoordinates);
+	} catch (error) {
+		coordinates = center ? [center] : undefined;
+	}
+
+	onMount(() => {
+		if (coordinates && mainContent === 'map') {
+			initMap();
+		}
+	});
+
+	let isFirstRun = true;
+	function initMap() {
+		if (coordinates && isFirstRun) {
+			console.log('init map');
+			const map = new mapboxgl.Map({
+				accessToken:
+					'pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA',
+				container: 'map',
+				center: center,
+				zoom: 4,
+				style: 'mapbox://styles/mapbox/satellite-streets-v12',
+				interactive: true,
+				doubleClickZoom: true,
+				maxZoom: 20,
+			});
+			map.addControl(new mapboxgl.NavigationControl());
+
+			// map.resize();
+			createBoundingBox(coordinates, map);
+			map.on('style.load', () => {
+				addPropertyBoundary(coordinates, map);
+			});
+		}
+		isFirstRun = false;
+	}
 </script>
 
 <!-- Info Bar -->
+<!-- <button on:click="{() => map.resize()}">resixe</button> -->
 <div class="sticky top-0 z-30 {contentCovered ? 'bg-neutral-200' : ''}">
 	<div class="h-20 custom-container flex gap-x-10">
 		<div
@@ -149,7 +180,7 @@
 	<!-- Left Side -->
 	<div class="w-full xl:w-8/12 relative">
 		<!-- Image Carousel -->
-		{#if mainContent === 'photo'}
+		<div class="{mainContent === 'photo' ? 'block' : 'hidden'}">
 			<div class="custom-grid z-20">
 				<!-- Left Buttons -->
 				<div style="grid-column: 6; padding: 0;">
@@ -199,55 +230,46 @@
 					</div>
 				{/each}
 			</div>
-		{/if}
+		</div>
 
 		<!-- Video -->
-		{#if mainContent === 'video' && listing?.videoURL}
-			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
-				<iframe
-					src="{listing.videoURL}"
-					title="The Ocean 4K - Sea Animals for Relaxation, Beautiful Coral Reef Fish in Aquarium (4K Video Ultra HD)"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					allowfullscreen></iframe>
-			</div>
-		{/if}
+		<div
+			style="grid-column: 7;"
+			class="aspect-w-5 aspect-h-3 {mainContent === 'video' ? 'block' : 'hidden'}"
+		>
+			<iframe
+				src="{listing.videoURL}"
+				title="The Ocean 4K - Sea Animals for Relaxation, Beautiful Coral Reef Fish in Aquarium (4K Video Ultra HD)"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				allowfullscreen></iframe>
+		</div>
 
 		<!-- Map -->
-		{#if mainContent === 'map' && listing?.boundaryCoordinates}
-			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3 ">
-				<div class="h-full w-full">
-					<Map
-						accessToken="pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA"
-						bind:this="{mapComponent}"
-						on:ready="{() => initMap()}"
-						center="{center}"
-						zoom="2"
-						options="{{ scrollZoom: false }}"
-					>
-						<NavigationControl />
-						<ScaleControl />
-					</Map>
-				</div>
-			</div>
-		{/if}
+		<div
+			style="grid-column: 7;"
+			class="aspect-w-5 aspect-h-3 {mainContent === 'map' ? 'block' : 'hidden'}"
+		>
+			<div id="map" class="h-full w-full"> </div>
+		</div>
 
 		<!-- 3D Model -->
-		{#if mainContent === 'model' && listing?.modelURL}
-			<div style="grid-column: 7;" class="aspect-w-5 aspect-h-3">
-				<div class="flex justify-center items-center display-text">
-					<iframe
-						class="w-full h-full"
-						title="3D Model"
-						id="model-iframe"
-						src="{listing.modelURL}"
-						allowfullscreen></iframe>
-				</div>
+		<div
+			style="grid-column: 7;"
+			class="aspect-w-5 aspect-h-3 {mainContent === 'model' ? 'block' : 'hidden'}"
+		>
+			<div class="flex justify-center items-center display-text">
+				<iframe
+					class="w-full h-full"
+					title="3D Model"
+					id="model-iframe"
+					src="{listing.modelURL}"
+					allowfullscreen></iframe>
 			</div>
-		{/if}
+		</div>
 
 		<!-- View Toggle -->
-		{#if listing?.videoURL || listing?.modelURL || listing?.boundaryCoordinates}
+		{#if listing?.videoURL || listing?.modelURL || coordinates}
 			<div
 				class="relative flex flex-wrap justify-center mt-4 md:-mt-6 z-20 gap-1 md:gap-0 mx-auto"
 				role="group"
@@ -270,11 +292,12 @@
 						<span class="ml-2">Video</span>
 					</button>
 				{/if}
-				{#if listing?.boundaryCoordinates}
+				{#if coordinates}
 					<button
 						type="button"
 						class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 						on:click="{() => (mainContent = 'map')}"
+						on:click|once="{() => initMap()}"
 					>
 						<Icon icon="material-symbols:map-outline" width="20" />
 						<span class="ml-2">Map</span>

@@ -1,6 +1,7 @@
 {
   "details": "<ul>\n  <li>Bordered by dense forest for privacy and natural habitat</li>\n  <li>Small stream running through the property</li>\n  <li>Mature oak trees present</li>\n  <li>Rolling hills with picturesque views</li>\n  <li>Property situated on a rise with panoramic views of distant mountains</li>\n  <li>Clearing in the center of the land offers a spacious, open area</li>\n  <li>Wildflowers and native plants found throughout the property</li>\n  <li>Mild winters and warm summers in the region</li>\n  <li>Hiking and biking trails in nearby forests</li>\n  <li>Southern exposure ensures plenty of sunlight throughout the day</li>\n</ul>",
   "agent": "tommy-lee",
+  "modelURL": "https://www.landlistingpro.com/3d-model/111/display",
   "summary": {
     "featureCategories": [
       {
@@ -53,6 +54,8 @@
   "price": 150000,
   "featuredImage": "/uploads/tomasz-filipek-cuwc-6mrcng-unsplash.jpeg",
   "date": "2023-01-06T04:07:33.149Z",
+  "boundaryCoordinates": "f",
+  "videoURL": "https://youtube.com/embed/Rz8Ah1y2hJM",
   "address": {
     "city": "Newberry",
     "state": "South Carolina",
