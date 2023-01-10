@@ -109,13 +109,14 @@
 		}
 	});
 
+	mapboxgl.accessToken =
+		'pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA';
 	let isFirstRun = true;
+	let map: mapboxgl.Map;
 	function initMap() {
+		// check if the map has been created
 		if (coordinates && isFirstRun) {
-			console.log('init map');
-			const map = new mapboxgl.Map({
-				accessToken:
-					'pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA',
+			map = new mapboxgl.Map({
 				container: 'map',
 				center: center,
 				zoom: 4,
@@ -124,9 +125,8 @@
 				doubleClickZoom: true,
 				maxZoom: 20,
 			});
-			map.addControl(new mapboxgl.NavigationControl());
 
-			// map.resize();
+			map.addControl(new mapboxgl.NavigationControl());
 			createBoundingBox(coordinates, map);
 			map.on('style.load', () => {
 				addPropertyBoundary(coordinates, map);
@@ -560,5 +560,16 @@
 			/* transform: translateX(-45.1%); */
 			width: 450%;
 		}
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	#map {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 100%;
 	}
 </style>
