@@ -83,7 +83,7 @@
 	let formPhone = '';
 	let formMessage = '';
 
-	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'photo';
+	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'model';
 
 	// const bbox = getBbox(coords);
 	// const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
