@@ -83,7 +83,7 @@
 	let formPhone = '';
 	let formMessage = '';
 
-	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'model';
+	let mainContent: 'photo' | 'video' | 'map' | 'model' = listing?.modelURL ? 'model' : 'photo';
 
 	// const bbox = getBbox(coords);
 	// const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
@@ -111,11 +111,11 @@
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA';
-	let isFirstRun = true;
-	let map: mapboxgl.Map;
+	let map: mapboxgl.Map | undefined;
+	console.log('map: ', map);
 	function initMap() {
 		// check if the map has been created
-		if (coordinates && isFirstRun) {
+		if (coordinates && !map) {
 			map = new mapboxgl.Map({
 				container: 'map',
 				center: center,
@@ -132,12 +132,10 @@
 				addPropertyBoundary(coordinates, map);
 			});
 		}
-		isFirstRun = false;
 	}
 </script>
 
 <!-- Info Bar -->
-<!-- <button on:click="{() => map.resize()}">resixe</button> -->
 <div class="sticky top-0 z-30 {contentCovered ? 'bg-neutral-200' : ''}">
 	<div class="h-20 custom-container flex gap-x-10">
 		<div
@@ -233,40 +231,42 @@
 		</div>
 
 		<!-- Video -->
-		<div
-			style="grid-column: 7;"
-			class="aspect-w-5 aspect-h-3 {mainContent === 'video' ? 'block' : 'hidden'}"
-		>
-			<iframe
-				src="{listing.videoURL}"
-				title="The Ocean 4K - Sea Animals for Relaxation, Beautiful Coral Reef Fish in Aquarium (4K Video Ultra HD)"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				allowfullscreen></iframe>
-		</div>
+		{#if listing?.videoURL}
+			<div
+				style="grid-column: 7;"
+				class="aspect-w-5 aspect-h-3 {mainContent === 'video' ? 'block' : 'hidden'}"
+			>
+				<video src="{listing.videoURL}" muted controls></video>
+			</div>
+		{/if}
 
 		<!-- Map -->
-		<div
-			style="grid-column: 7;"
-			class="aspect-w-5 aspect-h-3 {mainContent === 'map' ? 'block' : 'hidden'}"
-		>
-			<div id="map" class="h-full w-full"> </div>
-		</div>
+		{#if coordinates}
+			<div
+				style="grid-column: 7;"
+				class="aspect-w-5 aspect-h-3 {mainContent === 'map' ? 'block' : 'hidden'}"
+			>
+				<div id="map" class="h-full w-full"> </div>
+			</div>
+		{/if}
 
 		<!-- 3D Model -->
-		<div
-			style="grid-column: 7;"
-			class="aspect-w-5 aspect-h-3 {mainContent === 'model' ? 'block' : 'hidden'}"
-		>
-			<div class="flex justify-center items-center display-text">
-				<iframe
-					class="w-full h-full"
-					title="3D Model"
-					id="model-iframe"
-					src="{listing.modelURL}"
-					allowfullscreen></iframe>
+		{#if listing?.modelURL}
+			<div
+				style="grid-column: 7;"
+				class="aspect-w-5 aspect-h-3 {mainContent === 'model' ? 'block' : 'hidden'}"
+			>
+				<div class="flex justify-center items-center display-text">
+					<iframe
+						class="w-full h-full"
+						title="3D Model"
+						id="model-iframe"
+						src="{listing.modelURL}"
+						allow="fullscreen"
+						scrolling="no"></iframe>
+				</div>
 			</div>
-		</div>
+		{/if}
 
 		<!-- View Toggle -->
 		{#if listing?.videoURL || listing?.modelURL || coordinates}
@@ -276,7 +276,7 @@
 			>
 				<button
 					type="button"
-					class="button  bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+					class="button bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 					on:click="{() => (mainContent = 'photo')}"
 				>
 					<Icon icon="material-symbols:photo-library" width="20" />
@@ -285,7 +285,7 @@
 				{#if listing?.videoURL}
 					<button
 						type="button"
-						class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+						class="button bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 						on:click="{() => (mainContent = 'video')}"
 					>
 						<Icon icon="material-symbols:video-camera-back" width="20" />
@@ -295,9 +295,9 @@
 				{#if coordinates}
 					<button
 						type="button"
-						class="button  bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+						class="button bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 						on:click="{() => (mainContent = 'map')}"
-						on:click|once="{() => initMap()}"
+						on:click|once="{() => (!map ? initMap() : null)}"
 					>
 						<Icon icon="material-symbols:map-outline" width="20" />
 						<span class="ml-2">Map</span>
@@ -306,7 +306,7 @@
 				{#if listing?.modelURL}
 					<button
 						type="button"
-						class="button  bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
+						class="button bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 						on:click="{() => (mainContent = 'model')}"
 					>
 						<Icon icon="iconoir:3d-select-face" width="20" />
@@ -483,7 +483,7 @@
 		<div
 			class="bg-neutral-200 sticky {contentCovered
 				? 'top-[100px]'
-				: 'top-[80px]'} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10 max-w-[600px] mx-auto z-30"
+				: 'top-[80px]'} text-black p-10 rounded-[4%] drop-shadow-lg shine-lg mb-10 max-w-[600px] mx-auto z-20"
 		>
 			<div class="grid grid-cols-3">
 				<div class="col-span-1">
