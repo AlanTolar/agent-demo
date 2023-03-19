@@ -130,19 +130,14 @@
 			>
 		</div>
 		<div class="col-span-1 max-w-[400px] mx-auto">
-			<form
-				name="newsletter"
-				method="POST"
-				netlify-honeypot="bot-field"
-				data-netlify="true"
-				class="flex mb-2"
-			>
+			<form name="newsletter" method="POST" data-netlify="true" class="flex mb-2">
 				<input type="hidden" name="form-name" value="newsletter" />
 				<input class="w-full rounded-l-lg" type="email" name="email" />
 				<button
 					class="label-text px-5 py-2.5 text-white rounded-r-lg bg-primary-600"
 					type="submit">Subscribe</button
 				>
+				<input type="submit" value="Submit 2" />
 			</form>
 			<p class="caption-text"
 				>We care about the protection of your data. Read our <span class="underline"
