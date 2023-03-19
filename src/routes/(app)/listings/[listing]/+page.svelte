@@ -78,6 +78,7 @@
 	let formMessage = '';
 
 	let mainContent: 'photo' | 'video' | 'map' | 'model' = listing?.modelURL ? 'model' : 'photo';
+	$: console.log(mainContent);
 
 	// const bbox = getBbox(coords);
 	// const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
@@ -271,44 +272,73 @@
 				class="relative flex flex-wrap justify-center mt-4 md:-mt-6 z-20 gap-1 md:gap-0 mx-auto"
 				role="group"
 			>
-				<button
-					type="button"
-					class="button bg-primary-600 text-neutral-200   first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-					on:click="{() => (mainContent = 'photo')}"
+				<input
+					type="radio"
+					id="photo-btn"
+					name="content"
+					value="photo"
+					class="hidden peer/photo"
+					bind:group="{mainContent}"
+				/>
+				<label
+					for="photo-btn"
+					class="button bg-primary-600 peer-checked/photo:bg-neutral-600 text-neutral-200 first-of-type:md:rounded-l-lg last-of-type:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 				>
 					<Icon icon="material-symbols:photo-library" width="20" />
 					<span class="ml-2">Photos</span>
-				</button>
+				</label>
+
 				{#if listing?.videoURL}
-					<button
-						type="button"
-						class="button bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-						on:click="{() => (mainContent = 'video')}"
+					<input
+						type="radio"
+						id="video-btn"
+						name="content"
+						value="video"
+						class="hidden peer/video"
+						bind:group="{mainContent}"
+					/>
+					<label
+						for="video-btn"
+						class="button bg-primary-600 peer-checked/video:bg-neutral-600 text-neutral-200 first-of-type:md:rounded-l-lg last-of-type:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 					>
 						<Icon icon="material-symbols:video-camera-back" width="20" />
 						<span class="ml-2">Video</span>
-					</button>
+					</label>
 				{/if}
 				{#if coordinates}
-					<button
-						type="button"
-						class="button bg-primary-600 text-neutral-200  first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-						on:click="{() => (mainContent = 'map')}"
-						on:click|once="{() => (!map ? initMap() : null)}"
+					<input
+						type="radio"
+						id="map-btn"
+						name="content"
+						value="map"
+						class="hidden peer/map"
+						bind:group="{mainContent}"
+						on:change|once="{() => (!map ? initMap() : null)}"
+					/>
+					<label
+						for="map-btn"
+						class="button bg-primary-600 peer-checked/map:bg-neutral-600 text-neutral-200 first-of-type:md:rounded-l-lg last-of-type:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 					>
 						<Icon icon="material-symbols:map-outline" width="20" />
 						<span class="ml-2">Map</span>
-					</button>
+					</label>
 				{/if}
 				{#if listing?.modelURL}
-					<button
-						type="button"
-						class="button bg-primary-600 text-neutral-200 first:md:rounded-l-lg last:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
-						on:click="{() => (mainContent = 'model')}"
+					<input
+						type="radio"
+						id="model-btn"
+						name="content"
+						value="model"
+						class="hidden peer/model"
+						bind:group="{mainContent}"
+					/>
+					<label
+						for="model-btn"
+						class="button bg-primary-600 peer-checked/model:bg-neutral-600 text-neutral-200 first-of-type:md:rounded-l-lg last-of-type:md:rounded-r-lg border-2 -ml-[2px] first:ml-0"
 					>
 						<Icon icon="iconoir:3d-select-face" width="20" />
 						<span class="ml-2">3D Model</span>
-					</button>
+					</label>
 				{/if}
 			</div>
 		{/if}
