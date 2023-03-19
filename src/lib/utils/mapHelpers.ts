@@ -70,7 +70,7 @@ export function addPropertyBoundary(coordinates: number[][], map: mapboxgl.Map) 
 			'line-cap': 'round',
 		},
 		paint: {
-			'line-color': '#888',
+			'line-color': '#000000',
 			'line-width': 4,
 		},
 	});
