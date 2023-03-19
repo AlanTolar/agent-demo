@@ -59,10 +59,26 @@
 		});
 	};
 
-	const [minPrice, maxPrice] = [0, 2000000];
+	const priceFilterCeiling = 500000;
+	const minPrice = listings.reduce((min, p) => {
+		if (p.price > priceFilterCeiling) return priceFilterCeiling - 1;
+		return p.price < min ? p.price : min;
+	}, listings[0].price);
+	const maxPrice = listings.reduce((max, p) => {
+		if (p.price > priceFilterCeiling) return priceFilterCeiling;
+		return p.price > max ? p.price : max;
+	}, listings[0].price);
 	let [minPriceValue, maxPriceValue] = [minPrice, maxPrice];
 
-	const [minAcres, maxAcres] = [0, 100];
+	const acresFilterCeiling = 500;
+	const minAcres = listings.reduce((min, p) => {
+		if (p.acres > acresFilterCeiling) return acresFilterCeiling - 1;
+		return p.acres < min ? p.acres : min;
+	}, listings[0].acres);
+	const maxAcres = listings.reduce((max, p) => {
+		if (p.acres > acresFilterCeiling) return acresFilterCeiling;
+		return p.acres > max ? p.acres : max;
+	}, listings[0].acres);
 	let [minAcresValue, maxAcresValue] = [minAcres, maxAcres];
 
 	function filterListings(
@@ -124,7 +140,7 @@
 					max="{maxPrice}"
 					name="Price"
 					prefix="$"
-					on:stop="{(e) => {
+					on:change="{(e) => {
 						minPriceValue = e.detail.values[0];
 						maxPriceValue = e.detail.values[1];
 					}}"
@@ -135,7 +151,7 @@
 					min="{minAcres}"
 					max="{maxAcres}"
 					name="Acres"
-					on:stop="{(e) => {
+					on:change="{(e) => {
 						minAcresValue = e.detail.values[0];
 						maxAcresValue = e.detail.values[1];
 					}}"

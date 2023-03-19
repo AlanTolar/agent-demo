@@ -2,9 +2,9 @@
 	import RangeSlider from 'svelte-range-slider-pips';
 	import numbro from 'numbro';
 
-	export let min = 0;
-	export let max = 100;
-	export let step = max / 100;
+	export let min: number;
+	export let max: number;
+	export let step = (max - min) / 100;
 	export let name = 'Range';
 	export let prefix = '';
 
@@ -23,7 +23,15 @@
 	>
 </div>
 <div class="slider">
-	<RangeSlider min="{min}" max="{max}" step="{step}" range pushy bind:values="{range}" on:stop />
+	<RangeSlider
+		min="{min}"
+		max="{max}"
+		step="{step}"
+		range
+		pushy
+		bind:values="{range}"
+		on:change
+	/>
 </div>
 
 <style>
