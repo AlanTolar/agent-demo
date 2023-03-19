@@ -277,7 +277,6 @@
 				<input
 					type="radio"
 					id="photo-btn"
-					name="content"
 					value="photo"
 					class="hidden peer/photo"
 					bind:group="{mainContent}"
@@ -294,7 +293,6 @@
 					<input
 						type="radio"
 						id="video-btn"
-						name="content"
 						value="video"
 						class="hidden peer/video"
 						bind:group="{mainContent}"
@@ -311,7 +309,6 @@
 					<input
 						type="radio"
 						id="map-btn"
-						name="content"
 						value="map"
 						class="hidden peer/map"
 						bind:group="{mainContent}"
@@ -329,7 +326,6 @@
 					<input
 						type="radio"
 						id="model-btn"
-						name="content"
 						value="model"
 						class="hidden peer/model"
 						bind:group="{mainContent}"
@@ -366,7 +362,7 @@
 			{#if listing.summary}
 				<section id="summary-section" class="py-10">
 					<h3 class="heading-text-sm">Summary</h3>
-					<div class="mt-4" style="column-count:2;">
+					<div class="mt-4 sm:columns-2">
 						<div class="flex flex-col gap-6">
 							{#if listing.summary.featureCategories}
 								<div class="flex break-inside-avoid">
@@ -477,6 +473,16 @@
 				<section id="further-info-section" class="py-10">
 					<h3 class="heading-text-sm">Further Information</h3>
 					<div class="mt-4 grid sm:grid-cols-2 gap-6">
+						<div class="flex justify-center">
+							<div>
+								<p>{listing.address.street || ''}</p>
+								<p
+									>{listing.address.city || ''}, {listing.address.state || ''}
+									{listing.address.postCode || ''}</p
+								>
+								<p>{listing.address.county || ''}</p>
+							</div>
+						</div>
 						<div class="flex flex-col gap-4 items-center">
 							{#if listing.brouchure}
 								<a
@@ -496,16 +502,6 @@
 									></iconify-icon>Get Directions</a
 								>
 							{/if}
-						</div>
-						<div class="flex justify-center">
-							<div>
-								<p>{listing.address.street || ''}</p>
-								<p
-									>{listing.address.city || ''}, {listing.address.state || ''}
-									{listing.address.postCode || ''}</p
-								>
-								<p>{listing.address.county || ''}</p>
-							</div>
 						</div>
 					</div>
 				</section>

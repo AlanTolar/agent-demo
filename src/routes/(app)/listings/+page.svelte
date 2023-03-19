@@ -104,9 +104,7 @@
 	$: filterListings(minPriceValue, maxPriceValue, minAcresValue, maxAcresValue);
 	$: numListings = listings.filter((listing) => listing.visible).length;
 
-	let filterShow = false;
-	let mapShow = true;
-	let listShow = false;
+	let selectedView: 'map' | 'list' | 'filter' = 'map';
 	$: mobileView = ['sm', 'md'].includes(breakpoint);
 
 	let landTypeCheckboxes = [
@@ -124,13 +122,13 @@
 <div class="h-[calc(100vh-64px-50px)] md:h-[calc(100vh-64px)] flex flex-row grow">
 	<div class="grow flex flex-col">
 		<div
-			class="{filterShow && mobileView
+			class="{selectedView === 'filter' && mobileView
 				? ''
 				: 'hidden'} text-primary-600 font-semibold px-6 py-2 whitespace-nowrap"
 			><span>{numListings}</span> listings</div
 		>
 		<menu
-			class="{filterShow && mobileView ? '' : 'hidden'} {mobileView
+			class="{selectedView === 'filter' && mobileView ? '' : 'hidden'} {mobileView
 				? 'relative overflow-scroll'
 				: ''} flex flex-col md:flex md:flex-row md:justify-between md:items-center h-full md:h-[80px] gap-6 md:gap-16 bg-neutral-100 border-b-2 p-6"
 		>
@@ -158,7 +156,10 @@
 				/>
 			</li>
 			<li class="whitespace-nowrap">
-				<DropdownOptions name="Filter By" escape="{filterShow && mobileView}">
+				<DropdownOptions
+					name="Filter By"
+					escape="{selectedView === 'filter' && mobileView}"
+				>
 					<form
 						class="md:absolute flex flex-col md:flex-row bg-neutral-100 right-0 z-40 rounded-lg md:divide-x"
 					>
@@ -192,7 +193,9 @@
 				</DropdownOptions>
 			</li>
 		</menu>
-		<div class="{mapShow && mobileView ? '' : 'hidden'} md:block h-full relative">
+		<div
+			class="{selectedView === 'map' && mobileView ? '' : 'hidden'} md:block h-full relative"
+		>
 			<div
 				class="absolute md:hidden top-1 left-3 z-10 text-primary-600 font-semibold px-3 p-1 whitespace-nowrap bg-neutral-100 rounded-full"
 				><span>{numListings}</span> listings</div
@@ -230,7 +233,7 @@
 	</div>
 
 	<div
-		class="{listShow && mobileView
+		class="{selectedView === 'list' && mobileView
 			? ''
 			: 'hidden'} md:block relative overflow-scroll w-full md:w-1/3 xl:w-[500px] border-l-2 bg-neutral-200 "
 	>
@@ -333,42 +336,52 @@
 
 <menu
 	class="md:hidden flex justify-center items-center h-[50px] gap-16 bg-neutral-200 border-b-2 px-8"
+	role="group"
 >
 	<li>
-		<button
-			class="text-white button-sm drop-shadow-xl shine bg-primary-600"
-			on:click="{() => {
-				mapShow = true;
-				listShow = false;
-				filterShow = false;
-			}}"
+		<input
+			type="radio"
+			id="map-btn"
+			value="map"
+			class="hidden peer/map"
+			bind:group="{selectedView}"
+		/>
+		<label
+			for="map-btn"
+			class="text-white button-sm drop-shadow-xl shine bg-primary-600 peer-checked/map:bg-neutral-600"
 		>
 			Map
-		</button>
+		</label>
 	</li>
 	<li>
-		<button
-			class="text-white button-sm drop-shadow-xl shine bg-primary-600"
-			on:click="{() => {
-				mapShow = false;
-				listShow = true;
-				filterShow = false;
-			}}"
+		<input
+			type="radio"
+			id="list-btn"
+			value="list"
+			class="hidden peer/list"
+			bind:group="{selectedView}"
+		/>
+		<label
+			for="list-btn"
+			class="text-white button-sm drop-shadow-xl shine bg-primary-600 peer-checked/list:bg-neutral-600"
 		>
 			List
-		</button>
+		</label>
 	</li>
 	<li>
-		<button
-			class="text-white button-sm drop-shadow-xl shine bg-primary-600"
-			on:click="{() => {
-				mapShow = false;
-				listShow = false;
-				filterShow = true;
-			}}"
+		<input
+			type="radio"
+			id="filter-btn"
+			value="filter"
+			class="hidden peer/filter"
+			bind:group="{selectedView}"
+		/>
+		<label
+			for="filter-btn"
+			class="text-white button-sm drop-shadow-xl shine bg-primary-600 peer-checked/filter:bg-neutral-600"
 		>
 			Filter
-		</button>
+		</label>
 	</li>
 </menu>
 
