@@ -17,6 +17,7 @@
 
 	export let data: PageData;
 	let listing: Listing = data.listing;
+	console.log('listing: ', listing);
 	let agent: Agent = data.agent;
 	let movingImages = false;
 	let mainImgIndex = 0;
@@ -485,9 +486,11 @@
 									></iconify-icon>Download Files</a
 								>
 							{/if}
-							{#if listing.location}
+							{#if center}
 								<a
-									href="{listing.location}"
+									href="https://www.google.com/maps/dir/?api=1&destination={center[1]},{center[0]}"
+									target="_blank"
+									rel="noreferrer"
 									class="text-white button drop-shadow-xl shine bg-primary-600 min-w-[70%] text-center"
 									><iconify-icon inline icon="mdi:map-marker" class="mr-2"
 									></iconify-icon>Get Directions</a
