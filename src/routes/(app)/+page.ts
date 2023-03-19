@@ -6,3 +6,5 @@ export const load = (({ params }) => {
 		listings: getListings(),
 	};
 }) satisfies PageLoad;
+
+export const prerender = true;
