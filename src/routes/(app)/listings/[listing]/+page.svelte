@@ -18,12 +18,6 @@
 	export let data: PageData;
 	let listing: Listing = data.listing;
 	let agent: Agent = data.agent;
-	// console.log('agent: ', agent);
-	// console.log('listing: ', listing);
-
-	let scroll = getContext('scroll');
-	$: contentCovered = $scroll !== 0;
-
 	let movingImages = false;
 	let mainImgIndex = 0;
 
@@ -87,7 +81,7 @@
 
 	// const bbox = getBbox(coords);
 	// const center: Coord = [(bbox[0][0] + bbox[1][0]) / 2, (bbox[0][1] + bbox[1][1]) / 2];
-	let center: [number, number];
+	let center: [number, number] | undefined;
 	if (typeof listing?.location === 'string') {
 		const location = JSON.parse(listing.location);
 		if (location?.type === 'Point') {
@@ -96,23 +90,26 @@
 	}
 
 	// fit map to marker's bounding box
-	let coordinates: [number, number][];
+	let coordinates: [number, number][] | undefined;
 	try {
 		coordinates = JSON.parse(listing.boundaryCoordinates);
 	} catch (error) {
 		coordinates = center ? [center] : undefined;
 	}
 
+	let contentCovered: boolean;
 	onMount(() => {
 		if (coordinates && mainContent === 'map') {
 			initMap();
 		}
+		document.addEventListener('scroll', () => {
+			contentCovered = document.documentElement.scrollTop !== 0;
+		});
 	});
 
 	mapboxgl.accessToken =
 		'pk.eyJ1IjoibGFuZGxpc3Rpbmdwcm8iLCJhIjoiY2tuNjQ2djRxMGFkczJ3cXBxcmd4a2VnYSJ9.1bw7SeYN6vx3TIj849l5CA';
 	let map: mapboxgl.Map | undefined;
-	console.log('map: ', map);
 	function initMap() {
 		// check if the map has been created
 		if (coordinates && !map) {

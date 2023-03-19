@@ -24,20 +24,20 @@
 	let btmBarShow: Boolean;
 	$: btmBarShow = $page.url.pathname !== '/listings';
 
-	let mainContent: HTMLElement;
-	let mainContentScroll = writable(0);
-	setContext('scroll', $mainContentScroll);
+	// let mainContent: HTMLElement;
+	// let mainContentScroll = writable(0);
+	// setContext('scroll', $mainContentScroll);
 
-	onMount(() => {
-		mainContent.addEventListener('scroll', () => {
-			$mainContentScroll = mainContent.scrollTop;
-		});
-	});
+	// onMount(() => {
+	// 	mainContent.addEventListener('scroll', () => {
+	// 		$mainContentScroll = mainContent.scrollTop;
+	// 	});
+	// });
 
-	setContext('scroll', mainContentScroll);
+	// setContext('scroll', mainContentScroll);
 </script>
 
-<div class="flex flex-col h-screen">
+<div class="flex flex-col" style="min-height:100%">
 	<header
 		class="bg-primary-600 text-neutral-50"
 		use:clickOutside
@@ -113,51 +113,42 @@
 		</div>
 	</header>
 
-	<main class="grow overflow-scroll flex flex-col" bind:this="{mainContent}">
-		<div class="grow">
-			<slot />
-		</div>
-		<footer
-			class="{btmBarShow
-				? ''
-				: 'hidden'} bg-primary-600 text-neutral-50 px-4 md:px-6 lg:px-12 grid divide-y divide-primary-400"
-		>
-			<nav
-				class="flex justify-between md:grid md:grid-cols-12 items-start md:items-center py-3"
-			>
-				<a
-					href="/"
-					class="col-span-2 subtitle-text whitespace-nowrap"
-					on:click="{() => (showMobileNav = false)}">Acres & Acres</a
-				>
-				<div
-					class="col-span-8 flex justify-center items-end flex-col md:flex-row gap-2 md:gap-10"
-				>
-					{#each nav_items as item}
-						<a
-							href="{item.link}"
-							class="caption-text whitespace-nowrap {$page.url.pathname === item.link
-								? ''
-								: 'hover:text-neutral-300'}">{item.label}</a
-						>
-					{/each}
-				</div>
-			</nav>
-			<div class="flex flex-col sm:flex-row gap-2 justify-between items-center py-3">
-				<nav class="flex gap-2">
-					<a href=""><iconify-icon inline icon="mdi:twitter" width="20"></iconify-icon></a
-					>
-					<a href=""
-						><iconify-icon inline icon="mdi:facebook" width="20"></iconify-icon></a
-					>
-					<a href=""
-						><iconify-icon inline icon="mdi:instagram" width="20"></iconify-icon></a
-					>
-				</nav>
-				<span class="caption-text"
-					>© {new Date().getFullYear()} Acres and Acres, Inc. All rights reserved.</span
-				>
-			</div>
-		</footer>
-	</main>
+	<div class="grow">
+		<slot />
+	</div>
 </div>
+
+<footer
+	class="{btmBarShow
+		? ''
+		: 'hidden'} bg-primary-600 text-neutral-50 px-4 md:px-6 lg:px-12 grid divide-y divide-primary-400"
+>
+	<nav class="flex justify-between md:grid md:grid-cols-12 items-start md:items-center py-3">
+		<a
+			href="/"
+			class="col-span-2 subtitle-text whitespace-nowrap"
+			on:click="{() => (showMobileNav = false)}">Acres & Acres</a
+		>
+		<div class="col-span-8 flex justify-center items-end flex-col md:flex-row gap-2 md:gap-10">
+			{#each nav_items as item}
+				<a
+					href="{item.link}"
+					class="caption-text whitespace-nowrap {$page.url.pathname === item.link
+						? ''
+						: 'hover:text-neutral-300'}">{item.label}</a
+				>
+			{/each}
+		</div>
+	</nav>
+	<div class="flex flex-col sm:flex-row gap-2 justify-between items-center py-3">
+		<nav class="flex gap-2">
+			<a href=""><iconify-icon inline icon="mdi:twitter" width="20"></iconify-icon></a>
+			<a href=""><iconify-icon inline icon="mdi:facebook" width="20"></iconify-icon></a>
+			<a href=""><iconify-icon inline icon="mdi:instagram" width="20"></iconify-icon></a>
+		</nav>
+		<span class="caption-text"
+			>© {new Date().getFullYear()} Acres and Acres, Inc. All rights reserved.</span
+		>
+	</div>
+</footer>
+<!-- </main> -->
