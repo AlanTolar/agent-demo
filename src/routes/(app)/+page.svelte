@@ -130,12 +130,13 @@
 			>
 		</div>
 		<div class="col-span-1 max-w-[400px] mx-auto">
-			<div class="flex mb-2">
-				<input class="w-full rounded-l-lg" type="text" name="" id="" />
-				<button class="label-text px-5 py-2.5 text-white rounded-r-lg bg-primary-600"
-					>Subscribe</button
+			<form name="newsletter" method="POST" data-netlify="true" class="flex mb-2">
+				<input class="w-full rounded-l-lg" type="text" name="email" />
+				<button
+					class="label-text px-5 py-2.5 text-white rounded-r-lg bg-primary-600"
+					type="submit">Subscribe</button
 				>
-			</div>
+			</form>
 			<p class="caption-text"
 				>We care about the protection of your data. Read our <span class="underline"
 					><a href="/">Privacy Policy</a></span
