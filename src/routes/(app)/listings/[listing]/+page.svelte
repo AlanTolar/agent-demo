@@ -1,6 +1,6 @@
 <script lang="ts">
 	import numbro from 'numbro';
-	import { onMount, getContext } from 'svelte';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import type { Listing } from '$lib/types/Listing';
 	import type { Agent } from '$lib/types/Agent';

@@ -358,7 +358,12 @@
 
 <style>
 	:global(.mapboxgl-popup-content) {
-		border-radius: theme(borderRadius.xl) !important;
+		background-color: rgba(0, 0, 0, 0) !important;
 		padding: 0 !important;
+		box-shadow: none !important;
+	}
+
+	:global(.popup) {
+		box-shadow: none !important;
 	}
 </style>

@@ -20,7 +20,11 @@
 			<img class="rounded-t-xl" src="{listing.featuredImage}" alt="" />
 		</div>
 	{/if}
-	<div class="p-5 flex flex-col justify-between">
+	<div
+		class="p-5 flex flex-col justify-between bg-neutral-100 {horizontal
+			? 'rounded-r-xl'
+			: 'rounded-b-xl'}"
+	>
 		<div>
 			<span class="accent-text">{listing.address.city}, {listing.address.state}</span>
 			<h3 class="mb-2 subtitle-text text-primary-600">{listing.title}</h3>
