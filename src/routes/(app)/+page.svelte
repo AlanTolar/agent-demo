@@ -130,8 +130,8 @@
 			>
 		</div>
 		<div class="col-span-1 max-w-[400px] mx-auto">
-			<form name="newsletter" method="POST" data-netlify="true" class="flex mb-2">
-				<input class="w-full rounded-l-lg" type="text" name="email" />
+			<form name="newsletter" method="POST" netlify class="flex mb-2">
+				<input class="w-full rounded-l-lg" type="email" name="email" />
 				<button
 					class="label-text px-5 py-2.5 text-white rounded-r-lg bg-primary-600"
 					type="submit">Subscribe</button
