@@ -103,6 +103,7 @@
 		if (coordinates && mainContent === 'map') {
 			initMap();
 		}
+		contentCovered = document.documentElement.scrollTop !== 0;
 		document.addEventListener('scroll', () => {
 			contentCovered = document.documentElement.scrollTop !== 0;
 		});
@@ -364,13 +365,13 @@
 			{#if listing.summary}
 				<section id="summary-section" class="py-10">
 					<h3 class="heading-text-sm">Summary</h3>
-					<div class="mt-4 grid sm:grid-cols-2 gap-6">
+					<div class="mt-4" style="column-count:2;">
 						<div class="flex flex-col gap-6">
-							<div class="flex">
-								<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
-								></iconify-icon>
-								<div>
-									{#if listing.summary.featureCategories}
+							{#if listing.summary.featureCategories}
+								<div class="flex break-inside-avoid">
+									<iconify-icon icon="ph:tree-bold" class="py-1 pr-4" width="40"
+									></iconify-icon>
+									<div>
 										<h4 class="subtitle-text">Property</h4>
 										<div class="mt-2 flex flex-col gap-2">
 											{#each listing.summary.featureCategories as feature}
@@ -382,28 +383,32 @@
 												</div>
 											{/each}
 										</div>
-									{/if}
+									</div>
 								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon
-									icon="majesticons:checkbox-list-detail-line"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if listing.summary.landDetails}
+							{/if}
+
+							{#if listing.summary.landDetails}
+								<div class="flex break-inside-avoid">
+									<iconify-icon
+										icon="majesticons:checkbox-list-detail-line"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
 										<h4 class="subtitle-text">Land Details</h4>
 										<div class="mt-2">
 											<p>{listing.summary.landDetails}</p>
 										</div>
-									{/if}
+									</div>
 								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon icon="mingcute:road-line" class="py-1 pr-4" width="40"
-								></iconify-icon>
-								<div>
-									{#if listing.summary.distances}
+							{/if}
+
+							{#if listing.summary.distances}
+								<div class="flex break-inside-avoid">
+									<iconify-icon
+										icon="mingcute:road-line"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
 										<h4 class="subtitle-text">Distances</h4>
 										<div class="mt-2">
 											{#each listing.summary.distances as distances}
@@ -413,55 +418,56 @@
 												>
 											{/each}
 										</div>
-									{/if}
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="flex flex-col gap-6">
-							<div class="flex">
-								<iconify-icon
-									icon="eos-icons:pipeline-outlined"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if listing.summary.utilities}
+							{/if}
+
+							{#if listing.summary.utilities}
+								<div class="flex break-inside-avoid">
+									<iconify-icon
+										icon="eos-icons:pipeline-outlined"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
 										<h4 class="subtitle-text">Utilities</h4>
 										<div class="mt-2">
 											{#each listing.summary.utilities as utilities}
 												<p>{utilities.utility}: {utilities.availability}</p>
 											{/each}
 										</div>
-									{/if}
+									</div>
 								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon
-									icon="material-symbols:house-outline"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if listing.summary.housing}
+							{/if}
+
+							{#if listing.summary.housing}
+								<div class="flex break-inside-avoid">
+									<iconify-icon
+										icon="material-symbols:house-outline"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
 										<h4 class="subtitle-text">Housing</h4>
 										<div class="mt-2">
 											<p>{listing.summary.housing}</p>
 										</div>
-									{/if}
+									</div>
 								</div>
-							</div>
-							<div class="flex">
-								<iconify-icon
-									icon="material-symbols:trending-up"
-									class="py-1 pr-4"
-									width="40"></iconify-icon>
-								<div>
-									{#if listing.summary.improvements}
+							{/if}
+
+							{#if listing.summary.improvements}
+								<div class="flex break-inside-avoid">
+									<iconify-icon
+										icon="material-symbols:trending-up"
+										class="py-1 pr-4"
+										width="40"></iconify-icon>
+									<div>
 										<h4 class="subtitle-text">Improvements</h4>
 										<div class="mt-2">
 											<p>{listing.summary.improvements}</p>
 										</div>
-									{/if}
+									</div>
 								</div>
-							</div>
+							{/if}
 						</div>
 					</div>
 				</section>
