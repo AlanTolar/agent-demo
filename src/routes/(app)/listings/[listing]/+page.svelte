@@ -262,7 +262,7 @@
 						title="3D Model"
 						id="model-iframe"
 						sandbox="allow-scripts"
-						src="{listing.modelURL}"
+						src="https://iframetester.com/"
 						allow="fullscreen"
 						scrolling="no"></iframe>
 				</div>
