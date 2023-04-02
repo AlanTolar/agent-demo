@@ -261,6 +261,7 @@
 						class="w-full h-full"
 						title="3D Model"
 						id="model-iframe"
+						sandbox="allow-scripts"
 						src="{listing.modelURL}"
 						allow="fullscreen"
 						scrolling="no"></iframe>
