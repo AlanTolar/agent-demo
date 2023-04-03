@@ -12,3 +12,7 @@
 		// CMS.registerPreviewTemplate('my-template', MyTemplate);
 	});
 </script>
+
+<svelte:head>
+	<script src="https://unpkg.com/@staticcms/app@^1.0.0/dist/static-cms-app.js"></script>
+</svelte:head>
