@@ -222,9 +222,9 @@
 							easing: quintOut,
 						}}"
 						style="grid-column: {col};"
-						class="relative"
+						class="relative h-full max-h-[400px] lg:max-h-[500px]"
 					>
-						<img src="{slide.url}" alt="" />
+						<img src="{slide.url}" alt="" class="h-full mx-auto" />
 					</div>
 				{/each}
 			</div>
