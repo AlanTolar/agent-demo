@@ -66,5 +66,8 @@
   "location": "{\"type\":\"Point\",\"coordinates\":[-81.5142353,34.27226]}",
   "title": "Oak Grove Acres",
   "description": "<p>Oak Grove Acres is a beautiful piece of land located in the charming town of Newberry, South Carolina. This property spans 10 acres and is surrounded by lush forests, providing a peaceful and secluded retreat. The land is mostly flat and open, making it suitable for a variety of uses such as building a dream home, starting a small farm, or even developing a nature reserve. With easy access to local amenities and the beauty of the surrounding area, Oak Grove Acres is an opportunity not to be missed.</p>",
-  "acres": 18
+  "acres": 18,
+  "slideshowImages": [
+    "/uploads/01c9a0b55c7e66cec7ef48e58f29b886.jpeg"
+  ]
 }
