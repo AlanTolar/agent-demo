@@ -1,4 +1,5 @@
 <script lang="ts">
+	// import CMS from '@staticcms/core';
 	import { config } from './config';
 	import { onMount } from 'svelte';
 
@@ -11,7 +12,3 @@
 		// CMS.registerPreviewTemplate('my-template', MyTemplate);
 	});
 </script>
-
-<svelte:head>
-	<script src="https://unpkg.com/@staticcms/app@^1.2.14/dist/static-cms-app.js"></script>
-</svelte:head>
