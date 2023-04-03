@@ -13,7 +13,7 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"cms": "npx @staticcms/proxy-server",
 		"types": "node src/lib/server/scripts/createInterfaces.js",
-		"lm": "source /Users/alantolar/Library/Preferences/netlify/helper/path.zsh.inc"
+		"lm": ""
 	},
 	"devDependencies": {
 		"@beyonk/svelte-mapbox": "^8.2.0",
