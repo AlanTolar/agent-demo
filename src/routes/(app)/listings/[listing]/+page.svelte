@@ -95,6 +95,7 @@
 	let coordinates: [number, number][] | undefined;
 	try {
 		coordinates = JSON.parse(listing.boundaryCoordinates);
+		if (coordinates) center = coordinates[0];
 	} catch (error) {
 		coordinates = center ? [center] : undefined;
 	}
