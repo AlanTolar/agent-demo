@@ -47,5 +47,10 @@
   "location": "{\"type\":\"Point\",\"coordinates\":[-81.8240624,30.2223071]}",
   "title": "Sunny Acres",
   "description": "<p>Sunny Acres is a beautiful piece of land located in the Southeast United States. The property spans 5 acres and is the perfect size for someone looking to build their dream home or for a small developer looking for a new project. The land is located on a gently sloping hill, providing beautiful views of the surrounding area. A small stream runs through the property, adding to its natural charm. There are several mature oak trees on the land, providing plenty of shade and a picturesque setting. The property is surrounded by lush greenery, including several varieties of native grasses and wildflowers. There is a small pond on the land, attracting a variety of local wildlife. The land is located in a secluded area, providing privacy and a sense of serenity. The property has several clearings that would be perfect for building a home or planting a garden. The land has a mix of open and wooded areas, providing a diverse range of habitats for wildlife. There are several hiking trails on the property, providing opportunities for outdoor recreation. The land has a south-facing orientation, ensuring plenty of sunlight throughout the day.</p>",
-  "acres": 34
+  "acres": 34,
+  "slideshowImages": [
+    "/uploads/dillon-fancher-wszox-0duya-unsplash.jpeg",
+    "/uploads/xavi-moll-u-q14nlylei-unsplash.jpeg",
+    "/uploads/08425d08565f60d193d1c76b31c5ad95.jpeg"
+  ]
 }
