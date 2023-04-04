@@ -55,5 +55,10 @@
   "location": "{\"type\":\"Point\",\"coordinates\":[-81.5834061,28.9917999]}",
   "title": "Oak Grove Farms",
   "description": "<p>Oak Grove Farms is a stunning 10-acre property located in Mount Dora, Florida. The rolling hills and oak groves provide the perfect setting for a small farm or a private retreat. The property is just a short drive from downtown Mount Dora, which offers a variety of shopping, dining, and entertainment options. This piece of real estate is sure to be highly sought after due to its picturesque setting and convenient location. Whether you're looking to start a farm, build your dream home, or simply enjoy the peaceful Florida countryside, Oak Grove Farms is the perfect opportunity.</p>",
-  "acres": 10
+  "acres": 10,
+  "slideshowImages": [
+    "/uploads/rodion-kutsaiev-qdi8uvgd1ww-unsplash.jpeg",
+    "/uploads/pexels-colon-freld-2413940.jpeg",
+    "/uploads/pexels-airam-datoon-16018065.jpeg"
+  ]
 }
