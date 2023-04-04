@@ -17,7 +17,6 @@
 
 	export let data: PageData;
 	let listing: Listing = data.listing;
-	console.log('listing: ', listing);
 	let agent: Agent = data.agent;
 	let movingImages = false;
 	let mainImgIndex = 0;
@@ -78,7 +77,7 @@
 	let formPhone = '';
 	let formMessage = '';
 
-	let mainContent: 'photo' | 'video' | 'map' | 'model' = listing?.modelURL ? 'model' : 'photo';
+	let mainContent: 'photo' | 'video' | 'map' | 'model' = 'photo';
 	$: console.log(mainContent);
 
 	// const bbox = getBbox(coords);
