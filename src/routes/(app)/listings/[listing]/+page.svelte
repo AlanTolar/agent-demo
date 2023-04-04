@@ -120,7 +120,7 @@
 			map = new mapboxgl.Map({
 				container: 'map',
 				center: center,
-				zoom: 4,
+				zoom: 12,
 				style: 'mapbox://styles/mapbox/satellite-streets-v12',
 				interactive: true,
 				doubleClickZoom: true,
