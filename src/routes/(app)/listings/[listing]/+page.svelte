@@ -260,6 +260,7 @@
 				<div class="flex justify-center items-center display-text">
 					<iframe
 						class="w-full h-full"
+						loading="lazy"
 						title="3D Model"
 						id="model-iframe"
 						sandbox="allow-scripts"
