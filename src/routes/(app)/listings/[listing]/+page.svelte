@@ -22,6 +22,7 @@
 	let mainImgIndex = 0;
 
 	function getImg(i: number): string {
+		// if images then url at i or loop to beginning, else placeholder
 		const imgURL =
 			listing?.slideshowImages?.at(i % listing.slideshowImages.length) || '/placeholder.webp';
 		return imgURL;
