@@ -4,14 +4,11 @@
 	import type { PageData } from './$types';
 	import type { Listing } from '$lib/types/Listing';
 	import type { Agent } from '$lib/types/Agent';
-
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
-
 	import Icon from '@iconify/svelte';
-
-	// import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox';
-	// const { GeolocateControl, NavigationControl, ScaleControl } = controls;
+	import { register } from 'swiper/element/bundle';
+	register();
 	import { getBbox, createBoundingBox, addPropertyBoundary } from '$lib/utils/mapHelpers';
 	import mapboxgl from 'mapbox-gl';
 
@@ -180,8 +177,8 @@
 	<div class="w-full xl:w-8/12 relative">
 		<!-- Image Carousel -->
 		<div class="{mainContent === 'photo' ? 'block' : 'hidden'}">
-			<div class="custom-grid z-20">
-				<!-- Left Buttons -->
+			<div class="custom-grid z-20 xl:grid hidden">
+				<!-- Left Button -->
 				<div style="grid-column: 6; padding: 0;">
 					<button
 						class="absolute top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
@@ -195,7 +192,7 @@
 					</button>
 				</div>
 
-				<!-- Right Buttons -->
+				<!-- Right Button -->
 				<div style="grid-column: 8; padding: 0;">
 					<button
 						class="absolute top-1/2 -translate-y-1/2 -translate-x-full w-10 h-10 sm:w-12 sm:h-12 p-2 bg-primary-600 disabled:bg-primary-800 rounded-full drop-shadow-xl shine z-20"
@@ -229,6 +226,29 @@
 					</div>
 				{/each}
 			</div>
+			<swiper-container
+				class="xl:hidden"
+				slidesPerView="1"
+				spaceBetween="10"
+				loop="true"
+				centered-slides="true"
+				navigation="{{
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				}}"
+			>
+				{#each slides as slide (slide.id)}
+					<swiper-slide class="flex items-center justify-center aspect-w-5 aspect-h-3">
+						<img
+							src="{slide.url}"
+							alt=""
+							class="max-w-full max-h-full object-contain mx-auto"
+						/>
+					</swiper-slide>
+				{/each}
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</swiper-container>
 		</div>
 
 		<!-- Video -->
@@ -573,29 +593,28 @@
 </div>
 
 <style>
+	/* .swiper-button-prev,
+	.swiper-button-next {
+		color: black;
+		background-color: white;
+	} */
 	.custom-grid {
-		display: grid;
 		grid-template-columns: 53fr 0fr 100fr 0fr 100fr 0fr 100fr 0fr 50fr 0fr 100fr 0fr 100fr;
-		/* column-gap: 1em; */
 		position: relative;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 644%;
-		/* max-width: 1200px; */
 	}
 	.custom-grid > * {
-		/* background: #eee; */
-		/* border: 1px solid #ccc; */
 		padding: 0 1em;
 	}
 
-	@media (max-width: theme(screens.xl)) {
+	/* @media (max-width: theme(screens.xl)) {
 		.custom-grid {
 			grid-template-columns: 0fr 0fr 100fr 0fr 100fr 0fr 100fr 0fr 0fr 0fr 100fr 0fr 100fr;
-			/* transform: translateX(-45.1%); */
 			width: 450%;
 		}
-	}
+	} */
 
 	body {
 		margin: 0;
